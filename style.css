@@ -39,6 +39,9 @@ svg.scene { display: block; width: 100%; height: 100%; overflow: visible; mix-bl
 .ink-pass .solid { fill: var(--ink) !important; stroke: none !important; }
 .ink-pass .nol { stroke: none !important; }
 .ink-pass .fine { stroke-width: calc(var(--sw, 1.7) * .55); }
+/* pictures drawn inside other pictures (thought bubbles and so on): see nest() in art.js */
+.ink-pass .nest { stroke-width: calc(var(--sw, 1.7) * var(--nk, 1)); }
+.ink-pass .nest .fine { stroke-width: calc(var(--sw, 1.7) * var(--nk, 1) * .55); }
 .ink-pass .label { fill: var(--ink) !important; stroke: none !important; font-family: var(--letters); font-weight: 600; }
 .ink-pass .hatch { fill: url(#hatch) !important; stroke: none !important; opacity: .5; }
 .bg.wash-pass { opacity: .92; }

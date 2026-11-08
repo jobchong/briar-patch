@@ -151,7 +151,9 @@ ${o.face ? `${o.sleep ? `<path fill="none" d="M39 50q3.5 3 7 0M54 50q3.5 3 7 0"/
     }
     return `<path fill="${C.ochre}" d="${rays}"/>
 <circle fill="${C.butter}" cx="50" cy="50" r="29"/>
-${o.face === false ? '' : `<path fill="none" d="${o.sleep ? 'M38 46q4 3.5 8 0M54 46q4 3.5 8 0' : 'M38 45q4-4 8 0M54 45q4-4 8 0'}"/>
+${o.face === false ? '' : o.wow ? `<circle fill="${C.white}" cx="42" cy="44" r="5"/><circle fill="${C.white}" cx="58" cy="44" r="5"/><circle class="solid" cx="42" cy="44.5" r="2.4"/><circle class="solid" cx="58" cy="44.5" r="2.4"/>
+<path fill="none" d="M36 35q6-4 11 0M53 35q5-4 11 0"/><circle class="nol" fill="${C.rose}" opacity=".45" cx="35" cy="55" r="4"/><circle class="nol" fill="${C.rose}" opacity=".45" cx="65" cy="55" r="4"/>
+<ellipse fill="${C.rose}" cx="50" cy="61" rx="4.5" ry="5.5"/>` : `<path fill="none" d="${o.sleep ? 'M38 46q4 3.5 8 0M54 46q4 3.5 8 0' : 'M38 45q4-4 8 0M54 45q4-4 8 0'}"/>
 <circle class="nol" fill="${C.rose}" opacity=".45" cx="37" cy="56" r="4"/><circle class="nol" fill="${C.rose}" opacity=".45" cx="63" cy="56" r="4"/>
 ${o.sleep ? `<ellipse fill="${C.rose}" cx="50" cy="61" rx="3.2" ry="3.8"/>` : `<path fill="none" d="M41 60q9 8 18 0"/>`}`}`;
   };
@@ -195,7 +197,7 @@ ${o.legs === false ? '' : `<ellipse class="solid" cx="47" cy="25" rx="1.6" ry="2
 <path fill="none" class="fine" d="M24 64l30 4M24 70l18 2.5"/>`;
   META.box = { w: 1.2 };
 
-  S.frog = () => `
+  S.frog = (o = {}) => `
 <ellipse fill="${C.green}" cx="27" cy="86" rx="14" ry="9"/><ellipse fill="${C.green}" cx="73" cy="86" rx="14" ry="9"/>
 <ellipse fill="${C.green}" cx="50" cy="72" rx="27" ry="21"/>
 <ellipse class="nol" fill="${C.butter}" cx="50" cy="80" rx="15" ry="12"/>
@@ -204,7 +206,7 @@ ${o.legs === false ? '' : `<ellipse class="solid" cx="47" cy="25" rx="1.6" ry="2
 <circle fill="${C.white}" cx="37" cy="52" r="6"/><circle fill="${C.white}" cx="63" cy="52" r="6"/>
 <circle class="solid" cx="38" cy="53" r="2.8"/><circle class="solid" cx="62" cy="53" r="2.8"/>
 <path fill="none" d="M33 67Q50 79 67 67"/>
-<ellipse fill="${C.green}" cx="40" cy="94" rx="6" ry="2.6"/><ellipse fill="${C.green}" cx="60" cy="94" rx="6" ry="2.6"/>`;
+<ellipse fill="${C.green}" cx="40" cy="94" rx="6" ry="2.6"/><ellipse fill="${C.green}" cx="60" cy="94" rx="6" ry="2.6"/>${o.crown ? `<path fill="${C.gold}" d="M40 47L38 33L44 39L50 30L56 39L62 33L60 47Z"/>` : ''}`;
 
   S.hat = () => `
 <ellipse fill="${C.black}" cx="50" cy="88" rx="40" ry="8"/>
@@ -283,10 +285,13 @@ ${S.rabbithead(o)}`;
   S.bed = (o = {}) => {
     const who = o.rabbit ? `<g transform="translate(15 33) scale(.42)">${S.rabbithead({ sleep: true })}</g>`
       : o.pip ? `<g transform="translate(18.5 44) scale(.42)">${S.piphead({ sleep: true })}</g>`
+        : o.princess ? `<g transform="translate(10 39) scale(.44)">${S.princesshead({ sleep: o.princess !== 'awake' })}</g>`
         : o.ears ? `<path fill="${C.rabbit}" d="M44 62C40 54 41 48 44 48C47 48 48 54 47 62Z"/><path fill="${C.rabbit}" d="M51 62C51 54 53 48 56 49C59 50 56 56 54 62Z"/>` : '';
+    const frame = `<path fill="${C.brown}" d="M6 96V36Q14 26 22 36V96H17V60H11V96Z"/>
+<path fill="${C.brown}" d="M86 96V54Q92 47 98 54V96H94V70H90V96Z"/>`;
+    if (o.bare) return `${frame}<path fill="${C.tan}" d="M17 76H91V84H17Z"/><path fill="none" class="fine" d="M30 76v8M44 76v8M58 76v8M72 76v8"/><rect fill="${C.bark}" x="17" y="84" width="74" height="5"/>`;
     return `
-<path fill="${C.brown}" d="M6 96V36Q14 26 22 36V96H17V60H11V96Z"/>
-<path fill="${C.brown}" d="M86 96V54Q92 47 98 54V96H94V70H90V96Z"/>
+${frame}
 <ellipse fill="${C.white}" cx="30" cy="58" rx="13" ry="6.5"/>
 ${who}
 <path fill="${C.red}" d="M20 64Q50 ${o.ears ? 54 : 59} 88 62V84H20Z"/>
@@ -358,18 +363,25 @@ ${o.apron ? `<path fill="${C.white}" d="M56 70C62 74 74 72 77 64C78 76 70 84 60 
 <path fill="none" d="M28 58q5 8 3 17M46 52q5 10 3 21M64 54q5 9 3 19"/>`;
   META.bread = { w: 1.3 };
 
-  S.fox = (o = {}) => `
-<path fill="${C.rust}" d="M30 90C6 92 0 70 10 58C16 52 22 60 20 68C18 78 26 84 36 84Z"/>
-<path fill="${C.white}" d="M10 58C14 53 21 55 20 62C16 65 11 63 10 58Z"/>
-<path fill="${C.rust}" d="M30 92C26 70 36 52 54 48C64 46 70 54 68 66C68 78 66 88 64 92Z"/>
-<path class="nol" fill="${C.white}" d="M58 52C66 56 66 74 60 84C56 74 54 62 58 52Z"/>
-<path fill="${C.rust}" d="M55 34L55 15L64 28Z"/><path fill="${C.rust}" d="M63 29L68 13L72 31Z"/>
+  const foxHead = (o) => `<path fill="${C.rust}" d="M55 34L55 15L64 28Z"/><path fill="${C.rust}" d="M63 29L68 13L72 31Z"/>
 <path class="nol" fill="${C.black}" d="M57 30L57 20L61 27ZM65 28L68 18L70 30Z"/>
 <path fill="${C.rust}" d="M52 40C52 28 64 24 72 30L91 40C86 45 78 47 70 47C62 49 54 46 52 40Z"/>
 <path class="nol" fill="${C.white}" d="M69 41L88 41.5C82 46.5 74 46.5 67 45Z"/>
 <circle class="solid" cx="90.5" cy="40" r="2.3"/>
 ${o.happy ? `<path fill="none" d="M62 34q3-3 6 0"/>` : o.cross ? `<path fill="none" d="M61 31l7 2"/><circle class="solid" cx="65" cy="35" r="1.8"/>` : `<path class="solid" d="M62 35q3.5-3 7 0q-3.5 1.5-7 0z"/>`}
-${o.cross ? `<path fill="none" d="M74 46q4-2 8 0"/>` : `<path fill="none" d="M74 44q4 2.5 9-1"/>`}
+${o.cross ? `<path fill="none" d="M74 46q4-2 8 0"/>` : `<path fill="none" d="M74 44q4 2.5 9-1"/>`}`;
+  // o.low: lying flat on his belly, chin on his paws
+  S.fox = (o = {}) => o.low ? `
+<path fill="${C.rust}" d="M30 93C14 97 2 93 4 87C6 81 14 83 18 87C22 90 28 89 34 88Z"/>
+<path fill="${C.white}" d="M4 87C5 83 10 82 12 85C10 89 6 90 4 87Z"/>
+<path fill="${C.rust}" d="M22 95C20 82 34 74 52 74C64 74 72 80 72 92L70 95Z"/>
+<path fill="${C.rust}" d="M60 90H90Q94 90 94 93Q94 96 90 96H60Z"/><path class="nol" fill="${C.black}" d="M87 90h3q4 0 4 3q0 3-4 3h-3z"/>
+<g transform="translate(4 46)">${foxHead(o)}</g>`
+    : `<path fill="${C.rust}" d="M30 90C6 92 0 70 10 58C16 52 22 60 20 68C18 78 26 84 36 84Z"/>
+<path fill="${C.white}" d="M10 58C14 53 21 55 20 62C16 65 11 63 10 58Z"/>
+<path fill="${C.rust}" d="M30 92C26 70 36 52 54 48C64 46 70 54 68 66C68 78 66 88 64 92Z"/>
+<path class="nol" fill="${C.white}" d="M58 52C66 56 66 74 60 84C56 74 54 62 58 52Z"/>
+${foxHead(o)}
 <path fill="${C.rust}" d="M55 68L52 94H60L62 72Z"/><path class="nol" fill="${C.black}" d="M52.5 88L52 94H60L60.6 88Z"/>`;
 
   S.pot = (o = {}) => `
@@ -512,8 +524,9 @@ ${o.sleep ? `<path fill="none" d="M36 38q5 3 10 0M54 38q5 3 10 0"/>` : `<circle 
   };
   META.door = { w: 1.6 };
 
-  S.piphead = (o = {}) => `
+  S.piphead = (o = {}) => o.back ? `<circle fill="#f2cfae" cx="37.5" cy="40" r="2.6"/><circle fill="#f2cfae" cx="62.5" cy="40" r="2.6"/><circle fill="#7a4a2a" cx="50" cy="38" r="12.5"/>` : `
 <circle fill="#f2cfae" cx="50" cy="38" r="12.5"/>
+${o.ear ? `<ellipse fill="${C.red}" cx="37" cy="40" rx="3.6" ry="5"/>` : ''}
 <path fill="#7a4a2a" d="M37.5 38C35 26 45 21 51 23C57 21 66 27 62.5 38C61 32 56 29.5 50 30.5C44 29.5 40 33 37.5 38Z"/>
 <path fill="#7a4a2a" d="M48 24q2-6 7-5q-4 2-4 6z"/>
 ${o.sleep ? `<path fill="none" d="M43 39q2.5 2 5 0M52 39q2.5 2 5 0"/>` : `<circle class="solid" cx="45.5" cy="39" r="1.6"/><circle class="solid" cx="54.5" cy="39" r="1.6"/>`}
@@ -523,14 +536,16 @@ ${o.sneeze ? `<ellipse fill="${C.rose}" cx="50" cy="46.5" rx="2.2" ry="2.6"/>` :
   S.pip = (o = {}) => `
 <rect fill="${C.navy}" x="42" y="78" width="6" height="15"/><rect fill="${C.navy}" x="52" y="78" width="6" height="15"/>
 <ellipse fill="${C.black}" cx="44" cy="94" rx="6.5" ry="3.5"/><ellipse fill="${C.black}" cx="56" cy="94" rx="6.5" ry="3.5"/>
-<path fill="${C.red}" d="M35 82L40 51C44 47 56 47 60 51L65 82Q50 86 35 82Z"/>
+<path fill="${o.shirt || C.red}" d="M35 82L40 51C44 47 56 47 60 51L65 82Q50 86 35 82Z"/>
 <path class="nol" fill="${C.cream}" d="M48 58h4v2h-4zM48 66h4v2h-4zM48 74h4v2h-4z"/>
 <path fill="none" class="fine" d="M50 52V84"/>
-<path fill="${C.red}" d="M40 53C33 59 31 67 33 73L38 73C38 67 40 61 43 57Z"/>
-<path fill="${C.red}" d="M60 53C67 59 69 67 67 73L62 73C62 67 60 61 57 57Z"/>
-<circle fill="#f2cfae" cx="35.5" cy="75" r="3.2"/><circle fill="#f2cfae" cx="64.5" cy="75" r="3.2"/>
+<path fill="${o.shirt || C.red}" d="M40 53C33 59 31 67 33 73L38 73C38 67 40 61 43 57Z"/>
+${o.tag ? `<path fill="${o.shirt || C.red}" d="${stick(58, 55, 70, 40, 6.5)}"/><circle fill="#f2cfae" cx="70.5" cy="39" r="3.2"/>` : `<path fill="${o.shirt || C.red}" d="M60 53C67 59 69 67 67 73L62 73C62 67 60 61 57 57Z"/>`}
+<circle fill="#f2cfae" cx="35.5" cy="75" r="3.2"/>${o.tag ? '' : `<circle fill="#f2cfae" cx="64.5" cy="75" r="3.2"/>`}
 <path fill="${C.ochre}" d="M41 49H59V54H41ZM53 54L56 66L60 65L57 54Z"/>
-${S.piphead(o)}`;
+${S.piphead(o)}
+${o.tag ? `<path fill="none" class="fine" d="M70.5 36v-4"/><g transform="rotate(-6 76 26)"><rect fill="${C.cream}" x="${f(76 - (8 + o.tag.length * 7.6) / 2)}" y="16" width="${f(8 + o.tag.length * 7.6)}" height="17" rx="2.5"/>
+<text class="label" x="76" y="29" text-anchor="middle" font-size="14">${o.tag}</text></g>` : ''}`;
 
   S.bug = () => `
 <path fill="none" d="M28 48l-12-6M26 60H12M28 72l-12 7M72 48l12-6M74 60H88M72 72l12 7"/>
@@ -662,7 +677,7 @@ ${o.smoke && k === 'brick' ? `<path fill="none" class="fine" d="M71 14q-4-4 0-8t
   META.house = { w: 1.4 };
 
   // the Tar-Baby: a lump of tar and turpentine with a hat on (no face: it is only tar)
-  S.tarbaby = () => {
+  S.tarbaby = (o = {}) => {
     const tar = '#3b3438', gloss = '#8a8088';
     return `
 <ellipse fill="${tar}" cx="50" cy="93" rx="24" ry="4"/>
@@ -673,6 +688,7 @@ ${o.smoke && k === 'brick' ? `<path fill="none" class="fine" d="M71 14q-4-4 0-8t
 <circle fill="${tar}" cx="50" cy="48" r="17"/>
 <path class="nol" fill="${gloss}" opacity=".6" d="M39 45C39 39 43 35 49 34C44 37 42 41 42 46Z"/>
 <path fill="${tar}" d="M56 94v-5q2.5-3 5 0v5zM40 94v-4q2-2.5 4 0v4z"/>
+${o.goo ? `<path fill="${tar}" d="M24 78C16 76 8 72 0 70L0 75C8 77 16 81 25 83ZM34 54C24 52 16 52 6 54L6 59C16 57 24 57 34 59ZM30 92C22 91 14 92 6 95L8 98C16 96 22 95 30 96Z"/>` : ''}
 <path fill="${C.tan}" d="M37 34C37 20 63 20 63 34Z"/>
 <path fill="${C.deepred}" d="M37.4 30H62.6V34H37.4Z"/>
 <ellipse fill="${C.tan}" cx="50" cy="34.5" rx="23" ry="4.5"/>`;
@@ -726,6 +742,7 @@ ${o.happy ? `<path fill="none" d="M81 28q2.5-2.5 5 0"/>` : `<circle class="solid
 <path fill="#7d6a4a" d="M25 86Q50 92 75 86L76 96H24Z"/>
 <path fill="none" class="fine" d="M34 88l3 8M46 90l1 6M58 90l-1 6M68 88l-3 8"/>
 <ellipse class="nol" fill="#b8c094" cx="50" cy="74" rx="14" ry="10"/>
+${o.bib ? `<path fill="${C.white}" d="M34 56H66L60 82L50 76L40 82Z"/>` : ''}
 <path fill="${skin}" d="M26 36L6 26L24 46Z"/><path fill="${skin}" d="M74 36L94 26L76 46Z"/>
 <ellipse fill="${skin}" cx="50" cy="38" rx="27" ry="23"/>
 <path fill="${hair}" d="${cloud(50, 17, 22, 8, 8, 13)}"/>
@@ -785,6 +802,477 @@ ${o.happy || o.sleep ? `<path fill="none" d="M86 61q3 ${o.sleep ? 2.5 : -3} 6 0"
 <circle fill="${C.gold}" cx="48.8" cy="10" r="3.2"/>
 <path fill="${o.color || C.red}" d="M50.6 15C62 11 72 21 88 17L83 29L88 41C72 45 62 35 50.6 39Z"/>`;
   META.flag = { w: 0.35 };
+
+  /* ---------- little pictures inside other pictures ---------- */
+  // nest([[sprite, x, y, size, opts], ...]) draws sprites inside another sprite's 100 x 100 box,
+  // the way a story page places them. Their ink lines stay a little lighter than the page's.
+  const nest = (art) => art.map(([n, x, y, s = 1, o = {}]) => (S[n]
+    ? `<g class="nest" style="--nk:${f(0.8 / s)}" transform="translate(${x} ${y})${o.rot ? ` rotate(${o.rot})` : ''} scale(${o.flip ? -s : s} ${s}) translate(-50 -96)">${S[n](o)}</g>`
+    : '')).join('');
+
+  // a thought bubble: what someone is thinking of. o.art is the picture inside (see nest);
+  // o.tail 'right' puts the little trail of dots on the right instead of the left
+  S.think = (o = {}) => {
+    const r = o.tail === 'right';
+    return `<circle fill="${C.white}" cx="${r ? 80 : 20}" cy="86" r="4.8"/><circle fill="${C.white}" cx="${r ? 90 : 10}" cy="95" r="2.8"/>
+<path fill="${C.white}" d="${cloud(50, 42, 46, 36, 11, 5)}"/>${nest(o.art || [])}`;
+  };
+  META.think = { sky: true };
+
+  // a speech bubble with a picture in it: what someone is talking about
+  S.say = (o = {}) => `<path fill="${C.white}" d="${o.tail === 'right'
+    ? 'M70 70.6L84 95L56 73.7A46 34 0 1 1 70 70.6Z' : 'M30 70.6L16 95L44 73.7A46 34 0 1 0 30 70.6Z'}"/>${nest(o.art || [])}`;
+  META.say = { sky: true };
+
+  /* ---------- marks that show what is happening ---------- */
+  S.zzz = () => `<path fill="none" d="M12 80h12L12 92h12M36 54h16L36 70h16M64 20h22L64 42h22"/>`;
+  META.zzz = { sky: true };
+
+  // speed lines: something has just whizzed off to the right
+  S.lines = () => `<path fill="none" d="M10 40H56M24 54H76M6 68H50M26 82H64"/>`;
+  META.lines = { sky: true };
+
+  S.dust = () => `<path fill="${C.cream}" d="${cloud(30, 84, 16, 10, 7, 3)}"/><path fill="${C.cream}" d="${cloud(64, 80, 22, 14, 8, 6)}"/>`;
+  META.dust = { sky: true };
+
+  const heart = (x, y, s) => `M${x} ${f(y + s * 0.9)}C${f(x - s * 1.7)} ${f(y - s * 0.2)} ${f(x - s * 0.7)} ${f(y - s * 1.4)} ${x} ${f(y - s * 0.4)}` +
+    `C${f(x + s * 0.7)} ${f(y - s * 1.4)} ${f(x + s * 1.7)} ${f(y - s * 0.2)} ${x} ${f(y + s * 0.9)}Z`;
+  S.hearts = (o = {}) => o.one ? `<path fill="${C.red}" d="${heart(50, 62, 30)}"/>`
+    : `<path fill="${C.red}" d="${heart(30, 74, 14)}"/><path fill="${C.rose}" d="${heart(70, 50, 12)}"/><path fill="${C.red}" d="${heart(38, 28, 9)}"/>`;
+  META.hearts = { sky: true };
+
+  S.notes = () => `<ellipse class="solid" cx="22" cy="80" rx="6.5" ry="4.6" transform="rotate(-20 22 80)"/><path fill="none" d="M28 78V44q8 4 10 12"/>
+<ellipse class="solid" cx="56" cy="62" rx="6.5" ry="4.6" transform="rotate(-20 56 62)"/><ellipse class="solid" cx="82" cy="54" rx="6.5" ry="4.6" transform="rotate(-20 82 54)"/>
+<path fill="none" d="M62 60V28L88 20V52"/>`;
+  META.notes = { sky: true };
+
+  // a bang: two things have bumped together hard
+  S.burst = () => {
+    const r = rng(23); let d = '', e = '';
+    for (let i = 0; i < 20; i++) {
+      const a = (i / 20) * Math.PI * 2, R = i % 2 ? 22 + r() * 6 : 42 + r() * 6;
+      d += (i ? 'L' : 'M') + f(50 + Math.cos(a) * R) + ' ' + f(54 + Math.sin(a) * R * 0.9);
+      e += (i ? 'L' : 'M') + f(50 + Math.cos(a) * R * 0.55) + ' ' + f(54 + Math.sin(a) * R * 0.5);
+    }
+    return `<path fill="${C.butter}" d="${d}Z"/><path class="nol" fill="${C.orange}" opacity=".7" d="${e}Z"/>`;
+  };
+  META.burst = { sky: true };
+
+  const drop = (x, y, s) => `M${x} ${f(y - s * 2)}C${f(x + s * 0.4)} ${f(y - s)} ${f(x + s * 1.2)} ${f(y - s * 0.2)} ${f(x + s * 1.2)} ${f(y + s * 0.4)}` +
+    `A${f(s * 1.2)} ${f(s * 1.2)} 0 0 1 ${f(x - s * 1.2)} ${f(y + s * 0.4)}C${f(x - s * 1.2)} ${f(y - s * 0.2)} ${f(x - s * 0.4)} ${f(y - s)} ${x} ${f(y - s * 2)}Z`;
+  // drops of sweat, or of rain off someone wet through
+  S.drops = () => `<path fill="#a9c8da" d="${drop(20, 70, 7)}${drop(52, 40, 8)}${drop(82, 72, 6)}"/>`;
+  META.drops = { sky: true };
+
+  // a dashed arrow, curving from left to right (rotate it to point anywhere)
+  S.arrow = (o = {}) => o.up ? `<path fill="none" stroke-dasharray="7 6" d="M50 94Q40 56 50 16"/><path fill="none" d="M38 28L50 10L62 28"/>`
+    : `<path fill="none" stroke-dasharray="7 6" d="M8 84Q46 34 84 66"/><path fill="none" d="M70 68L88 70L84 52"/>`;
+  META.arrow = { sky: true };
+
+  // footprints in a row
+  S.steps = () => {
+    let s = '';
+    for (let i = 0; i < 5; i++) s += `<ellipse fill="#7f8550" opacity=".8" cx="${12 + i * 19}" cy="${i % 2 ? 86 : 93}" rx="5" ry="2.6"/>`;
+    return s;
+  };
+  META.steps = { sky: true };
+
+  // lines that spring out round someone who has just had a fright
+  S.alarm = () => `<path fill="none" d="M24 58L8 44M34 40L24 18M50 34V8M66 40L76 18M76 58L92 44"/>`;
+  META.alarm = { sky: true };
+
+  // the trip-trap of hooves on a bridge
+  S.sound = () => `<path fill="none" d="M26 82l-12-8M24 92H8M74 82l12-8M76 92h16"/>`;
+  META.sound = { sky: true };
+
+  // a sprinkle of magic
+  const twinkle = (x, y, s) => `M${x} ${y - s}Q${x} ${y} ${x + s} ${y}Q${x} ${y} ${x} ${y + s}Q${x} ${y} ${x - s} ${y}Q${x} ${y} ${x} ${y - s}Z`;
+  S.sparkle = () => `<path fill="${C.butter}" d="${twinkle(26, 70, 14)}${twinkle(70, 40, 18)}${twinkle(40, 22, 8)}${twinkle(80, 80, 9)}"/>`;
+  META.sparkle = { sky: true };
+
+  S.crack = () => `<path fill="none" d="M50 56L36 44L42 36L28 20M50 56L66 46L60 38L76 24M50 56L44 72L54 80L48 94M50 56L70 66"/>`;
+  META.crack = { sky: true };
+
+  // a big gust of breath or wind, blowing to the right
+  S.gust = () => `<path fill="none" d="M4 50Q40 40 70 50Q88 57 80 68Q72 74 66 64M10 72Q40 64 62 74M12 30Q44 22 66 30Q80 36 74 44Q68 48 64 42"/>`;
+  META.gust = { sky: true };
+
+  /* ---------- things ---------- */
+  S.fire = () => `
+<path fill="${C.bark}" d="${stick(12, 95, 88, 84, 7)}${stick(14, 84, 86, 95, 7)}"/>
+<path fill="${C.orange}" d="M20 90C12 70 26 62 30 44C34 56 40 58 40 70C42 56 48 44 50 18C56 38 62 50 60 66C64 58 66 52 72 44C80 60 84 76 78 90Z"/>
+<path class="nol" fill="${C.butter}" d="M32 90C28 80 34 72 40 64C42 72 46 74 46 80C48 74 52 68 54 58C60 70 66 80 64 90Z"/>`;
+  META.fire = { w: 0.9 };
+
+  // a bucket of tar, with the brush left in it
+  S.bucket = () => `
+<path fill="${C.bark}" d="${stick(58, 46, 80, 6, 4.5)}"/>
+<path fill="none" d="M24 46Q50 14 76 46"/>
+<path fill="${C.silver}" d="M24 44H76L70 94H30Z"/>
+<path fill="none" class="fine" d="M27 62H73M29 80H71"/>
+<ellipse fill="#3b3438" cx="50" cy="44" rx="26" ry="6"/>
+<path fill="#3b3438" d="M31 46q1 16 5 16q4 0 4-15M58 48q1 22 5 22q4 0 3-23"/>`;
+
+  // a branch with a rope hanging from it
+  S.rope = () => `
+<path fill="${C.bark}" d="M0 24Q40 14 100 22L100 30Q40 23 0 33Z"/>
+<path fill="${C.leaf}" d="M82 21q8-10 16-4q-8 8-16 4zM10 24q-2-12 8-12q2 10-8 12z"/>
+<path fill="${C.tan}" d="${stick(58, 26, 58, 60, 3.6)}"/>
+<path fill="${C.tan}" fill-rule="evenodd" d="M48 72a10 12 0 1 0 20 0a10 12 0 1 0-20 0M52 72a6 8 0 1 0 12 0a6 8 0 1 0-12 0"/>`;
+
+  // a rabbit skin pegged out flat to dry
+  S.pelt = () => `
+<path fill="${C.rabbit}" d="M40 32C35 18 37 4 42 4C47 4 48 18 46 30L54 30C52 18 53 4 58 4C63 4 65 18 60 32C69 36 71 44 70 52L86 48L86 58L70 62C72 72 70 80 66 84L76 94L64 96L57 88H43L36 96L24 94L34 84C30 80 28 72 30 62L14 58L14 48L30 52C29 44 31 36 40 32Z"/>
+<path class="nol" fill="${C.cream}" opacity=".6" d="M42 46C46 42 54 42 58 46C60 60 56 76 50 80C44 76 40 60 42 46Z"/>
+<path fill="none" class="fine" d="M88 46l4-4M88 60l4 4M12 46l-4-4M12 60l-4 4M24 98l-3 3M76 98l3 3M38 8l-2-4M62 8l2-4"/>`;
+
+  // a heap of earth, the hole it came out of, and the spade that dug it
+  S.dig = () => `
+<path fill="#7a5a3c" d="M4 94C8 78 26 72 42 78C48 82 50 88 52 94Z"/>
+<circle fill="#7a5a3c" cx="22" cy="58" r="3"/><circle fill="#7a5a3c" cx="38" cy="50" r="2.4"/><circle fill="#7a5a3c" cx="12" cy="66" r="2"/>
+<ellipse fill="#4a3628" cx="74" cy="91" rx="20" ry="5.5"/>
+<path fill="${C.bark}" d="${stick(46, 26, 62, 76, 4.5)}M38 24L54 19L55.5 23L39.5 28Z"/>
+<path fill="${C.silver}" d="M57 72L69 67L78 86L66 92Z"/>
+<circle fill="${C.ochre}" cx="80" cy="90" r="1.6"/><circle fill="${C.ochre}" cx="72" cy="92" r="1.6"/>`;
+  META.dig = { w: 1.2 };
+
+  S.sickle = () => `<path fill="${C.bark}" d="${stick(40, 94, 48, 64, 6)}"/><path fill="${C.silver}" d="M47 66C38 40 56 14 86 16C66 24 56 40 54 63Z"/>`;
+  META.sickle = { sky: true };
+
+  // a knife and fork, for eating
+  S.cutlery = () => `
+<path fill="${C.silver}" d="${stick(30, 94, 30, 46, 5)}M22 46H38V36H22ZM22 36V10H25V36ZM28.5 36V10H31.5V36ZM35 36V10H38V36Z"/>
+<path fill="${C.silver}" d="${stick(68, 94, 68, 58, 5)}M64.5 58C62 40 64 18 72 8V58Z"/>`;
+  META.cutlery = { sky: true };
+
+  // a bowl of hot soup with a spoon in it
+  S.bowl = () => `
+<path fill="${C.silver}" d="${stick(60, 66, 84, 30, 4)}"/><ellipse fill="${C.silver}" cx="86" cy="26" rx="6" ry="8" transform="rotate(34 86 26)"/>
+<path fill="${C.blue}" d="M12 66H88C88 84 72 94 50 94C28 94 12 84 12 66Z"/>
+<ellipse fill="${C.ochre}" cx="50" cy="66" rx="38" ry="6.5"/>
+<path fill="none" class="fine" d="M30 56q-4-6 0-12t0-12M48 54q-4-6 0-12t0-12M66 56q-4-6 0-12"/>`;
+  META.bowl = { w: 1.1 };
+
+  S.crumbs = () => `<path fill="#d79b55" d="M30 94C28 84 36 80 44 82L46 94Z"/>
+<circle fill="#d79b55" cx="58" cy="92" r="2.6"/><circle fill="#d79b55" cx="68" cy="94" r="2"/><circle fill="#d79b55" cx="76" cy="90" r="2.4"/><circle fill="#d79b55" cx="20" cy="93" r="2"/><circle fill="#d79b55" cx="86" cy="94" r="1.8"/>`;
+  META.crumbs = { w: 1 };
+
+  // a bale of straw
+  S.bale = () => {
+    const r = rng(41); let d = '';
+    for (let i = 0; i < 26; i++) { const x = 14 + r() * 72, y = 56 + r() * 34; d += `M${f(x)} ${f(y)}l${f(r() * 6 - 3)} 5`; }
+    return `<path fill="${C.butter}" d="M10 54H88V94H10Z"/><path fill="${C.ochre}" d="M10 54L20 44H98L88 54Z"/><path fill="#c9a24a" d="M88 54L98 44V84L88 94Z"/>
+<path fill="none" class="fine" d="${d}"/><path fill="none" d="M32 54V94M66 54V94M42 44L32 54M76 44L66 54"/>`;
+  };
+  META.bale = { w: 1.3 };
+
+  // a pig's face, front on, with the hairs on its chinny chin chin
+  S.pighead = () => `
+<path fill="${C.pink}" d="M20 34L24 8L42 22Z"/><path fill="${C.pink}" d="M80 34L76 8L58 22Z"/>
+<ellipse fill="${C.pink}" cx="50" cy="50" rx="32" ry="30"/>
+<circle class="solid" cx="38" cy="40" r="2.8"/><circle class="solid" cx="62" cy="40" r="2.8"/>
+<circle class="nol" fill="${C.rose}" opacity=".5" cx="30" cy="54" r="5"/><circle class="nol" fill="${C.rose}" opacity=".5" cx="70" cy="54" r="5"/>
+<ellipse fill="${C.rose}" cx="50" cy="56" rx="13" ry="9"/>
+<ellipse class="solid" cx="45" cy="56" rx="2" ry="3"/><ellipse class="solid" cx="55" cy="56" rx="2" ry="3"/>
+<path fill="none" d="M42 70q8 5 16 0"/>
+<path fill="none" d="M42 79l-2 9M47 80l-1 10M53 80l1 10M58 79l2 9"/>`;
+  META.pighead = { sky: true };
+
+  S.bones = () => `
+<path fill="${C.cream}" d="${stick(24, 28, 76, 84, 9)}${stick(76, 28, 24, 84, 9)}"/>
+<circle fill="${C.cream}" cx="16" cy="28" r="7"/><circle fill="${C.cream}" cx="24" cy="20" r="7"/><circle fill="${C.cream}" cx="84" cy="28" r="7"/><circle fill="${C.cream}" cx="76" cy="20" r="7"/>
+<circle fill="${C.cream}" cx="16" cy="84" r="7"/><circle fill="${C.cream}" cx="24" cy="92" r="7"/><circle fill="${C.cream}" cx="84" cy="84" r="7"/><circle fill="${C.cream}" cx="76" cy="92" r="7"/>`;
+  META.bones = { sky: true };
+
+  S.snail = () => `
+<path fill="#c4b48a" d="M8 94C10 87 18 85 28 85H70C78 85 82 76 84 66C86 59 94 59 94 66C94 78 88 94 70 94Z"/>
+<path fill="none" d="M86 61l-4-14M91 61l4-14"/><circle class="solid" cx="82" cy="46" r="2.2"/><circle class="solid" cx="95" cy="46" r="2.2"/>
+<circle fill="${C.rust}" cx="46" cy="62" r="24"/>
+<path fill="none" d="M46 62a3 3 0 1 1 6 0a6 6 0 1 1-12 0a9 9 0 1 1 18 0a12 12 0 1 1-24 0a15 15 0 1 1 30 0"/>`;
+  META.snail = { w: 0.9 };
+
+  // a prize rosette for the winner
+  S.rosette = () => `
+<path fill="${C.blue}" d="M42 56L30 94L42 87L48 96L54 58Z"/><path fill="${C.blue}" d="M58 56L70 94L58 87L52 96L46 58Z"/>
+<path fill="${C.red}" d="${cloud(50, 40, 27, 27, 12, 4)}"/>
+<circle fill="${C.gold}" cx="50" cy="40" r="16"/>
+<text class="label" x="50" y="46" text-anchor="middle" font-size="17">1</text>`;
+  META.rosette = { sky: true };
+
+  /* ---------- people (front on, like Pip, but grown up) ---------- */
+  const SKIN = '#f2cfae';
+  // where the hands go, [left, right], for each way of holding the arms
+  const POSE = {
+    down: [[37, 66], [63, 66]], hold: [[44, 55], [56, 55]], up: [[30, 16], [70, 16]],
+    point: [[37, 66], [83, 34]], throw: [[37, 66], [72, 10]], wave: [[37, 66], [71, 22]],
+    reach: [[37, 66], [81, 54]], offer: [[30, 50], [70, 50]], face: [[45, 33], [55, 33]]
+  };
+  const HAIR = {
+    fringe: 'M40 27C39 15 61 15 60 27Q57 20 50 22.5Q43 20 40 27Z',
+    short: 'M40 27C38 14 62 14 60 27Q58 20.5 51 21.5Q45 20 40 27Z',
+    thin: 'M40.5 26C42 17 58 17 59.5 26Q56 21.5 50 21.5Q44 21.5 40.5 26Z'
+  };
+  const BODY = {
+    gown: (c) => `<path fill="${c}" d="M42.5 38Q50 36 57.5 38L59 51Q67 71 76 93Q50 99 24 93Q33 71 41 51Z"/>
+<path fill="none" class="fine" d="M41 51Q50 54 59 51M37 76l-4 15M50 62v32M63 76l4 15"/>`,
+    tunic: (c, o) => `<rect fill="${o.legs || C.navy}" x="43" y="70" width="6" height="22"/><rect fill="${o.legs || C.navy}" x="51" y="70" width="6" height="22"/>
+<ellipse fill="${C.black}" cx="45" cy="93.5" rx="5.5" ry="3"/><ellipse fill="${C.black}" cx="55" cy="93.5" rx="5.5" ry="3"/>
+<path fill="${c}" d="M40 38Q50 35.5 60 38L63 73Q50 77 37 73Z"/>
+${o.apron ? `<path class="nol" fill="${C.white}" d="M42 58H58L60 74Q50 77 40 74Z"/>` : ''}
+<path fill="${C.bark}" d="M38.6 56H61.4V60H38.6Z"/>`,
+    robe: (c) => `<path fill="${c}" d="M41 38Q50 35.5 59 38L62 52Q68 72 72 94H28Q32 72 38 52Z"/>
+<path fill="${C.white}" d="M28.4 88H71.6L72 94H28Z"/>
+<path class="solid" d="M34 90h1.6v2.4H34zM44 90h1.6v2.4H44zM54 90h1.6v2.4H54zM64 90h1.6v2.4H64z"/>`,
+    cloak: (c) => `<path fill="${c}" d="M39 37Q50 33 61 37Q69 64 74 94H26Q31 64 39 37Z"/>
+<path fill="none" class="fine" d="M44 46l-6 46M56 46l6 46"/>`
+  };
+  // a head, face on. o.hair colour, o.style (fringe, short, thin), o.sleep, o.cry, o.cross, o.mouth,
+  // o.beard colour, o.crown, o.hat colour, o.chef, o.hood colour
+  function head(o = {}) {
+    const hair = o.hair || C.ochre;
+    const eyes = o.sleep ? `<path fill="none" d="M43 27.5q2.5 2 5 0M52 27.5q2.5 2 5 0"/>`
+      : `${o.cross ? `<path fill="none" d="M42 23l6 2.4M58 23l-6 2.4"/>` : ''}<circle class="solid" cx="45.5" cy="27.5" r="1.5"/><circle class="solid" cx="54.5" cy="27.5" r="1.5"/>`;
+    const m = o.mouth || (o.cry || o.cross ? 'sad' : 'smile');
+    const mouth = {
+      smile: `<path fill="none" d="M46.5 32q3.5 3 7 0"/>`, sad: `<path fill="none" d="M46.5 34q3.5-2.6 7 0"/>`,
+      o: `<ellipse fill="${C.rose}" cx="50" cy="33" rx="1.8" ry="2.3"/>`, grin: `<path fill="${C.rose}" d="M45.5 31.5Q50 37.5 54.5 31.5Z"/>`
+    }[m] || '';
+    return `<circle fill="${SKIN}" cx="50" cy="28" r="10"/>
+${eyes}<circle class="nol" fill="${C.rose}" opacity=".5" cx="42.8" cy="31.2" r="2.4"/><circle class="nol" fill="${C.rose}" opacity=".5" cx="57.2" cy="31.2" r="2.4"/>
+${mouth}
+${o.cry ? `<path fill="#a9c8da" d="${drop(44.5, 33, 1.6)}${drop(55.5, 33, 1.6)}${drop(42, 40, 1.4)}"/>` : ''}
+${o.beard ? `<path fill="${o.beard}" d="M41 30.5Q41 46 50 48Q59 46 59 30.5Q56 35 50 35.5Q44 35 41 30.5Z"/><path fill="none" d="M45 33q2.5-1.6 5 0q2.5-1.6 5 0"/>` : ''}
+${HAIR[o.style] ? `<path fill="${hair}" d="${HAIR[o.style]}"/>` : ''}
+${o.hood ? `<path fill="${o.hood}" d="M38.5 31C36 11 64 11 61.5 31C59 19 41 19 38.5 31Z"/>` : ''}
+${o.hat ? `<path fill="${o.hat}" d="M38 23C38 12 62 12 62 23Q50 19 38 23Z"/><path fill="${C.white}" d="M58 16q10-9 15-5q-6 2-13 8z"/>` : ''}
+${o.chef ? `<path fill="${C.white}" d="M41 21L41 14C34 14 34 4 42 6C44 0 56 0 58 6C66 4 66 14 59 14L59 21Z"/>` : ''}
+${o.crown ? `<path fill="${C.gold}" d="M41.5 20L41 11L45.5 15L50 9L54.5 15L59 11L58.5 20Z"/><circle class="nol" fill="${C.red}" cx="50" cy="16.5" r="1.4"/>` : ''}`;
+  }
+  // a whole person: o.body (gown, tunic, robe, cloak), o.col its colour, o.arms (see POSE),
+  // o.long long hair, o.cape colour, o.legs colour, o.apron, plus everything head() takes
+  function person(o = {}) {
+    const col = o.col || C.rose, [[lx, ly], [rx, ry]] = POSE[o.arms || 'down'];
+    return `
+${o.cape ? `<path fill="${o.cape}" d="M40 39L27 93Q50 97 73 93L60 39Z"/>` : ''}
+${o.hood ? `<path fill="${o.hood}" d="M36 36C31 8 69 8 64 36L68 46H32Z"/>` : ''}
+${o.long ? `<path fill="${o.hair || C.ochre}" d="M39.5 27C36 12 64 12 60.5 27C62 36 67 46 66 54Q60 52 57 44H43Q40 52 34 54C33 46 38 36 39.5 27Z"/>` : ''}
+${BODY[o.body || 'gown'](col, o)}
+<path fill="${o.sleeve || col}" d="${stick(41.5, 41, lx, ly, 6.5)}${stick(58.5, 41, rx, ry, 6.5)}"/>
+<circle fill="${SKIN}" cx="${lx}" cy="${ly}" r="3.2"/><circle fill="${SKIN}" cx="${rx}" cy="${ry}" r="3.2"/>
+${head(o)}`;
+  }
+
+  S.princess = (o = {}) => person({ col: C.rose, hair: C.gold, long: true, style: 'fringe', crown: true, ...o });
+  S.prince = (o = {}) => person({ body: 'tunic', col: C.blue, hair: C.brown, style: 'short', crown: true, cape: C.red, ...o });
+  S.king = (o = {}) => person({ body: 'robe', col: C.red, hair: C.silver, style: 'short', beard: C.silver, crown: true, ...o });
+  S.queen = (o = {}) => person({ col: C.plum, hair: C.brown, long: true, style: 'fringe', crown: true, ...o });
+  // a Wise Woman, in a hooded cloak; o.wicked for the thirteenth
+  S.wise = (o = {}) => person({ body: 'cloak', col: o.wicked ? C.black : C.teal, hood: o.wicked ? '#3a2f36' : '#4f807c', hair: C.silver, cross: o.wicked, ...o });
+  S.oldwoman = (o = {}) => person({ body: 'cloak', col: C.brown, hood: C.grey, hair: C.silver, style: 'thin', ...o });
+  S.henry = (o = {}) => person({ body: 'tunic', col: C.green, legs: C.brown, hair: C.brown, style: 'short', hat: C.leaf, ...o });
+  S.cook = (o = {}) => person({ body: 'tunic', col: C.cream, legs: C.brown, apron: true, hair: C.bark, style: 'short', beard: C.bark, chef: true, ...o });
+  // just a head (for tucking up in bed)
+  S.princesshead = (o = {}) => `<path fill="${o.hair || C.gold}" d="M39.5 27C36 12 64 12 60.5 27C62 32 63 36 60 38H40C37 36 38 32 39.5 27Z"/>${head({ hair: C.gold, style: 'fringe', crown: true, ...o })}`;
+
+  /* ---------- castles and things in them ---------- */
+  S.castle = (o = {}) => {
+    const stone = '#d6cbb4', roof = o.roof || C.blue;
+    const merlons = (x0, x1, y) => { let d = ''; for (let x = x0; x < x1; x += 6) d += `M${x} ${y}h3.4v-4.4h-3.4z`; return d; };
+    return `
+<path fill="${C.red}" d="M19 -6L19 -14L28 -10ZM81 -6L81 -14L90 -10Z"/><path fill="none" class="fine" d="M19 4V-14M81 4V-14"/>
+<path fill="${stone}" d="M30 96V40H70V96Z"/>
+<path fill="${stone}" d="${merlons(30, 70, 40)}"/>
+<path fill="${stone}" d="M8 96V30H30V96ZM70 96V30H92V96Z"/>
+<path fill="${roof}" d="M5 31L19 2L33 31ZM67 31L81 2L95 31Z"/>
+<path fill="${C.bark}" d="M41 96V76C41 66 59 66 59 76V96Z"/>
+<path fill="none" class="fine" d="M50 68V96M41 80H59M8 48H30M8 66H30M8 84H30M70 48H92M70 66H92M70 84H92M30 56H70M15 30v18M23 48v18M15 66v18M77 30v18M85 48v18M77 66v18"/>
+<path fill="${C.butter}" d="M16 50V42C16 38 22 38 22 42V50ZM78 50V42C78 38 84 38 84 42V50ZM46 58V50C46 46 54 46 54 50V58Z"/>`;
+  };
+  META.castle = { w: 1.5 };
+
+  // one tall tower with a little window at the top
+  S.tower = () => `
+<path fill="#d6cbb4" d="M34 96V22H66V96Z"/>
+<path fill="${C.blue}" d="M29 24L50 -16L71 24Z"/>
+<path fill="none" class="fine" d="M34 36H66M34 52H66M34 68H66M34 84H66M42 22v14M58 36v16M44 52v16M56 68v16M42 84v12"/>
+<path fill="${C.butter}" d="M45 34V27C45 23 55 23 55 27V34Z"/>
+<path fill="${C.bark}" d="M44 96V84C44 79 56 79 56 84V96Z"/>`;
+  META.tower = { w: 0.7 };
+
+  // a big arched castle door; o.open swings it open
+  S.castledoor = (o = {}) => `
+<path fill="#bfb39b" d="M14 96V44C14 10 86 10 86 44V96Z"/>
+<path fill="none" class="fine" d="M14 50H24M76 50H86M14 70H24M76 70H86M14 88H24M76 88H86M30 20l5 6M70 20l-5 6M50 12v7"/>
+${o.open ? `<path fill="#3e3238" d="M24 96V46C24 20 76 20 76 46V96Z"/><path fill="${C.brown}" d="M24 96V46L8 52V98Z"/>`
+    : `<path fill="${C.brown}" d="M24 96V46C24 20 76 20 76 46V96Z"/>
+<path fill="none" class="fine" d="M37 96V24M50 96V20M63 96V24"/>
+<path fill="${C.black}" d="M24 40H46V44H24ZM24 76H46V80H24Z"/>
+<path fill="none" d="M62 58a4.5 4.5 0 1 0 0.1 0"/>`}`;
+  META.castledoor = { w: 1.3 };
+
+  S.well = () => `
+<path fill="${C.bark}" d="M19 66V20H25V66ZM75 66V20H81V66Z"/>
+<path fill="${C.brown}" d="M8 24L50 2L92 24L86 28L50 10L14 28Z"/>
+<path fill="${C.bark}" d="M22 38H78V42H22Z"/>
+<path fill="none" class="fine" d="M50 42V52"/>
+<path fill="${C.tan}" d="M44 52H56L54 61H46Z"/>
+<path fill="${C.grey}" d="M12 64H88V94H12Z"/>
+<path fill="none" class="fine" d="M12 74H88M12 84H88M24 64v10M44 64v10M64 64v10M82 64v10M18 74v10M36 74v10M56 74v10M74 74v10M28 84v10M48 84v10M68 84v10"/>
+<ellipse fill="${C.silver}" cx="50" cy="64" rx="39" ry="6.5"/>
+<ellipse class="nol" fill="#3d5068" cx="50" cy="64" rx="33" ry="4"/>`;
+  META.well = { w: 1.4 };
+
+  S.ball = () => `<circle fill="${C.gold}" cx="50" cy="78" r="17"/><circle class="nol" fill="${C.butter}" cx="44" cy="72" r="5"/><path fill="none" class="fine" d="M34 77q16 8 32 0"/>`;
+  META.ball = { w: 0.5 };
+
+  S.crown = () => `
+<path fill="${C.gold}" d="M18 86L12 38L32 60L50 28L68 60L88 38L82 86Z"/>
+<path fill="${C.ochre}" d="M18 86H82V94H18Z"/>
+<circle fill="${C.red}" cx="50" cy="70" r="5"/><circle fill="${C.blue}" cx="32" cy="74" r="3.6"/><circle fill="${C.blue}" cx="68" cy="74" r="3.6"/>
+<circle fill="${C.gold}" cx="12" cy="36" r="3.4"/><circle fill="${C.gold}" cx="50" cy="26" r="3.4"/><circle fill="${C.gold}" cx="88" cy="36" r="3.4"/>`;
+  META.crown = { sky: true };
+
+  S.cup = () => `<path fill="${C.gold}" d="M28 30H72Q72 62 56 66V84H66V92H34V84H44V66Q28 62 28 30Z"/><path class="nol" fill="${C.butter}" d="M34 36h5v20h-5z"/><ellipse fill="${C.ochre}" cx="50" cy="30" rx="22" ry="4"/>`;
+  META.cup = { w: 0.6 };
+
+  S.plate = () => `<ellipse fill="${C.gold}" cx="50" cy="84" rx="44" ry="11"/><ellipse fill="${C.butter}" cx="50" cy="83" rx="30" ry="6.5"/>`;
+  META.plate = { sky: true };
+
+  // a table with a cloth on it; o.plates lays that many golden plates along it
+  S.table = (o = {}) => {
+    let plates = '';
+    const n = o.plates || 0;
+    for (let i = 0; i < n; i++) { const x = 9 + (i + 0.5) * (82 / n); plates += `<ellipse fill="${C.gold}" cx="${f(x)}" cy="52" rx="${f(Math.min(5.5, 34 / n))}" ry="2"/>`; }
+    return `
+<path fill="${C.bark}" d="M12 76H17V96H12ZM83 76H88V96H83Z"/>
+<path fill="${C.white}" d="M4 50H96L94 78Q88 74 82 78Q76 74 70 78Q64 74 58 78Q52 74 46 78Q40 74 34 78Q28 74 22 78Q16 74 10 78Q8 74 6 78Z"/>
+<path fill="none" class="fine" d="M4 56H96"/>${plates}`;
+  };
+  META.table = { w: 1.5 };
+
+  // a pile of mattresses and feather beds on a bedstead; o.n layers,
+  // o.peas shows the three peas underneath, o.princess puts her on top
+  S.mattresses = (o = {}) => {
+    const n = o.n || 16, h = 4.6, cols = [C.red, C.butter, C.blue, C.cream, C.rose, C.green, C.white, C.ochre, C.teal, C.pink];
+    const r = rng(7); let layers = '';
+    for (let i = 0; i < n; i++) {
+      const y = 84 - i * h, dx = f((r() - 0.5) * 6), w = f(22 + r() * 3);
+      layers += `<path fill="${cols[i % cols.length]}" d="M${f(50 - w + +dx)} ${f(y)}Q${f(50 - w - 2 + +dx)} ${f(y - h / 2)} ${f(50 - w + +dx)} ${f(y - h)}H${f(50 + w + +dx)}Q${f(50 + w + 2 + +dx)} ${f(y - h / 2)} ${f(50 + w + +dx)} ${f(y)}Z"/>`;
+    }
+    const top = 84 - n * h;
+    return `
+<path fill="${C.brown}" d="M17 96V58Q21.5 52 26 58V96Z"/><path fill="${C.brown}" d="M74 96V70Q78 64 82 70V96Z"/>
+<rect fill="${C.bark}" x="20" y="84" width="60" height="6"/>
+${o.peas ? `<circle fill="${C.pea}" cx="36" cy="84" r="2.6"/><circle fill="${C.pea}" cx="50" cy="84.5" r="2.6"/><circle fill="${C.pea}" cx="63" cy="84" r="2.6"/>` : ''}
+${layers}
+${o.princess ? `<ellipse fill="${C.white}" cx="36" cy="${f(top - 2.5)}" rx="9" ry="4"/>
+<g transform="translate(15 ${f(top - 20)}) scale(.42)">${S.princesshead({ sleep: o.princess === 'sleep', mouth: o.princess === 'sleep' ? 'smile' : 'sad' })}</g>
+<path fill="${C.rose}" d="M38 ${f(top - 1)}Q56 ${f(top - 8)} 76 ${f(top - 3)}V${f(top)}H38Z"/>` : ''}`;
+  };
+  META.mattresses = { w: 1 };
+
+  S.pea = () => `<circle fill="${C.pea}" cx="50" cy="80" r="16"/><circle class="nol" fill="${C.white}" opacity=".6" cx="44" cy="74" r="4.5"/>`;
+  META.pea = { w: 0.45 };
+
+  // the glass case the peas were kept in
+  S.glasscase = () => `
+<path fill="${C.bark}" d="M24 96V70H30V96ZM70 96V70H76V96Z"/>
+<path fill="${C.brown}" d="M18 66H82V72H18Z"/>
+<path fill="#d9e8ef" opacity=".7" d="M22 66V22H78V66Z"/>
+<path fill="${C.brown}" d="M18 22H82V16H18Z"/>
+<path fill="${C.deepred}" d="M32 66C32 56 68 56 68 66Z"/>
+<circle fill="${C.pea}" cx="42" cy="56" r="4"/><circle fill="${C.pea}" cx="50" cy="54" r="4"/><circle fill="${C.pea}" cx="58" cy="56" r="4"/>
+<path class="nol" fill="${C.white}" opacity=".8" d="M28 28L34 28L28 44Z"/>`;
+  META.glasscase = { w: 1 };
+
+  // a baby asleep in a rocking cradle
+  S.cradle = () => `
+<path fill="${C.bark}" d="M8 90Q50 100 92 90L92 95Q50 105 8 95Z"/>
+<path fill="${C.tan}" d="M14 52H86L80 88Q50 94 20 88Z"/>
+<path fill="none" class="fine" d="M18 62H84M20 74H82"/>
+<circle fill="${SKIN}" cx="56" cy="46" r="10"/>
+<path fill="none" d="M52 46q2 1.6 4 0M59 46q2 1.6 4 0"/><circle class="nol" fill="${C.rose}" opacity=".5" cx="54" cy="51" r="2"/>
+<path fill="${C.gold}" d="M50 38Q56 33 62 38Q56 36 50 38Z"/>
+<path fill="${C.pink}" d="M34 54Q58 46 84 54L82 64H32Z"/>
+<path fill="${C.tan}" d="M12 54C10 30 26 22 38 24L40 54Z"/>`;
+  META.cradle = { w: 1.2 };
+
+  S.spindle = () => `
+<path fill="${C.tan}" d="M48.6 92L49.2 16L50 4L50.8 16L51.4 92Z"/>
+<ellipse fill="${C.cream}" cx="50" cy="50" rx="9" ry="17"/>
+<path fill="none" class="fine" d="M42 44l16-6M41 52l18-6M42 60l16-6"/>
+<ellipse fill="${C.bark}" cx="50" cy="84" rx="12" ry="4.5"/>`;
+  META.spindle = { w: 0.3 };
+
+  // a heart with iron bands round it, to keep it from bursting; o.n bands still on, o.crack
+  S.ironheart = (o = {}) => {
+    const n = o.n === undefined ? 3 : o.n, band = (y) => `M14 ${y}Q50 ${y + 6} 86 ${y}L86 ${y + 6}Q50 ${y + 12} 14 ${y + 6}Z`;
+    return `<path fill="${C.red}" d="${heart(50, 58, 30)}"/>
+<path fill="#6b5e68" d="${[34, 50, 66].slice(0, n).map(band).join('')}"/>
+${o.crack ? `<path fill="#6b5e68" d="M70 20L92 10L94 15L72 25Z"/><path fill="none" d="M84 34l10-6M88 44l10 0M80 26l4-10"/>` : ''}`;
+  };
+  META.ironheart = { sky: true };
+
+  // a golden carriage, side on
+  S.coach = () => `
+<path fill="${C.deepred}" d="M24 22H80L76 32H28Z"/><circle fill="${C.gold}" cx="52" cy="18" r="3"/>
+<path fill="${C.gold}" d="M16 74C12 50 22 32 32 32H74C84 32 92 50 88 74Z"/>
+<path fill="${C.cream}" d="M38 40H58V58H38Z"/><path fill="none" class="fine" d="M48 40V58M38 49H58M22 66H84"/>
+<circle fill="${C.bark}" cx="28" cy="80" r="14"/><circle fill="${C.bark}" cx="78" cy="80" r="14"/>
+<circle class="nol" fill="${C.tan}" cx="28" cy="80" r="10"/><circle class="nol" fill="${C.tan}" cx="78" cy="80" r="10"/>
+<path fill="none" class="fine" d="M18 80H38M28 70V90M21 73L35 87M35 73L21 87M68 80H88M78 70V90M71 73L85 87M85 73L71 87"/>`;
+  META.coach = { w: 1.3 };
+
+  // a white horse with a feather on its head
+  S.horse = () => {
+    const c = C.white;
+    return `
+<path fill="${c}" d="M20 50C10 56 8 70 12 80C14 74 16 64 22 58Z"/>
+<rect fill="${c}" x="22" y="62" width="7" height="32" rx="3"/><rect fill="${c}" x="32" y="64" width="7" height="30" rx="3"/>
+<rect fill="${c}" x="62" y="64" width="7" height="30" rx="3"/><rect fill="${c}" x="71" y="62" width="7" height="32" rx="3"/>
+<path class="nol" fill="${C.grey}" d="M22 90h7v4h-7zM32 90h7v4h-7zM62 90h7v4h-7zM71 90h7v4h-7z"/>
+<path fill="${c}" d="M18 54C18 44 30 40 48 40C62 40 74 42 78 52C80 62 74 70 50 70C30 70 18 66 18 54Z"/>
+<path fill="${c}" d="M68 50C68 38 72 26 78 20L90 30C86 36 82 46 80 56Z"/>
+<path fill="${c}" d="M76 22C78 14 88 12 92 18L98 32C99 36 96 38 92 37L84 34Z"/>
+<path fill="${C.grey}" d="M76 22C70 26 66 36 66 46L70 44C70 36 74 28 80 22Z"/>
+<path fill="${C.white}" d="M84 14q-6-12 2-14q4 8-2 14z"/>
+<circle class="solid" cx="88" cy="22" r="1.8"/><circle class="solid" cx="95.5" cy="33" r=".9"/>
+<path fill="${C.gold}" d="M80 26L94 34L93 36L79 28Z"/>`;
+  };
+  META.horse = { w: 1.3 };
+
+  // a thick hedge of thorny branches; o.roses covers it in flowers
+  const HEDGE = [
+    [[6, 96], [10, 74], [20, 54], [34, 36], [46, 24]],
+    [[26, 96], [30, 76], [42, 58], [58, 44], [74, 34], [90, 30]],
+    [[52, 96], [56, 78], [68, 62], [84, 52], [98, 52]],
+    [[76, 96], [64, 82], [46, 72], [28, 66], [6, 68]],
+    [[96, 94], [86, 80], [72, 74], [58, 76]]
+  ];
+  S.hedge = (o = {}) => {
+    const r = rng(61);
+    let wood = '', thorns = '', roses = '', k = 0;
+    for (const b of HEDGE) {
+      for (let i = 0; i < b.length - 1; i++) {
+        const [x1, y1] = b[i], [x2, y2] = b[i + 1], a = Math.atan2(y2 - y1, x2 - x1);
+        wood += stick(x1, y1, x2, y2, 3);
+        for (const t of [0.3, 0.75]) {
+          const x = x1 + (x2 - x1) * t, y = y1 + (y2 - y1) * t, n = a + (k++ % 2 ? 1 : -1) * Math.PI / 2;
+          thorns += `M${f(x - Math.cos(a) * 2.4)} ${f(y - Math.sin(a) * 2.4)}L${f(x + Math.cos(n) * 7 + Math.cos(a) * 2)} ${f(y + Math.sin(n) * 7 + Math.sin(a) * 2)}L${f(x + Math.cos(a) * 2.4)} ${f(y + Math.sin(a) * 2.4)}Z`;
+        }
+      }
+    }
+    if (o.roses) {
+      for (let i = 0; i < 12; i++) {
+        const x = 12 + r() * 76, y = 22 + r() * 62, s = 4.5 + r() * 2.5;
+        roses += `<circle fill="${i % 3 ? C.rose : C.red}" cx="${f(x)}" cy="${f(y)}" r="${f(s)}"/><path fill="none" class="fine" d="M${f(x - s * 0.4)} ${f(y)}a${f(s * 0.4)} ${f(s * 0.4)} 0 1 1 ${f(s * 0.6)} ${f(s * 0.3)}"/>`;
+      }
+    }
+    return `<path fill="${C.moss}" d="${cloud(50, 58, 48, 42, 13, 9)}"/>
+<path class="nol" fill="${C.leaf}" opacity=".55" d="${cloud(42, 70, 30, 22, 9, 4)}"/>
+<path fill="${C.bark}" d="${wood}${thorns}"/>${roses}`;
+  };
+  META.hedge = { w: 1.5 };
 
   /* ---------- backgrounds ---------- */
   const W = 300, H = 360;
@@ -871,6 +1359,30 @@ ${o.happy || o.sleep ? `<path fill="none" d="M86 61q3 ${o.sleep ? 2.5 : -3} 6 0"
         `<path fill="none" class="fine" d="M80 302q8-4 16 0M190 326q8-4 16 0M118 340q8-4 16 0M214 298q6-3 12 0"/>` +
         `<path fill="none" d="M22 304q-2-22 2-34M27 304q0-20 0-35M33 304q3-16 0-26M268 302q-3-20 3-30M275 302q0-18 0-29M281 302q3-14 6-22"/>`
     }),
+    // a dark and stormy night: rain, and a flash of lightning
+    storm: (r) => {
+      let rain = '';
+      for (let i = 0; i < 70; i++) { const x = r() * 320 - 10, y = r() * 360; rain += `M${f(x)} ${f(y)}l-5 14`; }
+      return {
+        wash: sky('#3a4566') + `<path fill="#556080" d="${cloud(90, 40, 110, 40, 10, 3)}"/><path fill="#4b5675" d="${cloud(240, 60, 90, 36, 9, 8)}"/>` +
+          `<path fill="${C.butter}" d="M232 70L210 128H228L206 186L250 116H232L252 70Z"/>` + ground('#4f6243', 268),
+        ink: `<path fill="none" class="fine" d="${rain}"/>`
+      };
+    },
+    // a hall of stone blocks inside a castle, with a flagstone floor
+    hall: (r) => {
+      let stones = '';
+      for (let y = 20, row = 0; y < 262; y += 22, row++) {
+        stones += `M-20 ${y}H320`;
+        for (let x = (row % 2) * 24 - 10; x < 310; x += 48) stones += `M${x} ${y}v22`;
+      }
+      let flags = 'M-20 300H320M-20 336H320';
+      for (let x = 10; x < 300; x += 54) flags += `M${f(x + r() * 10)} 266v34M${f(x + 24 + r() * 10)} 300v36M${f(x + r() * 10)} 336v30`;
+      return {
+        wash: sky('#cbbfa6') + `<rect class="nol" fill="#b9ac91" x="-20" y="190" width="340" height="80"/><rect fill="#9c8e74" x="-20" y="262" width="340" height="120"/>`,
+        ink: `<path fill="none" class="fine" d="${stones}"/><path fill="none" d="M-20 262H320"/><path fill="none" class="fine" d="${flags}"/>`
+      };
+    },
     // a river running towards us, for a bridge to cross
     river: (r) => {
       let grass = '';
