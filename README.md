@@ -1,6 +1,6 @@
 # The Briar Patch Library
 
-[Read the stories](https://jobchong.org/stories/). The published library now lives in [jobchong.github.io](https://github.com/jobchong/jobchong.github.io/tree/master/content/stories).
+[Read the stories at spelling.cc](https://spelling.cc/). Cloudflare Pages deployment settings for this repository are production branch `main`, framework preset `None`, build command `exit 0`, and output directory `.`.
 
 A fill-in-the-blanks storybook for small children learning to spell on a computer. It's plain HTML and JavaScript with no build step: open `index.html` in Safari or Chrome.
 
