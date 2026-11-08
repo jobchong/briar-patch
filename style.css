@@ -49,6 +49,9 @@ svg.scene { display: block; width: 100%; height: 100%; overflow: visible; mix-bl
 
 /* ---------- the shelf ---------- */
 .shelf {
+  /* Cover height: as tall as the screen allows, but narrow enough that the
+     longest row (--n books, set by app.js) still fits across with its plaque. */
+  --ch: clamp(110px, min(26vh, calc((86vw - var(--n, 4) * 2vw) / (.5 + var(--n, 4) * .76))), 290px);
   height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 3.2vh; padding: 1vh 3vw 0;
 }
@@ -65,14 +68,12 @@ svg.scene { display: block; width: 100%; height: 100%; overflow: visible; mix-bl
   box-shadow: 0 10px 16px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 220, 170, .25);
 }
 .plaque {
-  --ch: clamp(130px, 26vh, 290px);
   width: calc(var(--ch) * .5); display: flex; flex-direction: column; align-items: center; gap: .4em;
   color: var(--gold); font-family: var(--fellsc); text-align: center; font-size: calc(var(--ch) * .075); line-height: 1.1;
 }
 .plaque svg.scene { width: 100%; height: auto; aspect-ratio: 300 / 360; mix-blend-mode: normal; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .4)); }
 .books { display: flex; gap: 2vw; align-items: flex-end; }
 .cover {
-  --ch: clamp(130px, 26vh, 290px);
   position: relative; width: calc(var(--ch) * .76); height: var(--ch);
   display: block;
   background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 3px),

@@ -137,7 +137,10 @@ ${o.face === false ? '' : `<path fill="none" d="M22 40q4 3 8 0"/>
 <path fill="none" d="M20 63q6 5 12-1"/>`}`;
   META.moon = { sky: true };
 
-  S.star = () => `<path fill="${C.butter}" d="${star5(50, 52, 44)}"/>`;
+  S.star = (o = {}) => `<path fill="${C.butter}" d="${star5(50, 52, 44)}"/>
+${o.face ? `${o.sleep ? `<path fill="none" d="M39 50q3.5 3 7 0M54 50q3.5 3 7 0"/>` : `<ellipse class="solid" cx="43" cy="50" rx="2.2" ry="2.9"/><ellipse class="solid" cx="57" cy="50" rx="2.2" ry="2.9"/>`}
+<circle class="nol" fill="${C.rose}" opacity=".5" cx="37" cy="59" r="3.6"/><circle class="nol" fill="${C.rose}" opacity=".5" cx="63" cy="59" r="3.6"/>
+<path fill="none" d="M44 60q6 5.5 12 0"/>` : ''}`;
   META.star = { sky: true };
 
   S.sun = (o = {}) => {
@@ -148,9 +151,9 @@ ${o.face === false ? '' : `<path fill="none" d="M22 40q4 3 8 0"/>
     }
     return `<path fill="${C.ochre}" d="${rays}"/>
 <circle fill="${C.butter}" cx="50" cy="50" r="29"/>
-${o.face === false ? '' : `<path fill="none" d="M38 45q4-4 8 0M54 45q4-4 8 0"/>
+${o.face === false ? '' : `<path fill="none" d="${o.sleep ? 'M38 46q4 3.5 8 0M54 46q4 3.5 8 0' : 'M38 45q4-4 8 0M54 45q4-4 8 0'}"/>
 <circle class="nol" fill="${C.rose}" opacity=".45" cx="37" cy="56" r="4"/><circle class="nol" fill="${C.rose}" opacity=".45" cx="63" cy="56" r="4"/>
-<path fill="none" d="M41 60q9 8 18 0"/>`}`;
+${o.sleep ? `<ellipse fill="${C.rose}" cx="50" cy="61" rx="3.2" ry="3.8"/>` : `<path fill="none" d="M41 60q9 8 18 0"/>`}`}`;
   };
   META.sun = { sky: true };
 
@@ -246,12 +249,15 @@ ${o.rat ? `<path fill="none" d="M73 57.5l7 1.5"/>` : ''}
 <path fill="${C.orange}" d="M84 43L97 47L84 52Z"/>
 <circle class="solid" cx="76" cy="42" r="2"/>`;
 
+  // o.hare: a sandier coat and black-tipped ears
+  const HARE = '#bf9260';
   S.rabbithead = (o = {}) => `
-<path fill="${C.rabbit}" d="M40 32C33 18 33 4 40 4C47 4 47 18 45 32Z"/>
-<path fill="${C.rabbit}" d="M60 32C67 18 67 4 60 4C53 4 53 18 55 32Z"/>
+<path fill="${o.hare ? HARE : C.rabbit}" d="M40 32C33 18 33 4 40 4C47 4 47 18 45 32Z"/>
+<path fill="${o.hare ? HARE : C.rabbit}" d="M60 32C67 18 67 4 60 4C53 4 53 18 55 32Z"/>
 <path class="nol" fill="${C.pink}" d="M41 28C37 18 37 9 40 9C43 9 43 18 43 28Z"/>
 <path class="nol" fill="${C.pink}" d="M59 28C63 18 63 9 60 9C57 9 57 18 57 28Z"/>
-<ellipse fill="${C.rabbit}" cx="50" cy="40" rx="15.5" ry="14"/>
+${o.hare ? `<path class="nol" fill="${C.black}" d="M35.4 11C35.8 6 37.6 4 40 4C42.6 4 44.4 6 44.8 11Q40 9 35.4 11ZM55.2 11C55.6 6 57.4 4 60 4C62.4 4 64.2 6 64.6 11Q60 9 55.2 11Z"/>` : ''}
+<ellipse fill="${o.hare ? HARE : C.rabbit}" cx="50" cy="40" rx="15.5" ry="14"/>
 <ellipse class="nol" fill="${C.cream}" cx="50" cy="46.5" rx="7.5" ry="5.5"/>
 ${o.sleep || o.laugh ? `<path fill="none" d="M41 38q3 2.5 6 0M53 38q3 2.5 6 0"/>`
       : `<ellipse class="solid" cx="44" cy="38" rx="2" ry="2.6"/><ellipse class="solid" cx="56" cy="38" rx="2" ry="2.6"/>`}
@@ -260,16 +266,19 @@ ${o.sleep || o.laugh ? `<path fill="none" d="M41 38q3 2.5 6 0M53 38q3 2.5 6 0"/>
 ${o.laugh ? `<path fill="${C.rose}" d="M45 48Q50 56 55 48Z"/>` : `<path fill="none" d="M50 45.5v2M50 47.5q-2 2-4 1M50 47.5q2 2 4 1"/>`}
 <path class="fine" fill="none" d="M42 46L30 44M42 48L30 50M58 46L70 44M58 48L70 50"/>`;
 
-  S.rabbit = (o = {}) => `
-<ellipse fill="${C.rabbit}" cx="40" cy="93" rx="10" ry="4.5"/><ellipse fill="${C.rabbit}" cx="60" cy="93" rx="10" ry="4.5"/>
-<path fill="${C.rabbit}" d="M34 92C28 70 36 52 50 52C64 52 72 70 66 92Z"/>
+  S.rabbit = (o = {}) => {
+    const fur = o.hare ? HARE : C.rabbit;
+    return `
+<ellipse fill="${fur}" cx="40" cy="93" rx="10" ry="4.5"/><ellipse fill="${fur}" cx="60" cy="93" rx="10" ry="4.5"/>
+<path fill="${fur}" d="M34 92C28 70 36 52 50 52C64 52 72 70 66 92Z"/>
 <ellipse class="nol" fill="${C.cream}" cx="50" cy="76" rx="9" ry="13"/>
 ${o.jacket ? `<path fill="${C.blue}" d="M35 90C30 70 36 56 44 54L50 72L56 54C64 56 70 70 65 90L58 90L56 70L50 80L44 70L42 90Z"/>
 <circle class="nol" fill="${C.gold}" cx="45" cy="74" r="1.6"/><circle class="nol" fill="${C.gold}" cx="55" cy="74" r="1.6"/>` : ''}
-<path fill="${o.jacket ? C.blue : C.rabbit}" d="M37 58C28 64 27 74 31 79C34 78 36 71 41 65Z"/>
-<path fill="${o.jacket ? C.blue : C.rabbit}" d="M63 58C72 64 73 74 69 79C66 78 64 71 59 65Z"/>
-<circle fill="${C.rabbit}" cx="31" cy="79" r="3.5"/><circle fill="${C.rabbit}" cx="69" cy="79" r="3.5"/>
+<path fill="${o.jacket ? C.blue : fur}" d="M37 58C28 64 27 74 31 79C34 78 36 71 41 65Z"/>
+<path fill="${o.jacket ? C.blue : fur}" d="M63 58C72 64 73 74 69 79C66 78 64 71 59 65Z"/>
+<circle fill="${fur}" cx="31" cy="79" r="3.5"/><circle fill="${fur}" cx="69" cy="79" r="3.5"/>
 ${S.rabbithead(o)}`;
+  };
 
   S.bed = (o = {}) => {
     const who = o.rabbit ? `<g transform="translate(15 33) scale(.42)">${S.rabbithead({ sleep: true })}</g>`
@@ -543,6 +552,207 @@ ${S.piphead(o)}`;
 <path class="nol" fill="${C.red}" opacity=".7" d="M28 36h5v4h-5zM40 34h5v4h-5zM52 34h5v4h-5zM64 35h5v4h-5zM34 40h5v3h-5zM58 40h5v3h-5z"/>
 <path fill="none" d="M22 42Q50 48 78 42"/>`;
 
+  // a tall grandfather clock: ten to one, or o.one for one o'clock; o.bong shakes it
+  S.clock = (o = {}) => {
+    const hand = (deg, len) => { const a = (deg - 90) * Math.PI / 180; return `M50 24L${f(50 + Math.cos(a) * len)} ${f(24 + Math.sin(a) * len)}`; };
+    let ticks = '';
+    for (let i = 0; i < 12; i++) {
+      const a = (i / 12) * Math.PI * 2;
+      ticks += `M${f(50 + Math.sin(a) * 9.5)} ${f(24 - Math.cos(a) * 9.5)}L${f(50 + Math.sin(a) * 11.5)} ${f(24 - Math.cos(a) * 11.5)}`;
+    }
+    return `
+<path fill="${C.bark}" d="M32 96V87H68V96Z"/>
+<path fill="${C.brown}" d="M36 88V46H64V88Z"/>
+<rect fill="#5f3f29" x="42" y="52" width="16" height="30" rx="8"/>
+<path fill="none" class="fine" d="M50 52V71"/>
+<circle fill="${C.gold}" cx="50" cy="75" r="4.5"/>
+<path fill="${C.bark}" d="M30 49V43H70V49Z"/>
+<path fill="${C.brown}" d="M32 44V14C32 4 68 4 68 14V44Z"/>
+<circle fill="${C.gold}" cx="50" cy="4" r="3"/>
+<circle fill="${C.cream}" cx="50" cy="24" r="13"/>
+<path fill="none" class="fine" d="${ticks}"/>
+<path fill="none" d="${o.one ? hand(30, 6.5) + hand(0, 10) : hand(25, 6.5) + hand(300, 10)}"/>
+<circle class="solid" cx="50" cy="24" r="1.5"/>
+${o.bong ? `<path fill="none" d="M25 13q-5 10 0 22M18 9q-7 15 0 32M75 13q5 10 0 22M82 9q7 15 0 32"/>` : ''}`;
+  };
+  META.clock = { w: 0.9 };
+
+  // a lily pad for frogs to sit on (the top of the pad is at about y = 82)
+  S.lily = () => `
+<path fill="${C.green}" d="M50 88L58 81C76 80.5 92 84 92 89C92 94 72 97 50 97C28 97 8 94 8 89C8 84 26 80.5 43 81Z"/>
+<path fill="none" class="fine" d="M50 88L28 91M50 88L50 95M50 88L73 92"/>`;
+  META.lily = { sky: true };
+
+  // the big bad wolf; o.blow puffs his cheeks out, o.ouch is after the hot pot
+  S.wolf = (o = {}) => {
+    const fur = '#8f8a8e', dark = '#5e5a5f';
+    return `
+<path fill="${fur}" d="M30 90C6 96-2 76 8 62C12 56 20 58 20 66C20 78 28 84 38 84Z"/>
+<path class="nol" fill="${C.silver}" d="M8 62C12 56 18 58 18 64C14 66 10 66 8 62Z"/>
+<path fill="${fur}" d="M28 94C22 70 32 48 54 44C66 42 74 52 72 66C72 80 70 90 68 94Z"/>
+<path class="nol" fill="${C.silver}" d="M58 48C68 52 68 74 62 86C57 74 54 60 58 48Z"/>
+<path fill="none" class="fine" d="M36 60l4 4M33 70l4 3M40 78l3 3"/>
+<path fill="${fur}" d="M52 32L52 12L62 26Z"/><path fill="${fur}" d="M62 27L68 9L72 30Z"/>
+<path class="nol" fill="${dark}" d="M54 28L54 17L59 25ZM64 26L67.5 15L70 29Z"/>
+<path fill="${fur}" d="M50 38C50 26 62 22 72 28L96 39C94 46 84 49 72 49C62 51 52 46 50 38Z"/>
+<path class="nol" fill="${C.silver}" d="M70 42L92 43C86 48 76 49 68 47Z"/>
+${o.blow ? `<circle fill="${fur}" cx="75" cy="41" r="8"/><circle class="nol" fill="${C.rose}" opacity=".5" cx="75" cy="42" r="4"/>` : ''}
+<circle class="solid" cx="95.5" cy="39" r="2.6"/>
+${o.ouch ? `<path fill="none" d="M59 30l6 3-6 3"/>` : `<path fill="none" d="M58 30l9 2.5"/><circle class="solid" cx="63" cy="34.5" r="1.9"/>`}
+${o.blow ? `<circle fill="none" cx="91" cy="47" r="2.4"/><path fill="none" class="fine" d="M100 40q9-3 18 1M100 46q11 0 22 4M99 52q9 2 16 9"/>`
+      : o.ouch ? `<path fill="${C.deepred}" d="M75 46Q84 57 93 47Q84 50 75 46Z"/>`
+        : `<path fill="none" d="M72 46q10 4 22-2"/><path fill="${C.white}" d="M78 47l1.5 3.5 2-3.2zM86 46.4l1.5 3.4 2-3.4z"/>`}
+<path fill="${fur}" d="M55 66L51 94H60L63 70Z"/><path class="nol" fill="${dark}" d="M51.5 88L51 94H60L60.7 88Z"/>`;
+  };
+  META.wolf = { w: 1.1 };
+
+  // the three little pigs' houses: o.kind is straw, sticks or brick;
+  // o.down is the heap that is left after the wolf has blown it in
+  const stick = (x1, y1, x2, y2, w = 2.8) => {
+    const a = Math.atan2(y2 - y1, x2 - x1) + Math.PI / 2, dx = (Math.cos(a) * w) / 2, dy = (Math.sin(a) * w) / 2;
+    return `M${f(x1 + dx)} ${f(y1 + dy)}L${f(x2 + dx)} ${f(y2 + dy)}L${f(x2 - dx)} ${f(y2 - dy)}L${f(x1 - dx)} ${f(y1 - dy)}Z`;
+  };
+  S.house = (o = {}) => {
+    const k = o.kind || 'straw';
+    if (o.down && k === 'straw') {
+      return `<path fill="${C.butter}" d="M4 96C8 84 28 77 50 80C72 77 94 86 96 96Z"/>
+<path fill="${C.ochre}" d="M30 84C38 76 56 74 66 80C56 82 42 84 30 84Z"/>
+<path fill="none" class="fine" d="M12 93l6-8M22 95l4-12M34 94l2-13M47 95V82M60 95l-2-13M72 94l-4-12M84 95l-6-9M28 86l10 3M56 83l12 5M40 79l-4-7M62 78l5-6"/>`;
+    }
+    if (o.down) {
+      const sticks = [[6, 94, 50, 82], [18, 96, 70, 86], [40, 95, 94, 90], [30, 82, 82, 96], [12, 88, 58, 95], [52, 80, 92, 93], [62, 84, 28, 96], [44, 78, 62, 96], [70, 80, 86, 96], [24, 90, 40, 76]];
+      return `<path fill="${C.tan}" d="${sticks.map((s) => stick(...s)).join('')}"/>`;
+    }
+    const wall = { straw: C.butter, sticks: C.tan, brick: C.red }[k];
+    const roof = { straw: C.ochre, sticks: C.brown, brick: '#6a5560' }[k];
+    const holes = [[24, 59, 37, 72], [63, 59, 76, 72], [41, 70, 59, 96]];
+    const free = (x, y) => !holes.some(([a, b, c, d]) => x > a - 2 && x < c + 2 && y > b - 2 && y < d + 2);
+    const r = rng(k.length * 17 + 3);
+    let tex = '';
+    if (k === 'straw') {
+      for (let i = 0; i < 60; i++) { const x = 20 + r() * 60, y = 52 + r() * 40; if (free(x, y) && free(x, y + 6)) tex += `M${f(x)} ${f(y)}q1.2 3 0 6`; }
+    } else if (k === 'sticks') {
+      for (let y = 55; y < 96; y += 6) for (let x = 19 + (y % 4); x < 80; x += 12) if (free(x, y) && free(x + 10, y)) tex += `M${f(x)} ${y}h${f(8 + r() * 3)}`;
+    } else {
+      for (let y = 55, row = 0; y < 96; y += 5, row++) {
+        for (let x = 18 + (row % 2) * 4; x < 82; x += 8) {
+          if (free(x + 4, y)) tex += `M${x} ${y}h8`;
+          if (x > 18 && free(x, y + 2.5)) tex += `M${x} ${y}v5`;
+        }
+      }
+    }
+    const rooftex = {
+      straw: 'M50 18L22 52M50 18L36 53M50 18L64 53M50 18L78 52M11 54l2 4M18 54l2 4M25 54l1 4M32 54l1 4M68 54l-1 4M75 54l-1 4M82 54l-2 4M89 54l-2 4',
+      sticks: 'M16 49L50 20M24 52L50 29M76 52L50 29M84 49L50 20M30 46h40M40 37h20',
+      brick: 'M26 46h48M18 52h64M34 39h32M42 32h16M30 46v6M42 46v6M54 46v6M66 46v6M38 39v7M50 39v7M62 39v7M46 32v7M54 32v7'
+    }[k];
+    return `
+${k === 'brick' ? `<path fill="${C.red}" d="M66 42V19H76V42Z"/><path fill="${C.deepred}" d="M64 16H78V20H64Z"/>` : ''}
+${o.smoke && k === 'brick' ? `<path fill="none" class="fine" d="M71 14q-4-4 0-8t0-8"/>` : ''}
+<path fill="${wall}" d="M18 96V50H82V96Z"/>
+<path fill="none" class="fine" d="${tex}"/>
+<path fill="${roof}" d="M8 54L50 16L92 54Z"/>
+<path fill="none" class="fine" d="${rooftex}"/>
+<path fill="${k === 'brick' ? C.bark : roof}" d="M42 96V78C42 69 58 69 58 78V96Z"/>
+<circle class="solid" cx="54.5" cy="84" r="1.3"/>
+<rect fill="${C.butter}" x="25" y="60" width="11" height="11"/><rect fill="${C.butter}" x="64" y="60" width="11" height="11"/>
+<path fill="none" class="fine" d="M30.5 60v11M25 65.5h11M69.5 60v11M64 65.5h11"/>`;
+  };
+  META.house = { w: 1.4 };
+
+  // a billy goat (side on, facing right)
+  S.goat = (o = {}) => {
+    const c = o.color || '#efe6d2', horn = '#b59a72';
+    return `
+<path fill="${c}" d="M22 52C15 46 13 39 17 37C19 43 23 47 26 48Z"/>
+<rect fill="${c}" x="24" y="64" width="7" height="30" rx="3"/><rect fill="${c}" x="34" y="66" width="7" height="28" rx="3"/>
+<rect fill="${c}" x="56" y="66" width="7" height="28" rx="3"/><rect fill="${c}" x="66" y="64" width="7" height="30" rx="3"/>
+<path class="nol" fill="${C.black}" d="M24 90h7v4h-7zM34 90h7v4h-7zM56 90h7v4h-7zM66 90h7v4h-7z"/>
+<path fill="${c}" d="${o.fat ? 'M15 57C15 40 30 33 48 33C66 33 79 41 79 56C79 73 67 78 48 78C28 78 15 73 15 57Z' : 'M20 56C20 45 30 41 48 41C63 41 73 45 75 55C75 66 67 72 48 72C30 72 20 67 20 56Z'}"/>
+<path fill="none" class="fine" d="M30 50q4 3 8 1M50 47q4 3 8 1M40 58q4 3 8 1"/>
+<path fill="${c}" d="M62 50C64 40 68 32 74 27L84 34C80 40 77 50 75 58Z"/>
+<path fill="${horn}" d="M75 24C71 11 61 7 54 13C61 13 67 17 71 27Z"/>
+<path fill="${horn}" d="M80 22C78 9 70 3 63 7C69 9 74 15 76 24Z"/>
+<path fill="${c}" d="M71 27C73 18 84 16 88 23L96 38C97 42 94 45 90 44L80 40C75 38 71 33 71 27Z"/>
+<path fill="${c}" d="M73 29C67 30 62 33 59 37C65 37 70 35 75 32Z"/>
+<path fill="${horn}" d="M86 44L84 55L90 45Z"/>
+${o.happy ? `<path fill="none" d="M81 28q2.5-2.5 5 0"/>` : `<circle class="solid" cx="83" cy="28" r="1.9"/>`}
+<circle class="solid" cx="94.2" cy="38.5" r=".9"/>
+<path fill="none" d="M88 42.5q3 1 6-1"/>`;
+  };
+  META.goat = { w: 1.1 };
+
+  // the Troll under the bridge, with eyes as big as saucers and a nose as long as a poker
+  S.troll = (o = {}) => {
+    const skin = '#9aa57a', hair = '#5d6b3a';
+    return `
+<path fill="${skin}" d="M30 66C17 66 9 74 10 84C14 85 20 79 31 75Z"/>
+<path fill="${skin}" d="M70 66C83 66 91 74 90 84C86 85 80 79 69 75Z"/>
+<circle fill="${skin}" cx="11" cy="85" r="4.5"/><circle fill="${skin}" cx="89" cy="85" r="4.5"/>
+<path fill="${skin}" d="M24 96C18 78 24 58 50 58C76 58 82 78 76 96Z"/>
+<path fill="#7d6a4a" d="M25 86Q50 92 75 86L76 96H24Z"/>
+<path fill="none" class="fine" d="M34 88l3 8M46 90l1 6M58 90l-1 6M68 88l-3 8"/>
+<ellipse class="nol" fill="#b8c094" cx="50" cy="74" rx="14" ry="10"/>
+<path fill="${skin}" d="M26 36L6 26L24 46Z"/><path fill="${skin}" d="M74 36L94 26L76 46Z"/>
+<ellipse fill="${skin}" cx="50" cy="38" rx="27" ry="23"/>
+<path fill="${hair}" d="${cloud(50, 17, 22, 8, 8, 13)}"/>
+<circle fill="${C.white}" cx="39" cy="32" r="8"/><circle fill="${C.white}" cx="61" cy="32" r="8"/>
+${o.wet ? `<path fill="none" d="M34 33q5 3 10 0M56 33q5 3 10 0"/>` : `<circle class="solid" cx="40" cy="33" r="2.8"/><circle class="solid" cx="60" cy="33" r="2.8"/>`}
+${o.wet ? '' : `<path fill="none" d="M29 22l13 4M71 22l-13 4"/>`}
+${o.roar ? `<path fill="${C.deepred}" d="M32 48Q50 72 68 48Q50 54 32 48Z"/><path fill="${C.white}" d="M38 50l2.5 5 3-4.5zM62 50l-2.5 5-3-4.5z"/>`
+      : `<path fill="none" d="${o.wet ? 'M34 56Q50 48 66 56' : 'M32 50Q50 60 68 50'}"/>`}
+<path fill="#c48f72" d="M46 34C43 44 41 56 45 62C49 66 56 63 55 54C54 46 54 40 54 34Z"/>
+<circle class="nol" fill="${C.rose}" opacity=".45" cx="30" cy="44" r="4"/><circle class="nol" fill="${C.rose}" opacity=".45" cx="70" cy="44" r="4"/>`;
+  };
+
+  // a wooden footbridge; the top of the deck is at about y = 55 in the middle
+  S.bridge = () => {
+    const band = (a, b) => `M-2 ${60 - a}Q50 ${50 - a} 102 ${60 - a}L102 ${60 - b}Q50 ${50 - b} -2 ${60 - b}Z`;
+    const top = (x) => { const t = (x + 2) / 104; return 60 - 20 * t * (1 - t); };
+    let planks = '', posts = '';
+    for (let x = 4; x < 100; x += 6.5) planks += `M${f(x)} ${f(top(x) + 0.8)}V${f(top(x) + 5.2)}`;
+    for (const x of [1, 25.5, 50, 74.5, 99]) posts += `<rect fill="${C.bark}" x="${f(x - 1.6)}" y="${f(top(x) - 14)}" width="3.2" height="14.5"/>`;
+    return `
+<path fill="${C.bark}" d="M4 64L2 96H9L11 64ZM15 63L17 96H24L21 63ZM96 64L98 96H91L89 64ZM85 63L83 96H76L79 63Z"/>
+<path fill="none" class="fine" d="M8 70L20 86M20 70L8 86M80 70L92 86M92 70L80 86"/>
+${posts}
+<path fill="${C.tan}" d="${band(14, 11.5)}"/>
+<path fill="${C.tan}" d="${band(0, -6)}"/>
+<path fill="none" class="fine" d="${planks}"/>`;
+  };
+  META.bridge = { sky: true };
+
+  // a splash of water
+  S.splash = () => `
+<path fill="#a9c8da" d="M8 96C14 88 22 84 25 70C29 80 33 84 38 72C42 82 46 84 50 60C54 84 58 82 62 72C67 84 71 80 75 70C78 84 86 88 92 96Z"/>
+<circle fill="#a9c8da" cx="24" cy="56" r="3"/><circle fill="#a9c8da" cx="38" cy="58" r="2.4"/><circle fill="#a9c8da" cx="50" cy="44" r="3.4"/>
+<circle fill="#a9c8da" cx="63" cy="57" r="2.4"/><circle fill="#a9c8da" cx="77" cy="55" r="3"/>`;
+  META.splash = { sky: true };
+
+  // a tortoise (side on, facing right)
+  S.tortoise = (o = {}) => {
+    const skin = '#a9ad6a', shell = '#8b7a3e';
+    return `
+<path fill="${skin}" d="M20 76L9 82L22 82Z"/>
+<path fill="${skin}" d="M24 78L21 94H32L34 80Z"/><path fill="${skin}" d="M62 78L62 94H73L72 80Z"/>
+<path class="nol" fill="#7f8550" d="M38 80L37 92H46L46 80ZM50 80L51 92H59L58 80Z"/>
+<path fill="${skin}" d="M74 70C76 58 86 52 94 56C100 60 98 70 90 72L80 76Z"/>
+${o.happy || o.sleep ? `<path fill="none" d="M86 61q3 ${o.sleep ? 2.5 : -3} 6 0"/>` : `<circle class="solid" cx="89" cy="60.5" r="2"/>`}
+<path fill="none" d="M88 67q4 2.5 8-1"/>
+<path fill="${shell}" d="M18 78C18 54 34 42 50 42C66 42 82 54 82 78Z"/>
+<path class="nol" fill="${C.ochre}" opacity=".5" d="M41 54H59L64 66H36Z"/>
+<path fill="none" class="fine" d="M50 42V54M38 46L41 54M62 46L59 54M41 54H59L64 66H36ZM41 54L29 61M59 54L71 61M36 66L27 77M64 66L73 77M50 66V77"/>
+<path fill="#c2a55d" d="M14 76H86Q86 82 80 82H20Q14 82 14 76Z"/>`;
+  };
+  META.tortoise = { w: 1.2 };
+
+  // a flag on a pole (for the start and the finish of a race)
+  S.flag = (o = {}) => `
+<rect fill="${C.bark}" x="47" y="12" width="3.6" height="84"/>
+<circle fill="${C.gold}" cx="48.8" cy="10" r="3.2"/>
+<path fill="${o.color || C.red}" d="M50.6 15C62 11 72 21 88 17L83 29L88 41C72 45 62 35 50.6 39Z"/>`;
+  META.flag = { w: 0.35 };
+
   /* ---------- backgrounds ---------- */
   const W = 300, H = 360;
   const sky = (c) => `<rect fill="${c}" x="-20" y="-20" width="${W + 40}" height="${H + 40}"/>`;
@@ -613,7 +823,36 @@ ${S.piphead(o)}`;
     hill: (r) => ({
       wash: sky(C.sky) + clouds(r) + `<path fill="#94b264" d="M-20 300C40 300 70 150 150 150S260 300 320 300V380H-20Z"/>` + ground(C.green, 290, 6),
       ink: tufts(r, 290, 8) + `<path fill="none" d="M-20 300C40 300 70 150 150 150S260 300 320 300"/>`
-    })
+    }),
+    // sunset: a warm sky, the first stars coming out
+    dusk: (r) => ({
+      wash: sky('#efc18f') + `<rect fill="#e79f7f" opacity=".6" x="-20" y="150" width="340" height="120"/>` + twinkles(r, 3, 80) +
+        `<path fill="#f6d9b0" d="${cloud(70 + r() * 30, 80, 40, 11, 8, 3)}"/>` + ground('#7d8f4f', 262),
+      ink: tufts(r, 262, 10)
+    }),
+    // a pond with reeds at each end
+    pond: (r) => ({
+      wash: sky(C.sky) + clouds(r) + ground(C.green, 262) + `<ellipse fill="#86aec4" cx="150" cy="314" rx="134" ry="40"/>` +
+        `<path fill="#6f8f45" d="M14 306q10-34 22 0zM262 304q10-32 22 0z"/><ellipse fill="${C.brown}" cx="27" cy="262" rx="2.6" ry="7"/><ellipse fill="${C.brown}" cx="275" cy="266" rx="2.6" ry="7"/>`,
+      ink: tufts(r, 262, 6) + `<ellipse fill="none" cx="150" cy="314" rx="134" ry="40"/>` +
+        `<path fill="none" class="fine" d="M80 302q8-4 16 0M190 326q8-4 16 0M118 340q8-4 16 0M214 298q6-3 12 0"/>` +
+        `<path fill="none" d="M22 304q-2-22 2-34M27 304q0-20 0-35M33 304q3-16 0-26M268 302q-3-20 3-30M275 302q0-18 0-29M281 302q3-14 6-22"/>`
+    }),
+    // a river running towards us, for a bridge to cross
+    river: (r) => {
+      let grass = '';
+      for (let i = 0; i < 10; i++) {
+        const right = i % 2, y = 280 + r() * 80, x = right ? 220 + r() * 60 + (y - 280) * 0.5 : 20 + r() * 60 - (y - 280) * 0.25;
+        grass += `M${f(x)} ${f(y)}l2-6M${f(x + 3)} ${f(y)}l1-7M${f(x + 6)} ${f(y)}l-1-5`;
+      }
+      const banks = 'M128 258C120 292 88 334 30 380M172 258C180 292 212 334 270 380';
+      return {
+        wash: sky(C.sky) + clouds(r) + `<path fill="#94b264" d="M-20 270C40 222 110 232 170 256L-20 280Z"/><path fill="#9db06d" d="M150 260C200 232 270 226 320 250V270Z"/>` +
+          ground(C.green, 262, 6) + `<path fill="#86aec4" d="M128 258C120 292 88 334 30 380H270C212 334 180 292 172 258Z"/>`,
+        ink: `<path fill="none" class="fine" d="${grass}"/><path fill="none" d="${banks}"/>` +
+          `<path fill="none" class="fine" d="M142 282q6-3 12 0M148 304q8-4 16 0M118 334q8-4 16 0M172 348q8-4 16 0M132 368q8-4 16 0"/>`
+      };
+    }
   };
 
   /* ---------- composing a picture ---------- */

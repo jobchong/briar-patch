@@ -213,7 +213,8 @@
   function renderShelf() {
     screen = 'shelf'; R = null; clearTimers();
     const stars = store.get('stars', {});
-    screenEl.innerHTML = `<main class="shelf">
+    const most = Math.max(...rowsData().map((r) => r.books.length)); // the covers shrink to fit the longest row
+    screenEl.innerHTML = `<main class="shelf" style="--n:${most}">
 <header><h1>The Briar Patch Library</h1><p class="sub">stories you spell yourself</p></header>
 ${rowsData().map((r, ri) => `<section class="row">
   <div class="plaque">${ART.scene({ bg: 'none', art: [[r.icon, 150, 300, 2.7]] }, 'icon')}<span>${esc(r.label)}</span></div>

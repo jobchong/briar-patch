@@ -34,14 +34,21 @@ On the shelf, the arrows choose a book and return opens it. Shortcuts with cmd, 
 | Old MacDonald Had a Farm | Little | Traditional song |
 | Hey Diddle Diddle | Little | *The Real Mother Goose* (1916), [Project Gutenberg #10607](https://www.gutenberg.org/ebooks/10607) |
 | Where Is Little Rabbit? | Little | New: a hide-and-seek book |
+| Twinkle, Twinkle, Little Star | Little | Jane Taylor, "The Star", from *Rhymes for the Nursery* (1806). The first two of its five verses, with the first sung again at the end. |
+| Hickory, Dickory, Dock | Little | *The Real Mother Goose* (1916), [Project Gutenberg #10607](https://www.gutenberg.org/ebooks/10607) |
+| One Red Bug | Little | New: a counting book (one bug, two frogs, three ducks, four pigs, five mice, and a cow) |
 | The Little Red Hen | Big | Retold from Florence White Williams' 1918 version, [Project Gutenberg #18735](https://www.gutenberg.org/ebooks/18735) |
 | Brer Rabbit and the Briar Patch | Big | Retold from the African American folk tale ([Project Gutenberg #2306](https://www.gutenberg.org/ebooks/2306)) |
 | The Owl and the Pussy-Cat | Big | Edward Lear, *Nonsense Songs* (1871), [Project Gutenberg #13647](https://www.gutenberg.org/ebooks/13647). The poem is printed exactly as Lear wrote it. |
 | Pip and the Word Tree | Big | New: every word Pip picks comes true |
+| The Three Little Pigs | Big | Retold from Joseph Jacobs' *English Fairy Tales* (1890), [Project Gutenberg #7439](https://www.gutenberg.org/ebooks/7439) |
+| The Three Billy Goats Gruff | Big | Retold from George Webbe Dasent's translation in *Popular Tales from the Norse* (1859), [Project Gutenberg #8933](https://www.gutenberg.org/ebooks/8933) |
+| The Tortoise and the Hare | Big | Retold from *The Aesop for Children* (1919), [Project Gutenberg #19994](https://www.gutenberg.org/ebooks/19994) |
 
 Notes on the choices:
 
 - **Brer Rabbit.** The trickster tales come from African American storytelling. The version on Gutenberg is Joel Chandler Harris's 1880 book, which frames them in minstrel-style dialect told by a plantation character, and it also has the "tar-baby" episode. This retelling keeps the plot that makes children laugh (the fox is tricked into throwing the rabbit exactly where he wants to go) in plain modern words. It drops the dialect, the Uncle Remus frame and the tar-baby. "Roast" and "drown" become "cook you in my pot" and "dunk you in the mud".
+- **The Three Little Pigs and the Billy Goats Gruff** have softer endings. In Jacobs the wolf eats the first two pigs and is eaten himself. Here the pigs run to the next house, and the wolf lands in the pot of hot water, shoots back up the chimney and runs away. In Dasent the big goat crushes the Troll "to bits, body and bones". Here he butts the Troll into the river, and the Troll swims away.
 - **Enid Blyton, Maurice Sendak and The Phantom Tollbooth** are still under copyright, so they shaped the look, not the words. *Pip and the Word Tree* is a new story in the Tollbooth spirit, where words are things you can pick.
 - The blank words are mostly three-letter words that sound out letter by letter (cat, pig, hen, pot, sun, bed, hop, mud), plus a few very common words (not, will, did, are). Those are the words five-year-olds usually learn first.
 

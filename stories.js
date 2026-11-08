@@ -6,8 +6,11 @@
  *   art    The picture: a list of [sprite, x, y, size, options].
  *          The picture is 300 wide and 360 tall; y is where the sprite's feet are.
  *          Options: flip, rot (degrees), noShadow, plus a few per sprite
- *          (cat: hat/sleep/sad, rabbit: jacket/sleep/laugh, bed: rabbit/pip/ears, ...).
- *   bg     The background: day, farm, night, indoor, sea, nightsea, wood, garden, hill.
+ *          (cat: hat/sleep/sad, rabbit: jacket/sleep/laugh/hare, bed: rabbit/pip/ears,
+ *          star: face/sleep, house: kind ('straw', 'sticks', 'brick')/down/smoke,
+ *          wolf: blow/ouch, troll: roar/wet, goat: fat/happy, clock: one/bong, ...).
+ *   bg     The background: day, farm, night, indoor, sea, nightsea, nightbeach, wood,
+ *          garden, hill, dusk, pond, river.
  *   after  Optional { text, art, bg }: shown once every blank on the page is filled.
  *
  * HOW THE TWO SHELVES DIFFER
@@ -94,6 +97,75 @@ window.BOOKS = [
       }
     ],
     end: { bg: 'night', art: [['moon', 150, 200, 1.1], ['star', 70, 100, 0.25], ['star', 235, 150, 0.22]] }
+  },
+  {
+    id: 'twinkle', shelf: 'little', cloth: '#2e3566',
+    title: 'Twinkle, Twinkle, Little Star',
+    byline: 'by Jane Taylor',
+    source: 'From "The Star" in Rhymes for the Nursery (1806). These are the first two of its five verses, with the first sung again at the end.',
+    cover: { bg: 'night', art: [['star', 150, 262, 1.6, { face: true }], ['star', 55, 80, 0.22], ['star', 250, 70, 0.28]] },
+    pages: [
+      { bg: 'night', text: 'Twinkle, twinkle, little [star],\nHow I wonder what you are!', art: [['star', 150, 262, 1.75, { face: true }], ['star', 48, 70, 0.22], ['star', 255, 92, 0.28]] },
+      { bg: 'night', text: 'Up above the world so high,\nLike a diamond in the [sky].', art: [['star', 205, 110, 0.55, { face: true }], ['tree', 70, 310, 1.5, { seed: 3 }], ['rabbit', 185, 322, 1.05]] },
+      { bg: 'dusk', text: 'When the blazing [sun] is gone,\nWhen he nothing shines upon,', art: [['sun', 150, 252, 1.25, { sleep: true }]] },
+      {
+        bg: 'night', text: 'Then you show your little [light],\nTwinkle, twinkle, all the night.',
+        art: [['moon', 62, 130, 0.55], ['star', 170, 225, 1.25, { face: true }], ['star', 250, 70, 0.2], ['star', 125, 62, 0.16], ['star', 262, 200, 0.18], ['star', 42, 228, 0.15]]
+      },
+      { bg: 'night', text: 'Twinkle, twinkle, little [star],\nHow I wonder what you are!', art: [['star', 228, 108, 0.6, { face: true }], ['bed', 150, 322, 2, { rabbit: true }]] }
+    ],
+    end: { bg: 'night', art: [['star', 150, 250, 1.4, { face: true, sleep: true }], ['star', 60, 80, 0.22], ['star', 245, 95, 0.26]] }
+  },
+  {
+    id: 'hickory', shelf: 'little', cloth: '#7c5a2e',
+    title: 'Hickory, Dickory, Dock',
+    byline: 'An old nursery rhyme',
+    source: 'From The Real Mother Goose (1916), Project Gutenberg eBook #10607.',
+    cover: { bg: 'indoor', art: [['clock', 150, 318, 2.65], ['mouse', 168, 83, 0.62, { noShadow: true }]] },
+    pages: [
+      { bg: 'indoor', text: 'Hickory, dickory, [dock]!', art: [['clock', 120, 318, 2.65], ['mouse', 240, 322, 0.95, { flip: true }]] },
+      { bg: 'indoor', text: 'The [mouse] ran up the clock;', art: [['clock', 165, 318, 2.65], ['mouse', 128, 236, 0.85, { rot: -90, noShadow: true }]] },
+      {
+        bg: 'indoor', text: 'The clock struck [one],', art: [['clock', 150, 318, 2.65, { one: true }], ['mouse', 168, 83, 0.62, { noShadow: true }]],
+        after: { text: 'Bong!', art: [['clock', 150, 318, 2.65, { one: true, bong: true }], ['mouse', 176, 58, 0.62, { noShadow: true, rot: -12, pop: true }]] }
+      },
+      { bg: 'indoor', text: 'And down he [run],', art: [['clock', 105, 318, 2.65, { one: true }], ['mouse', 232, 324, 1]] },
+      { bg: 'indoor', text: 'Hickory, dickory, [dock]!', art: [['clock', 120, 318, 2.65, { one: true }], ['mouse', 232, 324, 0.85, { flip: true }]] }
+    ]
+  },
+  {
+    id: 'count', shelf: 'little', cloth: '#8e3b52',
+    title: 'One Red Bug',
+    byline: 'A counting book',
+    source: 'A new story for this library.',
+    cover: { bg: 'garden', art: [['bug', 150, 300, 1.5]] },
+    pages: [
+      { bg: 'garden', text: 'One red [bug].', art: [['bug', 150, 306, 1.6]] },
+      {
+        bg: 'pond', text: 'Two green [frogs].',
+        art: [['lily', 88, 318, 1.5], ['frog', 88, 308, 1.05, { noShadow: true }], ['lily', 212, 338, 1.5], ['frog', 212, 328, 1.05, { noShadow: true }]]
+      },
+      {
+        bg: 'pond', text: 'Three white [ducks].',
+        art: [['duck', 70, 306, 1.05, { noShadow: true }], ['duck', 160, 336, 1.1, { noShadow: true }], ['duck', 240, 302, 1.05, { noShadow: true }]]
+      },
+      {
+        bg: 'farm', text: 'Four pink [pigs].',
+        art: [['mud', 150, 354, 2.6], ['pig', 88, 294, 0.72], ['pig', 212, 296, 0.72, { flip: true }], ['pig', 92, 344, 0.78], ['pig', 210, 346, 0.78, { flip: true }]]
+      },
+      {
+        bg: 'indoor', text: 'Five grey [mice].',
+        art: [['mouse', 55, 300, 0.7], ['mouse', 150, 300, 0.7], ['mouse', 245, 300, 0.7, { flip: true }], ['mouse', 100, 344, 0.75, { flip: true }], ['mouse', 200, 344, 0.75]]
+      },
+      {
+        bg: 'farm', text: 'And one big [cow],\nwith one red bug on her nose!', art: [['cow', 140, 320, 2.25], ['bug', 233, 224, 0.3, { noShadow: true }]],
+        after: { text: 'Moo!' }
+      }
+    ],
+    end: {
+      bg: 'farm',
+      art: [['cow', 150, 300, 1.3], ['bug', 204, 248, 0.18, { noShadow: true }], ['frog', 40, 336, 0.5], ['duck', 94, 340, 0.5], ['pig', 210, 338, 0.5, { flip: true }], ['mouse', 262, 340, 0.45, { flip: true }]]
+    }
   },
 
   /* ================= THE BIG SHELF (about age 5) ================= */
@@ -225,6 +297,153 @@ window.BOOKS = [
         bg: 'night', text: 'The sun went down, and Pip gave a big yawn.\nThere was one last word on the tree.\nIt said [bed].',
         art: [['moon', 240, 100, 0.6], ['wordtree', 160, 318, 2.6, { words: ['bed'] }], ['pip', 60, 330, 0.95]],
         after: { text: 'Pop! A little bed, as soft as moss.\nGoodnight, Pip.', art: [['moon', 240, 100, 0.6], ['bed', 150, 318, 2, { pip: true, pop: true }]] }
+      }
+    ]
+  },
+  {
+    id: 'pigs', shelf: 'big', cloth: '#a4472f',
+    title: 'The Three Little Pigs',
+    byline: 'Retold from an old English folk tale',
+    source: 'After the telling in Joseph Jacobs\' English Fairy Tales (1890), Project Gutenberg eBook #7439. Here nobody gets eaten: the pigs run to the next house, and the wolf runs away.',
+    cover: { bg: 'day', art: [['house', 150, 300, 1.7, { kind: 'brick', smoke: true }], ['pig', 58, 332, 0.6], ['pig', 245, 334, 0.6, { flip: true }]] },
+    pages: [
+      { bg: 'day', text: 'Once upon a time there were three little [pigs].\nOne day they set off to build houses of their own.', art: [['pig', 65, 322, 0.8], ['pig', 155, 326, 0.8], ['pig', 245, 330, 0.8]] },
+      { bg: 'day', text: 'The first little pig built a house of straw.\nHe was done in no time at [all].', art: [['house', 115, 316, 1.9, { kind: 'straw' }], ['pig', 240, 326, 0.8, { flip: true }]] },
+      {
+        bg: 'day', text: 'Along came a big bad [wolf].\n"Little pig, little pig, let me come in!"\n"No, no! Not by the hair of my chinny chin [chin]!"',
+        art: [['house', 92, 318, 1.9, { kind: 'straw' }], ['wolf', 230, 326, 1.3, { flip: true }]]
+      },
+      {
+        bg: 'day', text: '"Then I\'ll [huff], and I\'ll [puff],\nand I\'ll blow your house in!"',
+        art: [['house', 92, 318, 1.9, { kind: 'straw' }], ['wolf', 230, 326, 1.3, { flip: true, blow: true }]],
+        after: {
+          text: 'So he huffed, and he puffed, and he blew the house in!\nThe little pig ran to his brother\'s house of sticks.',
+          art: [['house', 108, 326, 1.9, { kind: 'straw', down: true }], ['wolf', 230, 326, 1.3, { flip: true }], ['pig', 48, 334, 0.62, { flip: true, pop: true }]]
+        }
+      },
+      {
+        bg: 'day', text: '"Little pigs, little pigs, let me come in!"\n"No, no! Not by the hair of our chinny chin [chins]!"',
+        art: [['house', 92, 318, 1.9, { kind: 'sticks' }], ['wolf', 230, 326, 1.3, { flip: true }]]
+      },
+      {
+        bg: 'day', text: '"Then I\'ll [huff], and I\'ll [puff],\nand I\'ll blow your house in!"',
+        art: [['house', 92, 318, 1.9, { kind: 'sticks' }], ['wolf', 230, 326, 1.3, { flip: true, blow: true }]],
+        after: {
+          text: 'And he did!\nThe two little pigs ran to their brother\'s house.',
+          art: [['house', 108, 326, 1.9, { kind: 'sticks', down: true }], ['wolf', 230, 326, 1.3, { flip: true }], ['pig', 40, 330, 0.58, { flip: true, pop: true }], ['pig', 92, 340, 0.58, { flip: true, pop: true }]]
+        }
+      },
+      {
+        bg: 'day', text: 'The third little pig had built his house of [red] bricks.\nIn ran his brothers, and he shut the door tight.',
+        art: [['house', 150, 312, 1.9, { kind: 'brick', smoke: true }], ['pig', 48, 336, 0.6], ['pig', 252, 338, 0.6, { flip: true }]]
+      },
+      {
+        bg: 'day', text: 'The wolf huffed, and he puffed.\nHe puffed, and he huffed.\nBut he could [not] blow that house in!',
+        art: [['house', 92, 318, 1.9, { kind: 'brick' }], ['wolf', 230, 326, 1.3, { flip: true, blow: true }]]
+      },
+      {
+        bg: 'indoor', text: 'So the wolf climbed up on the roof,\nand down the chimney he came...\nright into a big [pot] of hot water!',
+        art: [['pot', 150, 332, 1.7], ['wolf', 150, 118, 0.95, { rot: 180, noShadow: true }], ['pig', 45, 336, 0.55], ['pig', 258, 336, 0.55, { flip: true }]],
+        after: {
+          text: 'SPLASH! "Ow! Ow! OW! Too hot!"',
+          art: [['pot', 150, 332, 1.7], ['splash', 150, 252, 1.1], ['wolf', 150, 210, 0.9, { ouch: true, rot: -15, noShadow: true, pop: true }], ['pig', 45, 336, 0.55], ['pig', 258, 336, 0.55, { flip: true }]]
+        }
+      },
+      {
+        bg: 'day', text: 'Up the chimney he shot, and away he [ran].\nHe never came back again.\nAnd the three little pigs lived happily ever after.',
+        art: [['house', 150, 300, 1.7, { kind: 'brick', smoke: true }], ['wolf', 268, 252, 0.48], ['pig', 55, 340, 0.6], ['pig', 150, 346, 0.6], ['pig', 245, 340, 0.6, { flip: true }]]
+      }
+    ]
+  },
+  {
+    id: 'goats', shelf: 'big', cloth: '#45607a',
+    title: 'The Three Billy Goats Gruff',
+    byline: 'Retold from a Norwegian folk tale',
+    source: 'After the translation by George Webbe Dasent in Popular Tales from the Norse (1859), Project Gutenberg eBook #8933. Here the Troll lands in the river and swims away.',
+    cover: { bg: 'river', art: [['troll', 150, 345, 1.15, { noShadow: true }], ['bridge', 150, 330, 2.9], ['goat', 150, 212, 0.75]] },
+    pages: [
+      {
+        bg: 'hill', text: 'Once upon a time there were three billy goats,\nand the name of all three was Gruff.\nThey wanted to go up the [hill] to eat the sweet green grass.',
+        art: [['goat', 62, 330, 0.55], ['goat', 142, 336, 0.8], ['goat', 238, 344, 1.1]]
+      },
+      {
+        bg: 'river', text: 'On the way there was a bridge over a river.\nUnder the bridge lived a great ugly [Troll],\nwith eyes as big as saucers and a nose as long as a poker.',
+        art: [['troll', 150, 345, 1.15, { noShadow: true }], ['bridge', 150, 330, 2.9]]
+      },
+      {
+        bg: 'river', text: 'First came the littlest billy goat Gruff.\n[Trip], trap! Trip, trap! went the bridge.',
+        art: [['troll', 150, 345, 1.15, { noShadow: true }], ['bridge', 150, 330, 2.9], ['goat', 100, 213, 0.6]]
+      },
+      {
+        bg: 'river', text: '"WHO is that tripping over my bridge?" roared the Troll.\n"Now I\'m coming to gobble you [up]!"',
+        art: [['bridge', 150, 330, 2.9], ['goat', 85, 213, 0.6], ['troll', 205, 332, 1.35, { roar: true, noShadow: true }]]
+      },
+      {
+        bg: 'river', text: '"Oh, no! Don\'t eat me. I\'m [too] little," said the littlest goat.\n"Wait for the second billy goat Gruff. He\'s much bigger."\n"Well, be off with you!" said the Troll.',
+        art: [['troll', 150, 345, 1.15, { noShadow: true }], ['bridge', 150, 330, 2.9], ['goat', 262, 214, 0.6, { happy: true }]]
+      },
+      {
+        bg: 'river', text: 'Then came the second billy goat Gruff.\nTRIP, TRAP! TRIP, TRAP! "WHO is that?" roared the Troll.\n"Don\'t [eat] me!" said the second goat.\n"Wait for the big billy goat Gruff."',
+        art: [['bridge', 150, 330, 2.9], ['goat', 88, 213, 0.8], ['troll', 210, 332, 1.35, { roar: true, noShadow: true }]]
+      },
+      {
+        bg: 'river', text: 'Then came the big billy goat Gruff.\nTRIP, TRAP! TRIP, TRAP!\nThe bridge creaked and groaned, for he was so [big].',
+        art: [['troll', 150, 345, 1.15, { noShadow: true }], ['bridge', 150, 330, 2.9], ['goat', 150, 212, 1.15]]
+      },
+      {
+        bg: 'river', text: '"WHO is that?" roared the Troll.\n"It is I, the big billy goat Gruff!"\nAnd he put his head down and ran at the Troll. [Bump]!',
+        art: [['bridge', 150, 330, 2.9], ['goat', 100, 213, 1.1, { rot: 8 }], ['troll', 225, 332, 1.3, { roar: true, noShadow: true }]],
+        after: {
+          text: 'Up went the Troll, and down he came in the river. SPLASH!\nHe swam far away, and he never came back.',
+          art: [['bridge', 150, 330, 2.9], ['troll', 150, 356, 0.95, { wet: true, noShadow: true }], ['splash', 150, 362, 1.35, { pop: true }], ['goat', 150, 212, 1.15, { happy: true }]]
+        }
+      },
+      {
+        bg: 'hill', text: 'Then the three billy goats went up the hill.\nThey ate and ate, until they were so [fat]\nthey could hardly walk home again.',
+        art: [['sun', 245, 95, 0.7], ['goat', 62, 330, 0.6, { fat: true, happy: true }], ['goat', 142, 338, 0.85, { fat: true, happy: true }], ['goat', 238, 346, 1.12, { fat: true, happy: true }]],
+        after: { text: 'Snip, snap, snout.\nThis tale\'s told out.' }
+      }
+    ]
+  },
+  {
+    id: 'race', shelf: 'big', cloth: '#5e6b2a',
+    title: 'The Tortoise and the Hare',
+    byline: 'A fable by Aesop',
+    source: 'Retold from The Aesop for Children (1919), Project Gutenberg eBook #19994.',
+    cover: { bg: 'day', art: [['flag', 250, 290, 0.8], ['rabbit', 95, 318, 1.3, { hare: true, laugh: true }], ['tortoise', 205, 324, 1.05]] },
+    pages: [
+      {
+        bg: 'day', text: 'Hare could run very fast. One day he was making fun of Tortoise.\n"You are so [slow]!" he said. "Do you ever get anywhere?"',
+        art: [['rabbit', 92, 320, 1.35, { hare: true, laugh: true }], ['tortoise', 222, 324, 1, { flip: true }]]
+      },
+      {
+        bg: 'day', text: '"Yes, I do," said Tortoise.\n"I will [run] a race with you, and you will see."\nHare laughed and laughed.',
+        art: [['tortoise', 100, 324, 1.2], ['rabbit', 225, 320, 1.2, { hare: true, laugh: true }]]
+      },
+      {
+        bg: 'day', text: 'Fox was the judge. He set a flag at the end of the race.\n"Ready, steady... [go]!"',
+        art: [['fox', 222, 300, 1.05, { flip: true }], ['flag', 168, 302, 0.85], ['rabbit', 62, 326, 0.95, { hare: true }], ['tortoise', 128, 336, 0.8]]
+      },
+      {
+        bg: 'day', text: 'Off ran Hare, as fast as the wind.\nOff went Tortoise, one slow [step] at a time.',
+        art: [['rabbit', 250, 292, 0.7, { hare: true }], ['tortoise', 90, 334, 1.05]]
+      },
+      {
+        bg: 'day', text: 'Hare was so far ahead that he lay down under a tree.\n"I have lots of time," he said.\n"I will have a little [nap]."',
+        art: [['tree', 150, 300, 2.3, { seed: 5 }], ['rabbit', 160, 330, 1.1, { hare: true, sleep: true }]]
+      },
+      {
+        bg: 'day', text: 'But Tortoise did not stop.\nStep, step, step. On and on he went,\nright [past] the sleeping Hare.',
+        art: [['tree', 110, 300, 2.1, { seed: 5 }], ['rabbit', 112, 330, 1, { hare: true, sleep: true }], ['tortoise', 235, 336, 0.95]]
+      },
+      {
+        bg: 'day', text: 'At last Hare woke [up].\nWhere was Tortoise? He was nearly at the flag!',
+        art: [['tree', 75, 296, 1.7, { seed: 5 }], ['rabbit', 85, 330, 1.05, { hare: true }], ['flag', 262, 288, 0.75], ['tortoise', 222, 292, 0.45]]
+      },
+      {
+        bg: 'day', text: 'Hare ran as fast as he could.\nBut it was too late. Tortoise had [won]!',
+        art: [['flag', 150, 300, 1.15], ['tortoise', 150, 332, 1.05, { happy: true }], ['fox', 255, 320, 0.9, { flip: true, happy: true }], ['rabbit', 48, 326, 0.85, { hare: true }]],
+        after: { text: 'Slow and steady wins the race.' }
       }
     ]
   }
