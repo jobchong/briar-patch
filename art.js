@@ -380,6 +380,7 @@ ${o.fire === false ? '' : `<path fill="${C.orange}" d="M30 96C26 88 32 84 34 78C
 <path class="nol" fill="#8a7d86" opacity=".7" d="M24 52C24 64 30 74 38 78C30 70 28 60 28 52Z"/>
 <ellipse fill="#6b5e68" cx="50" cy="46" rx="36" ry="7"/>
 <ellipse class="nol" fill="#2f2730" cx="50" cy="46" rx="30" ry="4.4"/>
+${o.lid ? `<path fill="#6b5e68" d="M15 46Q50 29 85 46Q50 53 15 46Z"/><circle fill="#6b5e68" cx="50" cy="35.5" r="3.5"/>` : ''}
 <path fill="none" d="M18 47C14 18 86 18 82 47"/>
 <path fill="none" class="fine" d="M40 34q-4-5 0-10t0-10M56 34q-4-5 0-10t0-10"/>`;
   META.pot = { w: 1.1 };

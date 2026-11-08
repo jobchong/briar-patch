@@ -8,7 +8,7 @@
  *          Options: flip, rot (degrees), noShadow, plus a few per sprite
  *          (cat: hat/sleep/sad, rabbit: jacket/sleep/laugh/hare, bed: rabbit/pip/ears,
  *          star: face/sleep, house: kind ('straw', 'sticks', 'brick')/down/smoke,
- *          wolf: blow/ouch, troll: roar/wet, goat: fat/happy, clock: one/bong, ...).
+ *          wolf: blow/ouch, troll: roar/wet, pot: lid/fire, goat: fat/happy, clock: one/bong, ...).
  *   bg     The background: day, farm, night, indoor, sea, nightsea, nightbeach, wood,
  *          garden, hill, dusk, pond, river.
  *   after  Optional { text, art, bg }: shown once every blank on the page is filled.
@@ -304,7 +304,7 @@ window.BOOKS = [
     id: 'pigs', shelf: 'big', cloth: '#a4472f',
     title: 'The Three Little Pigs',
     byline: 'Retold from an old English folk tale',
-    source: 'After the telling in Joseph Jacobs\' English Fairy Tales (1890), Project Gutenberg eBook #7439. Here nobody gets eaten: the pigs run to the next house, and the wolf runs away.',
+    source: 'After the telling in Joseph Jacobs\' English Fairy Tales (1890), Project Gutenberg eBook #7439, without the turnips, the apples and the fair. Jacobs\' second pig builds with furze; here it is sticks.',
     cover: { bg: 'day', art: [['house', 150, 300, 1.7, { kind: 'brick', smoke: true }], ['pig', 58, 332, 0.6], ['pig', 245, 334, 0.6, { flip: true }]] },
     pages: [
       { bg: 'day', text: 'Once upon a time there were three little [pigs].\nOne day they set off to build houses of their own.', art: [['pig', 65, 322, 0.8], ['pig', 155, 326, 0.8], ['pig', 245, 330, 0.8]] },
@@ -317,49 +317,50 @@ window.BOOKS = [
         bg: 'day', text: '"Then I\'ll [huff], and I\'ll [puff],\nand I\'ll blow your house in!"',
         art: [['house', 92, 318, 1.9, { kind: 'straw' }], ['wolf', 230, 326, 1.3, { flip: true, blow: true }]],
         after: {
-          text: 'So he huffed, and he puffed, and he blew the house in!\nThe little pig ran to his brother\'s house of sticks.',
-          art: [['house', 108, 326, 1.9, { kind: 'straw', down: true }], ['wolf', 230, 326, 1.3, { flip: true }], ['pig', 48, 334, 0.62, { flip: true, pop: true }]]
+          text: 'So he huffed, and he puffed, and he blew the house in,\nand he ate up the little pig.',
+          art: [['house', 108, 326, 1.9, { kind: 'straw', down: true }], ['wolf', 230, 326, 1.3, { flip: true }]]
         }
       },
       {
-        bg: 'day', text: '"Little pigs, little pigs, let me come in!"\n"No, no! Not by the hair of our chinny chin [chins]!"',
+        bg: 'day', text: 'The second little pig built a house of sticks.\n"Little pig, little pig, let me come in!"\n"No, no! Not by the hair of my chinny chin [chin]!"',
         art: [['house', 92, 318, 1.9, { kind: 'sticks' }], ['wolf', 230, 326, 1.3, { flip: true }]]
       },
       {
         bg: 'day', text: '"Then I\'ll [huff], and I\'ll [puff],\nand I\'ll blow your house in!"',
         art: [['house', 92, 318, 1.9, { kind: 'sticks' }], ['wolf', 230, 326, 1.3, { flip: true, blow: true }]],
         after: {
-          text: 'And he did!\nThe two little pigs ran to their brother\'s house.',
-          art: [['house', 108, 326, 1.9, { kind: 'sticks', down: true }], ['wolf', 230, 326, 1.3, { flip: true }], ['pig', 40, 330, 0.58, { flip: true, pop: true }], ['pig', 92, 340, 0.58, { flip: true, pop: true }]]
+          text: 'So he huffed, and he puffed, and he blew the house in,\nand he ate up the second little pig, too.',
+          art: [['house', 108, 326, 1.9, { kind: 'sticks', down: true }], ['wolf', 230, 326, 1.3, { flip: true }]]
         }
       },
       {
-        bg: 'day', text: 'The third little pig had built his house of [red] bricks.\nIn ran his brothers, and he shut the door tight.',
-        art: [['house', 150, 312, 1.9, { kind: 'brick', smoke: true }], ['pig', 48, 336, 0.6], ['pig', 252, 338, 0.6, { flip: true }]]
+        bg: 'day', text: 'The third little pig built his house of [red] bricks.\n"Little pig, little pig, let me come in!"\n"No, no! Not by the hair of my chinny chin chin!"',
+        art: [['house', 92, 318, 1.9, { kind: 'brick', smoke: true }], ['wolf', 230, 326, 1.3, { flip: true }]]
       },
       {
-        bg: 'day', text: 'The wolf huffed, and he puffed.\nHe puffed, and he huffed.\nBut he could [not] blow that house in!',
+        bg: 'day', text: '"Then I\'ll huff, and I\'ll puff, and I\'ll blow your house in!"\nWell, he huffed, and he puffed, and he puffed and he huffed,\nbut he could [not] get the house down.',
         art: [['house', 92, 318, 1.9, { kind: 'brick' }], ['wolf', 230, 326, 1.3, { flip: true, blow: true }]]
       },
       {
-        bg: 'indoor', text: 'So the wolf climbed up on the roof,\nand down the chimney he came...\nright into a big [pot] of hot water!',
-        art: [['pot', 150, 332, 1.7], ['wolf', 150, 118, 0.95, { rot: 180, noShadow: true }], ['pig', 45, 336, 0.55], ['pig', 258, 336, 0.55, { flip: true }]],
+        bg: 'indoor', text: 'The wolf was very angry. "I will come down the chimney and eat you up!"\nSo the little pig hung a big [pot] of water on a blazing fire.',
+        art: [['pot', 140, 332, 1.7], ['pig', 255, 336, 0.6, { flip: true }]],
         after: {
-          text: 'SPLASH! "Ow! Ow! OW! Too hot!"',
-          art: [['pot', 150, 332, 1.7], ['splash', 150, 252, 1.1], ['wolf', 150, 210, 0.9, { ouch: true, rot: -15, noShadow: true, pop: true }], ['pig', 45, 336, 0.55], ['pig', 258, 336, 0.55, { flip: true }]]
+          text: 'Just as the wolf was coming down, the pig took off the lid,\nand in fell the wolf. SPLASH!',
+          art: [['wolf', 140, 168, 0.95, { rot: 180, noShadow: true }], ['pot', 140, 332, 1.7], ['splash', 140, 252, 0.8, { pop: true }], ['pig', 255, 336, 0.6, { flip: true }]]
         }
       },
       {
-        bg: 'day', text: 'Up the chimney he shot, and away he [ran].\nHe never came back again.\nAnd the three little pigs lived happily ever after.',
-        art: [['house', 150, 300, 1.7, { kind: 'brick', smoke: true }], ['wolf', 268, 252, 0.48], ['pig', 55, 340, 0.6], ['pig', 150, 346, 0.6], ['pig', 245, 340, 0.6, { flip: true }]]
+        bg: 'indoor', text: 'The little pig put the lid on again, and boiled him up,\nand [ate] him for supper.\nAnd he lived happily ever after.',
+        art: [['pot', 130, 332, 1.7, { lid: true }], ['pig', 245, 336, 0.75, { flip: true }]]
       }
-    ]
+    ],
+    end: { bg: 'day', art: [['house', 150, 300, 1.7, { kind: 'brick', smoke: true }], ['pig', 245, 334, 0.6, { flip: true }]] }
   },
   {
     id: 'goats', shelf: 'big', cloth: '#45607a',
     title: 'The Three Billy Goats Gruff',
     byline: 'Retold from a Norwegian folk tale',
-    source: 'After the translation by George Webbe Dasent in Popular Tales from the Norse (1859), Project Gutenberg eBook #8933. Here the Troll lands in the river and swims away.',
+    source: 'After the translation by George Webbe Dasent in Popular Tales from the Norse (1859), Project Gutenberg eBook #8933. The big billy goat\'s rhyme is Dasent\'s own.',
     cover: { bg: 'river', art: [['troll', 150, 345, 1.15, { noShadow: true }], ['bridge', 150, 330, 2.9], ['goat', 150, 212, 0.75]] },
     pages: [
       {
@@ -391,11 +392,19 @@ window.BOOKS = [
         art: [['troll', 150, 345, 1.15, { noShadow: true }], ['bridge', 150, 330, 2.9], ['goat', 150, 212, 1.15]]
       },
       {
-        bg: 'river', text: '"WHO is that?" roared the Troll.\n"It is I, the big billy goat Gruff!"\nAnd he put his head down and ran at the Troll. [Bump]!',
-        art: [['bridge', 150, 330, 2.9], ['goat', 100, 213, 1.1, { rot: 8 }], ['troll', 225, 332, 1.3, { roar: true, noShadow: true }]],
+        bg: 'river', text: '"WHO is that tramping over my bridge?" roared the Troll.\n"It is I, the big billy goat Gruff!"\n"Now I\'m coming to gobble you [up]!"',
+        art: [['bridge', 150, 330, 2.9], ['goat', 100, 213, 1.1], ['troll', 225, 332, 1.3, { roar: true, noShadow: true }]]
+      },
+      {
+        bg: 'river', text: '"Well, come along! I\'ve got two spears,\nAnd I\'ll poke your eyeballs out at your ears;\nI\'ve got besides two curling-stones,\nAnd I\'ll crush you to bits,\nbody and [bones]."',
+        art: [['bridge', 150, 330, 2.9], ['goat', 105, 213, 1.15, { rot: 8 }], ['troll', 225, 332, 1.3, { roar: true, noShadow: true }]]
+      },
+      {
+        bg: 'river', text: 'And he flew at the Troll. [Bump]!',
+        art: [['bridge', 150, 330, 2.9], ['goat', 150, 213, 1.15, { rot: 8 }], ['troll', 236, 250, 1.1, { roar: true, rot: 35, noShadow: true }]],
         after: {
-          text: 'Up went the Troll, and down he came in the river. SPLASH!\nHe swam far away, and he never came back.',
-          art: [['bridge', 150, 330, 2.9], ['troll', 150, 356, 0.95, { wet: true, noShadow: true }], ['splash', 150, 362, 1.35, { pop: true }], ['goat', 150, 212, 1.15, { happy: true }]]
+          text: 'He poked his eyes out with his horns,\nand crushed him to bits, body and bones,\nand tossed him out into the river.',
+          art: [['bridge', 150, 330, 2.9], ['splash', 150, 362, 1.5, { pop: true }], ['goat', 150, 212, 1.15, { happy: true }]]
         }
       },
       {
