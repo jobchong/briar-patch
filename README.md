@@ -63,10 +63,12 @@ The app uses the browser's built-in speech, which works offline on macOS. It pre
 
 ## Locking it down (Karabiner)
 
-The Karabiner rule allows only letters, numbers, arrows, space, return and backspace, but only while **TextEdit** is in front. A browser showing this app isn't covered, so a child could still press cmd-Q or cmd-W there. To lock the storybook the same way, run it in a browser you don't use yourself (for example Safari, if you live in Chrome). Then copy the rule's condition and add that browser's bundle id:
+The Karabiner rule *In TextEdit, Safari and Chrome, allow only letters, numbers, arrow keys, space, return, and backspace* covers this app in either browser. Everything else is swallowed whenever one of those three apps is in front: cmd and ctrl shortcuts, Escape, tab, punctuation and shift.
 
 ```json
-"bundle_identifiers": ["^com\\.apple\\.TextEdit$", "^com\\.apple\\.Safari$"]
+"bundle_identifiers": ["^com\\.apple\\.TextEdit$", "^com\\.apple\\.Safari$", "^com\\.google\\.Chrome$"]
 ```
 
-Open the book with **View → Enter Full Screen** before you walk away. Cmd, ctrl and Escape are blocked, so the keyboard can't leave full screen or close the tab. A mouse or trackpad can still reach the menu bar, though.
+Open the book with **View → Enter Full Screen** before you walk away. With Escape and cmd blocked, the keyboard can't leave full screen or close the tab. A mouse or trackpad can still reach the menu bar, though.
+
+**For grown-ups:** the rule also applies when *you* use Safari or Chrome, so you can't type a URL, use shortcuts or type punctuation. Turn it off in Karabiner-Elements → Complex Modifications by removing or disabling the rule, and add it back when the children sit down. Another way is to keep the rule in a separate "Kids" profile and switch profiles from the Karabiner menu-bar icon (switch with the mouse, since the keyboard is locked).
