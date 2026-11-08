@@ -661,21 +661,37 @@ ${o.smoke && k === 'brick' ? `<path fill="none" class="fine" d="M71 14q-4-4 0-8t
   };
   META.house = { w: 1.4 };
 
-  // a campfire: two crossed logs and the flames
-  S.fire = () => `
-<path fill="${C.bark}" d="${stick(12, 93, 82, 79, 9)}${stick(18, 79, 88, 93, 9)}"/>
-<ellipse fill="${C.tan}" cx="12" cy="93" rx="3" ry="4.5"/><ellipse fill="${C.tan}" cx="88" cy="93" rx="3" ry="4.5"/>
-<path fill="${C.orange}" d="M28 86C22 70 32 62 34 48C38 58 42 60 42 70C44 60 48 50 50 28C54 50 58 58 58 68C60 60 64 56 66 46C70 60 78 70 72 86Z"/>
-<path class="nol" fill="${C.butter}" d="M40 86C38 78 42 74 44 66C46 72 50 74 50 64C52 72 56 76 58 70C60 78 62 82 60 86Z"/>
-<path fill="none" class="fine" d="M44 24q-4-6 0-12M57 20q4-6 0-12"/>`;
-  META.fire = { w: 1.1 };
+  // the Tar-Baby: a lump of tar and turpentine with a hat on (no face: it is only tar)
+  S.tarbaby = () => {
+    const tar = '#3b3438', gloss = '#8a8088';
+    return `
+<ellipse fill="${tar}" cx="50" cy="93" rx="24" ry="4"/>
+<path fill="${tar}" d="M31 70C22 72 18 80 21 86L28 84C28 80 30 77 35 76Z"/>
+<path fill="${tar}" d="M69 70C78 72 82 80 79 86L72 84C72 80 70 77 65 76Z"/>
+<path fill="${tar}" d="M30 94C24 80 30 64 50 63C70 64 76 80 70 94Z"/>
+<path class="nol" fill="${gloss}" opacity=".55" d="M37 82C37 75 41 70 46 68C42 72 40 77 40 83Z"/>
+<circle fill="${tar}" cx="50" cy="48" r="17"/>
+<path class="nol" fill="${gloss}" opacity=".6" d="M39 45C39 39 43 35 49 34C44 37 42 41 42 46Z"/>
+<path fill="${tar}" d="M56 94v-5q2.5-3 5 0v5zM40 94v-4q2-2.5 4 0v4z"/>
+<path fill="${C.tan}" d="M37 34C37 20 63 20 63 34Z"/>
+<path fill="${C.deepred}" d="M37.4 30H62.6V34H37.4Z"/>
+<ellipse fill="${C.tan}" cx="50" cy="34.5" rx="23" ry="4.5"/>`;
+  };
 
-  // a little pond (lies flat on the ground, like the mud)
-  S.pond = () => `
-<path fill="#86aec4" d="M6 88C8 78 30 75 44 79C58 72 84 74 94 84C98 92 80 97 60 96C40 99 10 97 6 88Z"/>
-<path fill="none" class="fine" d="M22 86q6-3 12 0M50 81q6-3 12 0M66 90q6-3 12 0M38 92q5-2.5 10 0"/>
-<path fill="${C.leaf}" d="M88 82q-3-14 1-22q2 10 3 21zM93 84q1-12 6-18q-2 10-3 18z"/>`;
-  META.pond = { sky: true };
+  // a bush to hide behind
+  S.bush = () => `
+<path fill="${C.moss}" d="${cloud(50, 72, 46, 26, 10, 21)}"/>
+<path class="nol" fill="${C.leaf}" opacity=".6" d="${cloud(40, 80, 24, 12, 7, 8)}"/>
+<path fill="none" class="fine" d="M24 70q5-3 10 0M58 60q5-3 10 0M70 80q5-3 10 0"/>`;
+  META.bush = { w: 1.5 };
+
+  // a log lying on the ground, end on to the right
+  S.log = () => `
+<path fill="${C.bark}" d="M8 96V76Q8 70 14 70H84V96Z"/>
+<ellipse fill="${C.tan}" cx="84" cy="83" rx="8" ry="13"/>
+<ellipse fill="none" class="fine" cx="84" cy="83" rx="4" ry="7"/>
+<path fill="none" class="fine" d="M18 78h22M30 86h30M50 76h20M16 90h14"/>`;
+  META.log = { w: 1.5 };
 
   // a billy goat (side on, facing right)
   S.goat = (o = {}) => {

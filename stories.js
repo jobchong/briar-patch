@@ -201,28 +201,63 @@ window.BOOKS = [
     id: 'briar', shelf: 'big', cloth: '#1f4b3a',
     title: 'Brer Rabbit and the Briar Patch',
     byline: 'Retold from an African American folk tale',
-    source: 'A trickster tale from African American storytelling, first written down by Joel Chandler Harris in 1880 (Project Gutenberg eBook #2306). Retold here in plain words, without the dialect or the tar-baby.',
+    source: 'A trickster tale from African American storytelling, first written down by Joel Chandler Harris in Uncle Remus: His Songs and His Sayings (1880), Project Gutenberg eBook #2306. These are his "The Wonderful Tar-Baby Story" and "How Mr. Rabbit Was Too Sharp for Mr. Fox", told in plain words.',
     cover: { bg: 'wood', art: [['rabbit', 150, 262, 1.3, { jacket: true, noShadow: true }], ['briar', 150, 322, 2]] },
     pages: [
       { bg: 'wood', text: 'Brer Rabbit lived in the wood.\nHe could [hop], and he could [run]!', art: [['rabbit', 150, 314, 1.8, { jacket: true }]] },
       { bg: 'wood', text: 'Brer Fox was a sly old [fox].\nHe wanted to catch Brer Rabbit.', art: [['fox', 150, 314, 1.8]] },
-      { bg: 'wood', text: 'One day, Brer Rabbit sat down in the [sun]\nand fell fast asleep.', art: [['sun', 225, 100, 0.9], ['rabbit', 130, 314, 1.6, { jacket: true, sleep: true }]] },
-      { bg: 'wood', text: 'Brer Fox crept up, and snap!\nHe [got] him!', art: [['rabbit', 95, 316, 1.3, { jacket: true }], ['fox', 210, 316, 1.5, { flip: true, happy: true }]] },
       {
-        bg: 'wood', text: '"I will roast you on my [fire]!" said Brer Fox.', art: [['fire', 100, 320, 1.25], ['fox', 220, 316, 1.4, { flip: true }]],
+        bg: 'wood', text: 'One day Brer Fox got some [tar], and mixed it with turpentine,\nand made it into a figure he called a Tar-Baby.',
+        art: [['tarbaby', 112, 320, 1.6], ['fox', 232, 318, 1.25, { flip: true, happy: true }]]
+      },
+      {
+        bg: 'wood', text: 'He set the Tar-Baby in the middle of the big road,\nand then he [hid] in the bushes to see what would happen.',
+        art: [['tarbaby', 100, 320, 1.4], ['fox', 228, 298, 1, { flip: true }], ['bush', 228, 336, 1.2]]
+      },
+      {
+        bg: 'wood', text: 'By and by, along came Brer Rabbit, hopping down the road.\n"Good morning!" he said. "Nice weather this morning!"\nThe Tar-Baby said nothing, and Brer Fox, he lay [low].',
+        art: [['rabbit', 72, 320, 1.15, { jacket: true }], ['tarbaby', 172, 320, 1.2], ['fox', 266, 304, 0.7, { flip: true }], ['bush', 266, 338, 0.8]]
+      },
+      {
+        bg: 'wood', text: '"Are you deaf?" said Brer Rabbit. "If you are, I can holler louder."\n"You\'re stuck up, that\'s what you are! Take off your [hat]\nand say howdy, or I\'ll bust you wide open!"\nThe Tar-Baby said nothing, and Brer Fox, he lay low.',
+        art: [['rabbit', 88, 320, 1.15, { jacket: true }], ['tarbaby', 172, 320, 1.2], ['fox', 266, 304, 0.7, { flip: true }], ['bush', 266, 338, 0.8]]
+      },
+      {
+        bg: 'wood', text: 'So Brer Rabbit drew back his fist, and blip! He hit the Tar-Baby.\nHis fist stuck fast. He hit it with his other hand, and that stuck.\nHe kicked it, and his feet stuck. He butted it, and his [head] stuck.',
+        art: [['rabbit', 134, 322, 1.2, { jacket: true, rot: 18 }], ['tarbaby', 182, 320, 1.3]]
+      },
+      {
+        bg: 'wood', text: 'Then out came Brer Fox, as innocent as you please.\n"Howdy, Brer Rabbit. You look sort of [stuck] up this morning!"\nAnd he rolled on the ground, and laughed and laughed.',
+        art: [['rabbit', 82, 322, 1, { jacket: true, rot: 18 }], ['tarbaby', 122, 320, 1.1], ['fox', 236, 318, 1.25, { flip: true, happy: true, rot: -14 }]]
+      },
+      {
+        bg: 'wood', text: '"I\'ve got you this time, Brer Rabbit," said Brer Fox.\n"I\'ll pile up some brush and set it on [fire], and roast you!"',
+        art: [['rabbit', 71, 322, 0.95, { jacket: true, rot: 18 }], ['tarbaby', 110, 320, 1.05], ['house', 172, 340, 1, { kind: 'sticks', down: true }], ['fox', 244, 318, 1.2, { flip: true, happy: true }]],
         after: { text: '"Roast me, Brer Fox," said Brer Rabbit,\n"but please don\'t throw me in the briar patch!"' }
       },
       {
-        bg: 'wood', text: '"Then I will drown you in the [pond]!" said Brer Fox.', art: [['pond', 105, 326, 1.6], ['fox', 225, 316, 1.4, { flip: true }]],
-        after: { text: '"Drown me as deep as you please, Brer Fox," said Brer Rabbit,\n"but please, PLEASE don\'t throw me in the briar patch!"' }
+        bg: 'wood', text: '"It\'s too much trouble to light a fire," said Brer Fox,\n"so I\'ll have to [hang] you."',
+        art: [['rabbit', 82, 322, 1, { jacket: true, rot: 18 }], ['tarbaby', 122, 320, 1.1], ['fox', 238, 318, 1.25, { flip: true }]],
+        after: { text: '"Hang me as high as you please, Brer Fox," said Brer Rabbit,\n"but please don\'t throw me in the briar patch!"' }
       },
       {
-        bg: 'wood', text: '"The briar patch is the worst place of all!" thought Brer Fox.\nSo in went Brer Rabbit.\nBump, bump, [bump]!',
-        art: [['rabbit', 126, 168, 0.85, { jacket: true, noShadow: true, rot: 185 }], ['briar', 120, 320, 1.9], ['fox', 240, 318, 1.15, { flip: true, happy: true }]]
+        bg: 'wood', text: '"I haven\'t got any string," said Brer Fox,\n"so I\'ll have to [drown] you."',
+        art: [['rabbit', 82, 322, 1, { jacket: true, rot: 18 }], ['tarbaby', 122, 320, 1.1], ['fox', 238, 318, 1.25, { flip: true }]],
+        after: { text: '"Drown me as deep as you please, Brer Fox," said Brer Rabbit,\n"but please don\'t throw me in the briar patch!"' }
       },
       {
-        bg: 'wood', text: 'But Brer Rabbit just laughed.\n"I was born and bred in the briar patch, Brer Fox!\nThis is my home!"\nAnd off he went. Hop, hop, [hop]!',
-        art: [['rabbit', 120, 250, 1.1, { jacket: true, laugh: true, noShadow: true }], ['briar', 120, 322, 1.9], ['fox', 245, 318, 1.1, { flip: true, cross: true }]]
+        bg: 'wood', text: '"There\'s no water near," said Brer Fox,\n"so I\'ll have to [skin] you."',
+        art: [['rabbit', 82, 322, 1, { jacket: true, rot: 18 }], ['tarbaby', 122, 320, 1.1], ['fox', 238, 318, 1.25, { flip: true, happy: true }]],
+        after: { text: '"Skin me, Brer Fox," said Brer Rabbit. "Pull out my eyes,\ntear out my ears by the roots, and cut off my legs,\nbut please, PLEASE don\'t throw me in the briar patch!"' }
+      },
+      {
+        bg: 'wood', text: 'Brer Fox wanted to hurt Brer Rabbit as badly as he could.\nSo he caught him by the hind legs, and flung him\nright into the middle of the briar [patch].',
+        art: [['rabbit', 126, 168, 0.85, { jacket: true, noShadow: true, rot: 185 }], ['briar', 120, 320, 1.9], ['fox', 240, 318, 1.15, { flip: true, happy: true }]],
+        after: { text: 'There was a great flutter in the bushes where Brer Rabbit landed,\nand Brer Fox hung around to see what would happen.' }
+      },
+      {
+        bg: 'hill', text: 'By and by, somebody called Brer Fox. Way up the hill sat Brer Rabbit on a log,\ncombing the tar out of his fur with a chip.\n"Bred and born in a briar patch, Brer Fox! Bred and born in a briar patch!"\nAnd he skipped [off], as lively as a cricket in the embers.',
+        art: [['log', 150, 160, 0.9], ['rabbit', 146, 140, 0.8, { jacket: true, laugh: true, noShadow: true }], ['briar', 240, 346, 1.1], ['fox', 72, 334, 1.1, { cross: true }]]
       }
     ]
   },
