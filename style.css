@@ -52,9 +52,7 @@ svg.scene { display: block; width: 100%; height: 100%; overflow: visible; mix-bl
 
 /* ---------- the shelf ---------- */
 .shelf {
-  /* Cover height: as tall as the screen allows, but narrow enough that the
-     longest row (--n books, set by app.js) still fits across with its plaque. */
-  --ch: clamp(110px, min(26vh, calc((86vw - var(--n, 4) * 2vw) / (.5 + var(--n, 4) * .76))), 290px);
+  --ch: min(27vh, 310px);
   height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 3.2vh; padding: 1vh 3vw 0;
 }
@@ -64,20 +62,25 @@ svg.scene { display: block; width: 100%; height: 100%; overflow: visible; mix-bl
   font-size: clamp(26px, 5.4vh, 60px); letter-spacing: .03em; text-shadow: 0 2px 0 rgba(0, 0, 0, .4);
 }
 .shelf .sub { margin: .1em 0 0; font-family: var(--fell); font-style: italic; color: #d8caa4; font-size: clamp(14px, 2.4vh, 24px); }
-.row { position: relative; display: flex; align-items: flex-end; gap: 2.4vw; padding: 0 2vw; }
+.row { width: 100%; position: relative; display: flex; align-items: flex-end; gap: 2.4vw; padding: 0 2vw; }
 .row::after {
   content: ""; position: absolute; left: -2vw; right: -2vw; bottom: -1.6vh; height: 1.8vh;
   background: linear-gradient(#8f5f3a, #5d3a21); border-radius: 3px;
   box-shadow: 0 10px 16px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 220, 170, .25);
 }
 .plaque {
-  width: calc(var(--ch) * .5); display: flex; flex-direction: column; align-items: center; gap: .4em;
+  flex-shrink: 0; width: calc(var(--ch) * .5); display: flex; flex-direction: column; align-items: center; gap: .4em;
   color: var(--gold); font-family: var(--fellsc); text-align: center; font-size: calc(var(--ch) * .075); line-height: 1.1;
 }
 .plaque svg.scene { width: 100%; height: auto; aspect-ratio: 300 / 360; mix-blend-mode: normal; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .4)); }
-.books { display: flex; gap: 2vw; align-items: flex-end; }
+.books {
+  flex: 1; min-width: 0; display: flex; gap: clamp(14px, 1.6vw, 28px); align-items: flex-end; overflow-x: auto;
+  padding: 3.2vh 12px 8px; margin: -3.2vh -12px -8px;
+  scrollbar-width: thin; scrollbar-color: #927248 transparent;
+  scroll-padding-inline: 12px;
+}
 .cover {
-  position: relative; width: calc(var(--ch) * .76); height: var(--ch);
+  flex: none; position: relative; width: calc(var(--ch) * .76); height: var(--ch);
   display: block;
   background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 3px),
     repeating-linear-gradient(0deg, rgba(0, 0, 0, .05) 0 1px, transparent 1px 3px), var(--cloth);
@@ -96,7 +99,7 @@ svg.scene { display: block; width: 100%; height: 100%; overflow: visible; mix-bl
   position: absolute; left: 10%; right: 6%; top: 71%; bottom: 3%;
   display: flex; align-items: center; justify-content: center;
   font-family: var(--fellsc); color: var(--gold); text-align: center;
-  font-size: calc(var(--ch) * .07); line-height: 1.05; text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
+  font-size: calc(var(--ch) * .079); line-height: 1.05; text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
 }
 .cover.sel {
   transform: translateY(-2.2vh) rotate(-1.5deg) scale(1.06);

@@ -285,7 +285,7 @@ ${S.rabbithead(o)}`;
   S.bed = (o = {}) => {
     const who = o.rabbit ? `<g transform="translate(15 33) scale(.42)">${S.rabbithead({ sleep: true })}</g>`
       : o.pip ? `<g transform="translate(18.5 44) scale(.42)">${S.piphead({ sleep: true })}</g>`
-        : o.princess ? `<g transform="translate(10 39) scale(.44)">${S.princesshead({ sleep: o.princess !== 'awake' })}</g>`
+        : o.princess ? `<g transform="translate(10 39) scale(.44)">${S.princesshead({ sleep: o.princess !== 'awake', ...o.head })}</g>`
         : o.ears ? `<path fill="${C.rabbit}" d="M44 62C40 54 41 48 44 48C47 48 48 54 47 62Z"/><path fill="${C.rabbit}" d="M51 62C51 54 53 48 56 49C59 50 56 56 54 62Z"/>` : '';
     const frame = `<path fill="${C.brown}" d="M6 96V36Q14 26 22 36V96H17V60H11V96Z"/>
 <path fill="${C.brown}" d="M86 96V54Q92 47 98 54V96H94V70H90V96Z"/>`;
@@ -587,7 +587,7 @@ ${o.tag ? `<path fill="none" class="fine" d="M70.5 36v-4"/><g transform="rotate(
 <circle fill="${C.gold}" cx="50" cy="4" r="3"/>
 <circle fill="${C.cream}" cx="50" cy="24" r="13"/>
 <path fill="none" class="fine" d="${ticks}"/>
-<path fill="none" d="${o.one ? hand(30, 6.5) + hand(0, 10) : hand(25, 6.5) + hand(300, 10)}"/>
+<path fill="none" d="${o.midnight ? hand(0, 10) : o.one ? hand(30, 6.5) + hand(0, 10) : hand(25, 6.5) + hand(300, 10)}"/>
 <circle class="solid" cx="50" cy="24" r="1.5"/>
 ${o.bong ? `<path fill="none" d="M25 13q-5 10 0 22M18 9q-7 15 0 32M75 13q5 10 0 22M82 9q7 15 0 32"/>` : ''}`;
   };
@@ -1013,6 +1013,11 @@ ${o.happy || o.sleep ? `<path fill="none" d="M86 61q3 ${o.sleep ? 2.5 : -3} 6 0"
     thin: 'M40.5 26C42 17 58 17 59.5 26Q56 21.5 50 21.5Q44 21.5 40.5 26Z'
   };
   const BODY = {
+    mermaid: () => `<path fill="${SKIN}" d="M41 38Q50 35 59 38L58 57H42Z"/>
+<path fill="${C.plum}" d="M40 41Q46 38 50 44Q56 38 61 42L58 48H42Z"/>
+<path fill="${C.teal}" d="M41 55Q50 59 59 55Q66 78 41 86L29 88Q27 76 15 76Q16 89 29 91Q16 93 15 99Q30 101 38 93Q55 92 62 82Q73 65 59 54Z"/>`,
+    trousers: (c) => `<path fill="${c}" d="M40 38Q50 35 60 38L61 57Q72 74 61 89H53L50 69L47 89H39Q28 75 39 57Z"/>
+<path fill="${C.gold}" d="M39 56H61V60H39Z"/><path fill="${C.brown}" d="M39 89H47V95H34Q32 92 39 89ZM53 89H61L67 93V95H53Z"/>`,
     gown: (c) => `<path fill="${c}" d="M42.5 38Q50 36 57.5 38L59 51Q67 71 76 93Q50 99 24 93Q33 71 41 51Z"/>
 <path fill="none" class="fine" d="M41 51Q50 54 59 51M37 76l-4 15M50 62v32M63 76l4 15"/>`,
     tunic: (c, o) => `<rect fill="${o.legs || C.navy}" x="43" y="70" width="6" height="22"/><rect fill="${o.legs || C.navy}" x="51" y="70" width="6" height="22"/>
@@ -1037,7 +1042,7 @@ ${o.apron ? `<path class="nol" fill="${C.white}" d="M42 58H58L60 74Q50 77 40 74Z
       smile: `<path fill="none" d="M46.5 32q3.5 3 7 0"/>`, sad: `<path fill="none" d="M46.5 34q3.5-2.6 7 0"/>`,
       o: `<ellipse fill="${C.rose}" cx="50" cy="33" rx="1.8" ry="2.3"/>`, grin: `<path fill="${C.rose}" d="M45.5 31.5Q50 37.5 54.5 31.5Z"/>`
     }[m] || '';
-    return `<circle fill="${SKIN}" cx="50" cy="28" r="10"/>
+    return `<circle fill="${o.skin || SKIN}" cx="50" cy="28" r="10"/>
 ${eyes}<circle class="nol" fill="${C.rose}" opacity=".5" cx="42.8" cy="31.2" r="2.4"/><circle class="nol" fill="${C.rose}" opacity=".5" cx="57.2" cy="31.2" r="2.4"/>
 ${mouth}
 ${o.cry ? `<path fill="#a9c8da" d="${drop(44.5, 33, 1.6)}${drop(55.5, 33, 1.6)}${drop(42, 40, 1.4)}"/>` : ''}
@@ -1058,12 +1063,86 @@ ${o.hood ? `<path fill="${o.hood}" d="M36 36C31 8 69 8 64 36L68 46H32Z"/>` : ''}
 ${o.long ? `<path fill="${o.hair || C.ochre}" d="M39.5 27C36 12 64 12 60.5 27C62 36 67 46 66 54Q60 52 57 44H43Q40 52 34 54C33 46 38 36 39.5 27Z"/>` : ''}
 ${BODY[o.body || 'gown'](col, o)}
 <path fill="${o.sleeve || col}" d="${stick(41.5, 41, lx, ly, 6.5)}${stick(58.5, 41, rx, ry, 6.5)}"/>
-<circle fill="${SKIN}" cx="${lx}" cy="${ly}" r="3.2"/><circle fill="${SKIN}" cx="${rx}" cy="${ry}" r="3.2"/>
+<circle fill="${o.skin || SKIN}" cx="${lx}" cy="${ly}" r="3.2"/><circle fill="${o.skin || SKIN}" cx="${rx}" cy="${ry}" r="3.2"/>
 ${head(o)}`;
   }
 
   S.princess = (o = {}) => person({ col: C.rose, hair: C.gold, long: true, style: 'fringe', crown: true, ...o });
+  S.elsa = (o = {}) => S.princess({ col: C.sky, hair: C.cream, crown: false, ...o });
+  S.anna = (o = {}) => S.princess({ col: C.pea, hair: C.rust, crown: false, ...o });
+  S.snowball = () => `<circle fill="${C.white}" cx="50" cy="55" r="37"/>
+<path fill="none" class="fine" d="M24 61q4 15 19 18"/>`;
+  S.olaf = () => `<path fill="none" d="M39 59L18 45l-4-9m4 9-9-3m52 17 21-14 4-9m-4 9 9-3"/>
+<ellipse fill="${C.white}" cx="50" cy="80" rx="22" ry="15"/><ellipse fill="${C.white}" cx="50" cy="57" rx="16" ry="13"/>
+<path fill="none" d="M49 19l-5-12m6 13 4-15"/><path fill="${C.white}" d="M31 25Q31 14 49 16Q71 13 69 31Q66 49 51 49Q33 46 31 25Z"/>
+<circle class="solid" cx="44" cy="25" r="2"/><circle class="solid" cx="54" cy="25" r="2"/>
+<path fill="${C.orange}" d="M48 28l25 2-24 5Z"/><path fill="none" d="M40 36q9 10 19 1"/>
+<circle class="solid" cx="50" cy="56" r="3"/><circle class="solid" cx="50" cy="75" r="3"/>`;
+  S.aurora = (o = {}) => S.princess({ col: C.grey, sleeve: C.cream, crown: false, ...o });
+  S.owlprince = () => `${S.owl()}
+<path fill="${C.red}" d="M24 25Q36 20 46 7Q58 7 73 24Q51 19 24 25Z"/>
+<path fill="${C.deepred}" d="M32 51Q47 56 67 51L80 91Q59 98 38 92L45 58L24 89Z"/>`;
   S.prince = (o = {}) => person({ body: 'tunic', col: C.blue, hair: C.brown, style: 'short', crown: true, cape: C.red, ...o });
+  S.belle = (o = {}) => S.princess({ col: C.leaf, hair: C.brown, crown: false, ...o });
+  S.cinderella = (o = {}) => S.princess({ col: C.sky, long: false, crown: false, ...o });
+  S.rapunzel = (o = {}) => `<path fill="${C.gold}" d="M44 28Q32 33 36 59T21 85Q34 91 42 69L51 39Z"/>${S.princess({ col: '#ad85af', crown: false, ...o })}`;
+  S.flynn = (o = {}) => person({ body: 'tunic', col: C.teal, sleeve: C.cream, hair: C.brown, style: 'short', ...o });
+  S.eric = (o = {}) => person({ body: 'tunic', col: C.white, legs: C.navy, hair: C.black, style: 'short', ...o });
+  S.ariel = (o = {}) => person({ body: 'mermaid', hair: C.rust, long: true, style: 'fringe', sleeve: SKIN, ...o });
+  S.beast = () => `<path fill="${C.plum}" d="M29 43Q48 35 71 44L82 93Q51 102 18 92Z"/>
+<path fill="${C.navy}" d="M29 45Q50 39 71 45L66 72Q50 79 34 72Z"/>
+<path fill="${C.gold}" d="M40 45L50 52L61 45L52 62Z"/>
+<path fill="${C.tan}" d="M34 73H46L44 91Q40 96 28 94L30 90ZM55 73H66L70 89Q78 95 57 94Z"/>
+<path fill="${C.brown}" d="M26 21L34 20Q49 5 67 18L78 16L72 31L75 39L68 38L70 46L61 43L58 52L51 48L46 54L40 46L33 48L32 41L24 42L28 32Z"/>
+<path fill="${C.cream}" d="M35 22Q23 18 27 5Q29 15 40 16ZM59 17Q70 14 71 4Q78 17 65 22Z"/>
+<ellipse fill="${C.tan}" cx="50" cy="34" rx="15" ry="9"/><ellipse fill="${C.black}" cx="51" cy="29" rx="5.5" ry="3.1"/>
+<circle class="solid" cx="40" cy="24" r="2"/><circle class="solid" cx="60" cy="24" r="2"/>
+<path fill="${C.cream}" d="M36 39l-1-7 5 6ZM60 38l5-6-2 7Z"/><path fill="none" d="M43 38q7 4 14-1"/>`;
+  S.jasmine = (o = {}) => `${person({ body: 'trousers', col: '#65b9b3', skin: '#bf8259', hair: C.black, long: true, style: 'fringe', ...o })}
+<path fill="${C.teal}" d="M39 21Q48 11 61 21L60 24Q51 16 40 24Z"/><circle fill="${C.sky}" cx="50" cy="18" r="2.8"/>`;
+  S.aladdin = (o = {}) => `${person({ body: 'trousers', col: C.cream, skin: '#bd8055', hair: C.black, style: 'short', cape: C.white, ...o })}
+<path fill="${C.cream}" d="M37 22Q32 9 46 10Q57 3 64 14L63 22Q52 19 37 24Z"/>
+<path fill="${C.plum}" d="M49 19Q47 7 54 1Q57 10 52 19Z"/><circle fill="${C.red}" cx="50" cy="20" r="2.6"/>`;
+
+  S.slipper = () => `<path fill="#c3e2e7" d="M12 52Q21 71 39 67L66 48Q72 45 75 56Q79 66 90 68Q95 76 84 80H54Q44 80 35 72L24 72L23 86H17Z"/>
+<path fill="none" class="fine" d="M35 68Q49 75 61 74M71 54l4 7"/>`;
+  S.slipperfoot = () => `<path fill="${SKIN}" d="M31 10L52 11L47 55Q48 64 68 69L76 74L34 73Q25 68 30 58Z"/>
+<path fill="${C.cream}" d="M16 6H68L61 28Q51 34 43 27Q33 35 20 29Z"/>
+<g transform="translate(8 11) scale(.86)">${S.slipper()}</g>`;
+  S.pumpkin = () => `<path fill="${C.leaf}" d="M47 42Q50 25 57 23L61 28Q53 32 54 42Z"/>
+<path fill="${C.orange}" d="M50 39C20 24 3 52 12 76Q20 96 50 91Q80 97 89 75C99 49 75 24 50 39Z"/>
+<path fill="none" d="M42 40Q22 61 39 89M55 40Q74 63 59 90"/>`;
+  S.stepslab = () => `<path fill="#c9bda8" d="M5 94V74H33V55H61V36H93V94Z"/><path fill="none" d="M33 74H93M61 55H93"/>`;
+  S.lantern = () => `<path fill="#f6cb77" d="M21 19Q47 12 79 19L73 77Q48 86 27 77Z"/>
+<ellipse fill="${C.butter}" cx="50" cy="78" rx="23" ry="4"/><path fill="${C.orange}" d="M45 77Q43 68 51 60Q49 68 55 72L54 78Z"/>`;
+  META.lantern = { sky: true };
+  S.bookcase = () => {
+    const colors = [C.rust, C.teal, C.gold, C.navy, C.leaf, C.plum];
+    let books = '';
+    for (let row = 0; row < 4; row++) {
+      const y = 26 + row * 20;
+      for (let i = 0; i < 10; i++) {
+        const x = 13 + i * 7.4, h = 11 + (i * 3 + row) % 7;
+        books += `<rect fill="${colors[(row + i) % colors.length]}" x="${x}" y="${y - h}" width="6.8" height="${h}"/>`;
+      }
+      books += `<path fill="${C.tan}" d="M9 ${y}h82v3H9Z"/>`;
+    }
+    return `<path fill="${C.brown}" d="M7 4H93V94H7Z"/>${books}`;
+  };
+  S.carpet = () => `<path fill="${C.plum}" d="M4 68Q26 73 52 65T96 60L82 84Q60 77 37 86L12 87Z"/>
+<path fill="none" stroke="${C.butter}" d="M12 72Q35 75 53 69T87 65L80 79Q61 75 39 82L17 84Z"/>
+<path fill="${C.gold}" d="M43 77l9-7 9 2-10 7Z"/><path fill="none" d="M9 85l-4 8m9-7-3 8m71-11 4 8m5-29 6 4"/>`;
+  META.carpet = { sky: true };
+  S.roof = () => `<path fill="${C.teal}" d="M3 76Q30 80 50 45Q70 80 97 76Q78 92 50 68Q27 94 3 76Z"/>
+<path fill="${C.deepred}" d="M23 83L50 67L78 83V96H23Z"/>`;
+  S.firework = () => {
+    let rays = '';
+    for (let angle = 0; angle < 360; angle += 30) {
+      rays += `<g transform="rotate(${angle} 50 50)"><path fill="${angle % 60 ? C.butter : C.pink}" d="M49 40Q46 24 50 16Q49 32 52 38Z"/><circle fill="${C.gold}" cx="50" cy="10" r="2.3"/></g>`;
+    }
+    return rays;
+  };
+  META.firework = { sky: true };
   S.king = (o = {}) => person({ body: 'robe', col: C.red, hair: C.silver, style: 'short', beard: C.silver, crown: true, ...o });
   S.queen = (o = {}) => person({ col: C.plum, hair: C.brown, long: true, style: 'fringe', crown: true, ...o });
   // a Wise Woman, in a hooded cloak; o.wicked for the thirteenth
@@ -1324,6 +1403,14 @@ ${o.crack ? `<path fill="#6b5e68" d="M70 20L92 10L94 15L72 25Z"/><path fill="non
       };
     },
     sea: (r) => { const w = wavesBg(236, '#6f9db2', r); return { wash: sky('#c4d6df') + clouds(r) + w.wash, ink: w.ink }; },
+    beach: (r) => {
+      const w = wavesBg(213, '#87b0c1', r, 2);
+      return { wash: sky('#edcaac') + w.wash + '<path fill="#ddc596" d="M-20 265Q104 242 320 259V380H-20Z"/>', ink: w.ink };
+    },
+    desert: () => ({
+      wash: sky('#526484') + '<path fill="#dcbe8d" d="M-20 238Q86 202 170 232T320 220V380H-20Z"/><path fill="#c69a63" d="M70 260L132 163L189 258ZM169 245L211 186L256 246Z"/><path fill="#997653" d="M132 163L145 251L189 258ZM211 186L220 242L256 246Z"/>',
+      ink: '<path fill="none" class="fine" d="M25 292q50-11 78-2m60 28q48-10 84-1"/>'
+    }),
     nightsea: (r) => { const w = wavesBg(240, '#3d6581', r); return { wash: sky('#34476f') + twinkles(r, 11, 180) + w.wash, ink: w.ink }; },
     nightbeach: (r) => {
       const w = wavesBg(212, '#3d6581', r, 2), shore = 'M-20 266Q80 254 150 260T320 256';

@@ -213,8 +213,7 @@
   function renderShelf() {
     screen = 'shelf'; R = null; clearTimers();
     const stars = store.get('stars', {});
-    const most = Math.max(...rowsData().map((r) => r.books.length)); // the covers shrink to fit the longest row
-    screenEl.innerHTML = `<main class="shelf" style="--n:${most}">
+    screenEl.innerHTML = `<main class="shelf">
 <header><h1>The Briar Patch Library</h1><p class="sub">stories you spell yourself</p></header>
 ${rowsData().map((r, ri) => `<section class="row">
   <div class="plaque">${ART.scene({ bg: 'none', art: [[r.icon, 150, 300, 2.7]] }, 'icon')}<span>${esc(r.label)}</span></div>
@@ -224,6 +223,12 @@ ${rowsData().map((r, ri) => `<section class="row">
   </button>`).join('')}</div>
 </section>`).join('')}
 </main>`;
+    $$('.books', screenEl).forEach((row) => row.addEventListener('wheel', (e) => {
+      if (e.ctrlKey || e.shiftKey || e.deltaX || !e.deltaY || row.scrollWidth <= row.clientWidth) return;
+      const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? row.clientWidth : 1;
+      row.scrollLeft += e.deltaY * unit;
+      e.preventDefault();
+    }, { passive: false }));
     $$('.cover', screenEl).forEach((c) => c.addEventListener('click', () => {
       wake(); sel.row = +c.dataset.row; sel.idx = +c.dataset.idx; openBook(selectedBook());
     }));
@@ -232,6 +237,8 @@ ${rowsData().map((r, ri) => `<section class="row">
   }
   function markSel(speak = true) {
     $$('.cover', screenEl).forEach((c) => c.classList.toggle('sel', +c.dataset.row === sel.row && +c.dataset.idx === sel.idx));
+    const cover = $('.cover.sel', screenEl);
+    if (cover) cover.scrollIntoView({ block: 'nearest', inline: 'nearest' });
     const b = selectedBook();
     if (speak && b) say(b.title);
   }
@@ -616,7 +623,7 @@ ${p.after ? `<div class="after${st.done ? ' shown' : ''}">${esc(p.after.text).re
 
   /* ---------------- start ---------------- */
   KB.build();
-  const h = location.hash.slice(1), m = h.match(/^book=(\w+)(?:&page=(\d+))?(&solve)?/);
+  const h = location.hash.slice(1), m = h.match(/^book=([\w-]+)(?:&page=(\d+))?(&solve)?/);
   if (h === 'gallery') gallery();
   else if (m && BOOKS.find((b) => b.id === m[1])) openBook(BOOKS.find((b) => b.id === m[1]), +(m[2] || 0), !!m[3]);
   else renderShelf();

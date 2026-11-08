@@ -210,6 +210,59 @@ window.BOOKS = [
     end: { bg: 'night', art: [['moon', 150, 200, 1.1], ['star', 70, 100, 0.25], ['star', 235, 150, 0.22]] }
   },
 
+  {
+    id: 'frozen-ice-boat', shelf: 'little', cloth: '#39758b',
+    title: 'Frozen: Snow in the Castle',
+    byline: 'Anna and Elsa as children',
+    source: 'Retold from the opening of Disney’s Frozen (2013).',
+    cover: { bg: 'hall', art: [['elsa', 69, 315, 1.35], ['olaf', 150, 329, 1.2], ['anna', 230, 315, 1.25]] },
+    pages: [
+      { bg: 'indoor', text: 'Anna could not sleep.\nShe woke Elsa in [bed].', art: [['bed', 145, 314, 2, { princess: true, head: { crown: false, hair: '#f3e6c8' } }], ['anna', 226, 322, 1.2]] },
+      { bg: 'hall', text: 'Downstairs, Elsa made a little [ball] of snow between her hands.', art: [['anna', 79, 315, 1.3], ['elsa', 185, 317, 1.65, { arms: 'hold' }], ['snowball', 185, 265, 0.4]] },
+      { bg: 'hall', text: 'Up it went! Soft [snow] fell all around the girls.', art: [['anna', 79, 320, 1.35, { arms: 'up' }], ['elsa', 207, 320, 1.5, { arms: 'up' }], ['snowball', 58, 150, 0.13], ['snowball', 128, 170, 0.11], ['snowball', 193, 123, 0.13], ['snowball', 244, 200, 0.12], ['snowball', 143, 228, 0.13]] },
+      { bg: 'hall', text: 'The girls made a snowman. Elsa moved his twig arm.\nAnna gave Olaf a big [hug].', art: [['elsa', 98, 314, 1.55, { arms: 'reach' }], ['olaf', 161, 320, 1.1], ['anna', 200, 323, 1.25, { arms: 'reach', flip: true }]] }
+    ]
+  },
+  {
+    id: 'cinderella', shelf: 'little', cloth: '#526796',
+    title: 'Cinderella and the Glass Slipper',
+    byline: 'Midnight at the ball',
+    source: 'Retold from Disney’s Cinderella (1950).',
+    cover: { bg: 'hall', art: [['cinderella', 99, 317, 1.8], ['slipper', 209, 326, 1.3]] },
+    pages: [
+      { bg: 'hall', text: 'At the ball, Cinderella danced with the prince.\nThen the [clock] began to strike twelve.', art: [['clock', 215, 310, 1.95, { midnight: true, bong: true }], ['cinderella', 80, 323, 1.65]] },
+      { bg: 'hall', text: 'She ran down the steps.\nOne glass [shoe] slipped off!', art: [['stepslab', 155, 329, 2.25], ['slipper', 175, 262, 0.92], ['cinderella', 62, 327, 1.3]] },
+      { bg: 'night', text: 'Away sped her coach. At the last bong, it was a [pumpkin] again.', art: [['pumpkin', 153, 315, 1.8], ['mouse', 64, 327, 0.72], ['mouse', 241, 322, 0.68]] },
+      { bg: 'night', text: 'Cinderella still had one glass slipper on her [foot].', art: [['slipperfoot', 150, 307, 1.95]],
+        after: { text: 'The other slipper was back at the palace.' } }
+    ]
+  },
+  {
+    id: 'rapunzel', shelf: 'little', cloth: '#725681',
+    title: 'Rapunzel and the Floating Lights',
+    byline: 'Lantern night on the water',
+    source: 'Retold from Disney’s Tangled (2010).',
+    cover: { bg: 'nightsea', art: [['lantern', 83, 143, 0.7], ['lantern', 204, 105, 0.55], ['rapunzel', 138, 286, 1.27], ['boat', 149, 316, 2.2]] },
+    pages: [
+      { bg: 'night', text: 'Each year on her birthday, Rapunzel saw lights from her tall [tower].', art: [['tower', 143, 315, 2.2], ['lantern', 233, 134, 0.42], ['lantern', 66, 100, 0.32]] },
+      { bg: 'nightsea', text: 'This year Flynn took her out in a [boat].\nThey waited on the water.', art: [['rapunzel', 106, 292, 1.28], ['flynn', 190, 293, 1.28], ['boat', 149, 316, 2.3]] },
+      { bg: 'night', text: 'At the castle, the [king] and queen let the first lantern go.', art: [['king', 104, 313, 1.6, { arms: 'up' }], ['queen', 196, 313, 1.55], ['lantern', 128, 141, 0.9]] },
+      { bg: 'nightsea', text: 'Soon the whole [sky] was full of lights.\nRapunzel let a lantern float up from her hands.', art: [['lantern', 50, 132, 0.41], ['lantern', 86, 79, 0.27], ['lantern', 150, 109, 0.5], ['lantern', 226, 76, 0.36], ['lantern', 248, 163, 0.54], ['lantern', 101, 184, 0.74], ['rapunzel', 109, 289, 1.3, { arms: 'up' }], ['flynn', 192, 291, 1.26], ['boat', 151, 317, 2.32]] }
+    ]
+  },
+  {
+    id: 'ariel', shelf: 'little', cloth: '#357076',
+    title: 'The Little Mermaid to the Rescue',
+    byline: 'Ariel saves Prince Eric',
+    source: 'Retold from Disney’s The Little Mermaid (1989).',
+    cover: { bg: 'nightsea', art: [['boatsail', 204, 239, 1.3], ['boat', 204, 250, 1.6], ['ariel', 102, 325, 1.75]] },
+    pages: [
+      { bg: 'nightsea', text: 'Ariel swam up to a [ship].\nPrince Eric was on board.', art: [['boatsail', 166, 252, 2.1], ['eric', 115, 253, 1.05], ['boat', 153, 283, 2.45], ['ariel', 64, 331, 1.1]] },
+      { bg: 'nightsea', text: 'A storm came. The ship caught fire!\nEric went back for his [dog], Max.', art: [['fire', 202, 267, 1.1], ['eric', 144, 262, 1.22, { arms: 'reach' }], ['dog', 88, 265, 1.08], ['boat', 149, 296, 2.5]] },
+      { bg: 'nightsea', text: 'Max was safe, but Eric fell into the [sea].\nAriel swam to him.', art: [['eric', 189, 301, 1.12, { sleep: true, rot: 48, noShadow: true }], ['ariel', 104, 316, 1.3, { arms: 'reach' }], ['splash', 156, 314, 0.58]] },
+      { bg: 'beach', text: 'Ariel brought Eric to shore.\nAs he woke, he heard her [song].', art: [['eric', 179, 323, 1.38, { rot: 75, sleep: true }], ['ariel', 103, 317, 1.65], ['notes', 160, 185, 0.75]] }
+    ]
+  },
   /* ================= THE BIG SHELF (about age 5) ================= */
   {
     id: 'hen', shelf: 'big', cloth: '#8a5a1c',
@@ -689,5 +742,44 @@ window.BOOKS = [
       }
     ],
     end: { bg: 'day', art: [['castle', 150, 300, 1.9], ['hedge', 40, 350, 1, { roses: true }], ['hedge', 260, 350, 1, { roses: true }]] }
+  },
+  {
+    id: 'aurora-lullaby', shelf: 'big', cloth: '#86536b',
+    title: 'Sleeping Beauty: The Forest Dance',
+    byline: 'Aurora meets Prince Phillip',
+    source: 'Retold from the forest meeting in Disney’s Sleeping Beauty (1959).',
+    cover: { bg: 'wood', art: [['aurora', 105, 327, 1.85, { arms: 'reach' }], ['owlprince', 208, 306, 1.25]] },
+    pages: [
+      { bg: 'wood', text: 'Deep in the woods, Aurora sang about the young man in her dream.\nPrince Phillip heard her [song] through the trees.', art: [['prince', 240, 250, 0.85, { crown: false }], ['aurora', 90, 323, 1.75], ['notes', 158, 176, 0.95]] },
+      { bg: 'wood', text: 'Her animal friends found a red [hat] and cloak that belonged to the prince.\nThey dressed up to give Aurora a partner.', art: [['rabbit', 66, 328, 1], ['owlprince', 178, 319, 2]] },
+      { bg: 'wood', text: 'Aurora took hold of the cloak. Round and round she danced with an [owl] peeking out at her.', art: [['aurora', 100, 326, 1.8, { arms: 'reach' }], ['owlprince', 187, 284, 1.4]] },
+      { bg: 'wood', text: 'Then someone took the owl’s place. Aurora turned and saw a young [man].\nIt was Phillip! Before she ran home, she told him where they could meet again.', art: [['aurora', 99, 325, 1.8, { arms: 'reach' }], ['prince', 195, 326, 1.85, { crown: false, arms: 'reach', flip: true }]] }
+    ]
+  },
+  {
+    id: 'belle', shelf: 'big', cloth: '#91672e',
+    title: 'Beauty and the Beast',
+    byline: 'A library for Belle',
+    source: 'Retold from Disney’s Beauty and the Beast (1991).',
+    cover: { bg: 'indoor', art: [['bookcase', 158, 281, 2.14], ['belle', 76, 333, 1.52], ['beast', 219, 334, 1.65]] },
+    pages: [
+      { bg: 'hall', text: 'The Beast had a surprise for Belle. He led her to a tall [door] in a part of the castle she had never seen.', art: [['castledoor', 165, 295, 2.15], ['beast', 75, 331, 1.6], ['belle', 223, 330, 1.48]] },
+      { bg: 'indoor', text: 'Belle shut her [eyes]. The Beast hurried across the dark room and drew back the curtains.', art: [['belle', 143, 325, 2.5, { sleep: true }]] },
+      { bg: 'indoor', text: 'When she looked, there were [books] all the way up to the ceiling. Belle turned to take in shelf after shelf.', art: [['bookcase', 110, 296, 2.25], ['bookcase', 216, 252, 1.25], ['belle', 207, 328, 1.45]] },
+      { bg: 'indoor', text: 'Belle loved the library. When the Beast saw her [smile], he gave it to her. She could read here whenever she liked.', art: [['bookcase', 148, 268, 1.85], ['beast', 79, 328, 1.6], ['belle', 200, 334, 1.95, { mouth: 'grin' }]] }
+    ]
+  },
+  {
+    id: 'aladdin', shelf: 'big', cloth: '#43517d',
+    title: 'Aladdin and the Magic Carpet',
+    byline: 'A night flight with Jasmine',
+    source: 'Retold from Disney’s Aladdin (1992).',
+    cover: { bg: 'night', art: [['moon', 219, 136, 0.76], ['aladdin', 105, 264, 1.32], ['jasmine', 185, 264, 1.3], ['carpet', 147, 293, 2.15]] },
+    pages: [
+      { bg: 'night', text: 'Jasmine looked over the edge of her balcony. There was Aladdin, dressed as a prince, standing on a [rug] that could fly!', art: [['aladdin', 144, 261, 1.6, { arms: 'wave' }], ['carpet', 147, 292, 2.3]] },
+      { bg: 'night', text: 'Aladdin held out his [hand]. Jasmine took it and stepped aboard. The carpet lifted them over the palace walls.', art: [['castle', 143, 315, 1.7], ['aladdin', 95, 252, 1.7, { arms: 'reach' }], ['jasmine', 194, 253, 1.62, { arms: 'reach', flip: true }], ['carpet', 147, 277, 2.1]] },
+      { bg: 'desert', text: 'Over the desert they flew. Far below them, huge pyramids rose out of the [sand].', art: [['aladdin', 123, 140, 0.8], ['jasmine', 167, 140, 0.8], ['carpet', 146, 156, 1.25]] },
+      { bg: 'night', text: 'In China they stopped on a roof. Jasmine leaned close to Aladdin as fireworks burst in the [sky].', art: [['firework', 81, 142, 0.93], ['firework', 217, 122, 0.82], ['firework', 154, 174, 0.55], ['roof', 150, 332, 2.4], ['aladdin', 128, 251, 1], ['jasmine', 170, 251, 1]] }
+    ]
   }
 ];

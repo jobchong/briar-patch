@@ -25,7 +25,7 @@ All of these are on the Karabiner allowlist:
 | up arrow or space | read the page again (only when the voice is on) |
 | down arrow | a hint: show the next letter and light its key |
 
-On the shelf, the arrows choose a book and return opens it. Shortcuts with cmd, ctrl or option are ignored by the app, so grown-ups can still use them.
+Each shelf scrolls sideways. Use the arrow keys to choose a book and Return to open it, or scroll over a row and click a cover. Shortcuts with cmd, ctrl or option are ignored by the app, so grown-ups can still use them.
 
 ## The stories
 
@@ -47,6 +47,13 @@ On the shelf, the arrows choose a book and return opens it. Shortcuts with cmd, 
 | The Tortoise and the Hare | Big | Retold from *The Aesop for Children* (1919), [Project Gutenberg #19994](https://www.gutenberg.org/ebooks/19994) |
 | The Frog Prince | Big | Retold from "The Frog-King, or Iron Henry" in the Grimms' *Household Tales*, tr. Margaret Hunt (1884), [Project Gutenberg #5314](https://www.gutenberg.org/ebooks/5314) |
 | Briar Rose | Big | Retold from "Briar-Rose" (Sleeping Beauty) in the same Hunt translation, [Project Gutenberg #5314](https://www.gutenberg.org/ebooks/5314) |
+| Frozen: Snow in the Castle | Little | The childhood snow scene from Disney’s *Frozen* (2013), retold for early spellers |
+| Sleeping Beauty: The Forest Dance | Big | Aurora and Phillip’s forest meeting from Disney’s *Sleeping Beauty* (1959), retold for early spellers |
+| Cinderella and the Glass Slipper | Little | The flight from the ball in Disney’s *Cinderella* (1950) |
+| Rapunzel and the Floating Lights | Little | The lantern festival in Disney’s *Tangled* (2010) |
+| The Little Mermaid to the Rescue | Little | Ariel’s rescue of Eric in Disney’s *The Little Mermaid* (1989) |
+| Beauty and the Beast | Big | The library surprise in Disney’s *Beauty and the Beast* (1991) |
+| Aladdin and the Magic Carpet | Big | Jasmine and Aladdin’s flight in Disney’s *Aladdin* (1992) |
 
 Notes on the choices:
 
