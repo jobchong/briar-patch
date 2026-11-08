@@ -146,7 +146,7 @@ window.BOOKS = [
       },
       {
         bg: 'wood', text: '"The briar patch is the worst place of all!" thought Brer Fox.\nSo in went Brer Rabbit.\nBump, bump, [bump]!',
-        art: [['briar', 120, 320, 1.9], ['rabbit', 128, 128, 0.85, { jacket: true, noShadow: true, rot: 165 }], ['fox', 240, 318, 1.15, { flip: true, happy: true }]]
+        art: [['rabbit', 126, 168, 0.85, { jacket: true, noShadow: true, rot: 185 }], ['briar', 120, 320, 1.9], ['fox', 240, 318, 1.15, { flip: true, happy: true }]]
       },
       {
         bg: 'wood', text: 'But Brer Rabbit just laughed.\n"I was born and bred in the briar patch, Brer Fox!\nThis is my home!"\nAnd off he went. Hop, hop, [hop]!',
@@ -155,7 +155,7 @@ window.BOOKS = [
     ]
   },
   {
-    id: 'owl', shelf: 'big', cloth: '#5a3550',
+    id: 'owl', shelf: 'big', cloth: '#5a3550', verse: true,
     title: 'The Owl and the Pussy-Cat',
     byline: 'by Edward Lear',
     source: 'From Nonsense Songs (1871), Project Gutenberg eBook #13647. The words are Lear\'s own.',
@@ -182,8 +182,8 @@ window.BOOKS = [
         art: [['turkey', 150, 160, 0.8], ['owl', 70, 330, 0.85], ['pig', 160, 334, 0.75, { ring: true }], ['cat', 238, 332, 0.75, { flip: true }]]
       },
       {
-        bg: 'nightsea', text: 'They dined on mince and slices of quince,\nWhich they ate with a runcible [spoon];\nAnd hand in hand, on the edge of the sand,\nThey danced by the light of the [moon],\nThe moon,\nThe moon,\nThey danced by the light of the moon.',
-        art: [['moon', 150, 160, 1.15], ['owl', 100, 318, 1.15], ['cat', 200, 318, 1.05, { happy: true }], ['spoon', 260, 330, 0.55, { legs: false, rot: 20, noShadow: true }]]
+        bg: 'nightbeach', text: 'They dined on mince and slices of quince,\nWhich they ate with a runcible [spoon];\nAnd hand in hand, on the edge of the sand,\nThey danced by the light of the [moon],\nThe moon,\nThe moon,\nThey danced by the light of the moon.',
+        art: [['moon', 150, 150, 1.1], ['owl', 112, 322, 1.15], ['cat', 192, 322, 1.05, { happy: true }], ['spoon', 252, 334, 0.75, { legs: false, rot: 14 }]]
       }
     ],
     end: { bg: 'nightsea', art: [['moon', 150, 190, 1.2], ['star', 60, 80, 0.25], ['star', 250, 70, 0.3]] }
@@ -218,8 +218,8 @@ window.BOOKS = [
       },
       {
         bg: 'garden', text: 'Pip felt hungry. The next word said [jam].',
-        art: [['wordtree', 160, 318, 2.6, { words: ['jam', 'bed'] }], ['pip', 60, 330, 0.95]],
-        after: { text: 'Pop! A jar of jam, sticky and sweet. Yum!', art: [['wordtree', 160, 318, 2.6, { words: ['bed'] }], ['pip', 60, 330, 0.95], ['jam', 150, 336, 0.8, { pop: true }]] }
+        art: [['wordtree', 160, 318, 2.6, { words: ['jam', 'bed'] }], ['pip', 60, 330, 0.95], ['cat', 238, 334, 0.9, { hat: true }]],
+        after: { text: 'Pop! A jar of jam, sticky and sweet. Yum!', art: [['wordtree', 160, 318, 2.6, { words: ['bed'] }], ['pip', 60, 330, 0.95], ['jam', 122, 338, 0.62, { pop: true }], ['cat', 238, 334, 0.9, { hat: true, happy: true }]] }
       },
       {
         bg: 'night', text: 'The sun went down, and Pip gave a big yawn.\nThere was one last word on the tree.\nIt said [bed].',

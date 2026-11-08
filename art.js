@@ -561,11 +561,11 @@ ${S.piphead(o)}`;
     return s;
   }
   const clouds = (r) => `<path fill="#f7f2e6" d="${cloud(70 + r() * 30, 60 + r() * 20, 38, 14, 8, 3)}"/><path fill="#f7f2e6" d="${cloud(220 + r() * 30, 40 + r() * 30, 30, 11, 7, 5)}"/>`;
-  function wavesBg(top, col, r) {
+  function wavesBg(top, col, r, rows = 5) {
     let d = `M-20 ${top}`, ink = '';
     for (let x = -20; x < 320; x += 25) d += `Q${x + 12.5} ${top - 8} ${x + 25} ${top}`;
     d += 'V380H-20Z';
-    for (let row = 0; row < 5; row++) {
+    for (let row = 0; row < rows; row++) {
       const y = top + 18 + row * 22;
       for (let x = (row % 2) * 20 + r() * 10; x < 300; x += 40 + r() * 20) ink += `M${f(x)} ${f(y)}q6-6 12 0`;
     }
@@ -594,6 +594,10 @@ ${S.piphead(o)}`;
     },
     sea: (r) => { const w = wavesBg(236, '#6f9db2', r); return { wash: sky('#c4d6df') + clouds(r) + w.wash, ink: w.ink }; },
     nightsea: (r) => { const w = wavesBg(240, '#3d6581', r); return { wash: sky('#34476f') + twinkles(r, 11, 180) + w.wash, ink: w.ink }; },
+    nightbeach: (r) => {
+      const w = wavesBg(212, '#3d6581', r, 2), shore = 'M-20 266Q80 254 150 260T320 256';
+      return { wash: sky('#34476f') + twinkles(r, 11, 160) + w.wash + `<path fill="#d9c08b" d="${shore}V380H-20Z"/>`, ink: w.ink + `<path fill="none" d="${shore}"/>` };
+    },
     wood: (r) => {
       let back = '';
       for (let i = 0; i < 4; i++) {

@@ -14,6 +14,9 @@
   const BOOKS = window.BOOKS, SHELVES = window.SHELVES, ART = window.ART;
   const params = new URLSearchParams(location.search);
   const SETTINGS = {
+    // The browser's built-in voices sound robotic, so reading aloud is off.
+    // ?speech=on turns it back on (a stand-in until there are recorded clips).
+    speech: params.get('speech') === 'on',
     rate: +params.get('rate') || 0.92,      // speaking speed for the big shelf
     littleRate: +params.get('rate') || 0.85, // and for the little shelf
     voice: params.get('voice') || '',        // e.g. ?voice=Daniel
@@ -111,7 +114,7 @@
       let finished = false;
       const finish = () => { if (finished) return; finished = true; if (my === token && typeof then === 'function') then(); };
       const parts = chunks(text);
-      if (!synth || !parts.length) { setTimeout(finish, 300); return; }
+      if (!synth || !SETTINGS.speech || !parts.length) { setTimeout(finish, 250); return; }
       const rate = opts.rate || (R && R.little ? SETTINGS.littleRate : SETTINGS.rate);
       const go = () => {
         if (my !== token) return;
@@ -308,6 +311,7 @@ ${rowsData().map((r, ri) => `<section class="row">
     spread.innerHTML = leftHtml() + rightHtml();
     spread.classList.remove('fresh'); void spread.offsetWidth; spread.classList.add('fresh');
     setTimeout(() => spread.classList.remove('nofx'), 60);
+    fitText();
     $$('.corner.next', spread).forEach((c) => c.addEventListener('click', () => handleKey('ArrowRight')));
     $$('.corner.back', spread).forEach((c) => c.addEventListener('click', () => handleKey('ArrowLeft')));
     const story = R.pages.filter((p) => p.type === 'story').length;
@@ -328,6 +332,22 @@ ${rowsData().map((r, ri) => `<section class="row">
     const folio = p.type === 'story' ? `<div class="folio">${R.i * 2}</div>` : '';
     return `<div class="page left"><div class="art">${art}</div>${folio}<button class="corner back" tabindex="-1" aria-label="Back"></button></div>`;
   }
+  // Shrink the words a little if that lets every written line fit on one line,
+  // but never so far that they get hard to read; past that, lines wrap evenly.
+  function fitText() {
+    const t = $('.page.right .text', screenEl); if (!t) return;
+    t.style.fontSize = '';
+    const base = parseFloat(getComputedStyle(t).fontSize);
+    // poems may shrink further, since keeping Lear's lines whole matters more there
+    const min = Math.max(base * (t.classList.contains('verse') ? 0.62 : 0.74), $('.page.right', screenEl).clientHeight * 0.034);
+    t.classList.add('measure');
+    const widest = Math.max(...$$('.ln', t).map((l) => l.scrollWidth));
+    const avail = t.clientWidth;
+    t.classList.remove('measure');
+    if (widest > avail) t.style.fontSize = Math.max(min, base * (avail / widest) * 0.98).toFixed(1) + 'px';
+  }
+  window.addEventListener('resize', () => { if (screen === 'book') fitText(); });
+
   function sizeCls(p) {
     const t = p.text + (p.after ? '\n' + p.after.text : '');
     const lines = t.split('\n').length, chars = t.length;
@@ -349,21 +369,26 @@ ${rowsData().map((r, ri) => `<section class="row">
 <div class="sticker">${starSvg('big')}</div>${starsRow(n, 10)}</div>
 <button class="corner next ready" tabindex="-1" aria-label="Back to the shelf"></button></div>`;
     }
-    const first = R.i === 1 && !R.little && !/^\[/.test(p.text); // a big red initial, old-book style
+    const first = R.i === 1 && !R.little && !b.verse && !/^\[/.test(p.text); // a big red initial, old-book style
     return `<div class="page right"><div class="runhead">${esc(b.title)}</div>
-<div class="inner"><div class="text ${sizeCls(p)}${first ? ' dropcap' : ''}">${textHtml(p, st)}</div>
+<div class="inner"><div class="text ${sizeCls(p)}${first ? ' dropcap' : ''}${b.verse ? ' verse' : ''}">${textHtml(p, st)}</div>
 ${p.after ? `<div class="after${st.done ? ' shown' : ''}">${esc(p.after.text).replace(/\n/g, '<br>')}</div>` : ''}</div>
 <div class="findkey"><span class="hand">&#9758;</span><span class="fk-key"></span></div>
 <div class="folio">${R.i * 2 + 1}</div><button class="corner next${st.done ? ' ready' : ''}" tabindex="-1" aria-label="Next"></button></div>`;
   }
   function textHtml(p, st) {
     let bi = 0;
-    // one block per line, so long lines wrap with a hanging indent, the way poems are printed
-    return p.text.split('\n').map((line) => `<span class="ln">${line.split(/(\[[^\]]+\])/).map((part) => {
+    const piece = (part) => {
       const m = part.match(/^\[([^\]]+)\]$/);
       if (!m) return esc(part);
       const idx = bi++, b = st.blanks[idx];
       return `<span class="blank" data-b="${idx}">${[...b.word].map((c) => `<span class="slot">${esc(c)}</span>`).join('')}</span>`;
+    };
+    // One block per line. Each space-separated word that holds a blank is kept on one
+    // line, so a comma or "E-I-E-I-O" never wraps away from its letters.
+    return p.text.split('\n').map((line) => `<span class="ln">${line.split(/(\s+)/).map((word) => {
+      const html = word.split(/(\[[^\]]+\])/).map(piece).join('');
+      return word.includes('[') || /\w-\w/.test(word) ? `<span class="nw">${html}</span>` : html; // also keep "Pussy-Cat" whole
     }).join('')}</span>`).join('');
   }
   function refreshSlots() {
@@ -427,9 +452,10 @@ ${p.after ? `<div class="after${st.done ? ' shown' : ''}">${esc(p.after.text).re
     const p = page(), b = curBlank();
     if (p.type === 'story' && b) {
       if (!R.little && b.ghost !== b.n) {
-        if (!b.slow) { b.slow = true; say(`${b.word}. ${b.word}.`, armIdle, { rate: 0.7 }); return; }
+        if (!b.slow && SETTINGS.speech) { b.slow = true; say(`${b.word}. ${b.word}.`, armIdle, { rate: 0.7 }); return; }
         b.ghost = b.n; updateHints();
       }
+      wiggle(b);
       say(`Find ${NAME[nextChar(b)]}. Look for the shining key!`, armIdle);
     } else if (p.type === 'end') say('Press the arrow to go back to the shelf.', armIdle);
     else say(p.type === 'cover' ? 'Press the arrow to start the story.' : 'Press the arrow to turn the page.', armIdle);

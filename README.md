@@ -2,14 +2,14 @@
 
 A fill-in-the-blanks storybook for small children learning to spell on a computer. It's plain HTML and JavaScript with no build step: open `index.html` in Safari or Chrome.
 
-A voice reads every page aloud. Each page has a blank word, and the child fills it in by typing. Only the right letter goes in. A wrong key gets a soft "boop", the letter floats away, and the voice says which letter to look for. Nothing ever has to be deleted or corrected.
+Each page has a picture and a blank word, and the child fills it in by typing. Only the right letter goes in. A wrong key gets a soft "boop" and the letter floats away. Nothing ever has to be deleted or corrected. (There is no reading voice for now; see *Voice* below.)
 
 ## The two shelves
 
 | Shelf | For | How the blanks work |
 |---|---|---|
-| **The Little Shelf** | about 3 | Every letter of the word is printed faintly. The matching key glows on the on-screen typewriter, a pointing hand shows it big, and the voice names it ("Find see"). The child is learning letter names and where the keys are. |
-| **The Big Shelf** | about 5 | Only empty letter slots. The picture and the spoken word are the clue ("Can you spell pig?"). After one wrong key the voice says the word again slowly. After two, the next letter fades in and its key lights up. The same happens if they go quiet for about ten seconds. |
+| **The Little Shelf** | about 3 | Every letter of the word is printed faintly. The matching key glows on the on-screen typewriter and a pointing hand shows it big. The child is learning letter shapes and where the keys are. |
+| **The Big Shelf** | about 5 | Only empty letter slots, with the picture as the clue. After two wrong keys the next letter fades in and its key lights up. The same happens if they go quiet for about ten seconds, or press the down arrow. |
 
 Finishing a book puts a gold star on its cover. Stars are kept in the browser's local storage.
 
@@ -22,7 +22,7 @@ All of these are on the Karabiner allowlist:
 | letters | fill in the blank |
 | right arrow or return | turn the page (only once the page is filled in) |
 | left arrow | go back a page (from the title page, back to the shelf) |
-| up arrow or space | read the page again |
+| up arrow or space | read the page again (only when the voice is on) |
 | down arrow | a hint: show the next letter and light its key |
 
 On the shelf, the arrows choose a book and return opens it. Shortcuts with cmd, ctrl or option are ignored by the app, so grown-ups can still use them.
@@ -55,11 +55,13 @@ Everything is in `stories.js`, and the comment at the top explains the format. A
 
 Square brackets mark the blank. `art` places pictures from `art.js` on a 300 by 360 canvas. Open `index.html#gallery` to see every picture by name. To jump straight to a page while editing, open `index.html#book=hen&page=3` (add `&solve` to see it filled in).
 
-To rename the shelves (to the children's names, say), edit `SHELVES` at the top of `stories.js`. The labels are read aloud.
+To rename the shelves (to the children's names, say), edit `SHELVES` at the top of `stories.js`.
 
 ## Voice
 
-The app uses the browser's built-in speech, which works offline on macOS. It prefers a British voice (Daniel, Serena, Kate…) and skips the novelty voices. To pick a voice or speed yourself, add it to the address: `index.html?voice=Samantha&rate=0.85`. Better voices can be downloaded in System Settings → Accessibility → Spoken Content → System Voice → Manage Voices.
+Reading aloud is off, because the browser's built-in voices sound robotic. A natural narrator would mean recording clips ahead of time (with a good speech model, or your own voice) and having the app play them; nothing for that exists yet.
+
+The old built-in-voice narration is still there for testing: add `?speech=on` to the address (and optionally `&voice=Daniel&rate=0.85`).
 
 ## Locking it down (Karabiner)
 

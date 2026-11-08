@@ -150,7 +150,12 @@ svg.star { filter: drop-shadow(0 2px 1px rgba(0, 0, 0, .35)); transform: rotate(
 .inner { position: absolute; inset: 10% 7% 14% 10%; display: flex; flex-direction: column; justify-content: center; }
 .text { font-size: clamp(15px, 6.2cqh, 50px); line-height: 1.5; }
 .text.short { font-size: clamp(17px, 7.4cqh, 60px); line-height: 1.45; }
-.text .ln { display: block; padding-left: .9em; text-indent: -.9em; }
+.text .ln { display: block; text-wrap: balance; }
+.text.measure .ln { white-space: nowrap; }
+.text .nw { white-space: nowrap; }
+.after { text-wrap: pretty; }
+/* poems: a long line that wraps gets a hanging indent, the way verse is printed */
+.text.verse .ln { padding-left: .9em; text-indent: -.9em; }
 .text.long { font-size: clamp(13px, 4.6cqh, 38px); line-height: 1.42; }
 .text.xlong { font-size: clamp(12px, 3.85cqh, 32px); line-height: 1.36; }
 .text.dropcap::first-letter {
@@ -165,7 +170,8 @@ svg.star { filter: drop-shadow(0 2px 1px rgba(0, 0, 0, .35)); transform: rotate(
 .after.shown { opacity: 1; transform: none; }
 
 /* the blanks */
-.blank { display: inline-flex; gap: .05em; margin: 0 .08em; white-space: nowrap; vertical-align: baseline; }
+/* text-indent is inherited into inline-blocks, so reset it or the letters slide off their slots */
+.blank { display: inline-flex; gap: .05em; margin: 0 .08em; white-space: nowrap; vertical-align: baseline; text-indent: 0; }
 .slot {
   position: relative; display: inline-block; min-width: .6em; padding: 0 .04em; text-align: center;
   font-family: var(--letters); font-weight: 600; line-height: 1.15;
@@ -180,7 +186,7 @@ svg.star { filter: drop-shadow(0 2px 1px rgba(0, 0, 0, .35)); transform: rotate(
 .slot.filled { color: var(--stamp); border-bottom-color: transparent; animation: stamp .38s cubic-bezier(.2, 1.6, .4, 1); }
 .nofx .slot.filled { animation: none; }
 .blank.done .slot { border-bottom-color: transparent; }
-.blank.done { background: linear-gradient(transparent 62%, rgba(242, 201, 90, .35) 62% 92%, transparent 92%); border-radius: .1em; }
+.blank.done { background: rgba(242, 201, 90, .26); border-radius: .18em; box-shadow: 0 0 0 .06em rgba(242, 201, 90, .26); }
 .blank.wiggle { animation: wiggle .4s; }
 @keyframes stamp { 0% { transform: scale(1.9) rotate(-9deg); opacity: 0; } 60% { transform: scale(.92); opacity: 1; } 100% { transform: none; } }
 @keyframes wiggle { 20% { transform: translateX(-.08em); } 40% { transform: translateX(.08em); } 60% { transform: translateX(-.05em); } 80% { transform: translateX(.04em); } }
@@ -228,6 +234,7 @@ svg.star { filter: drop-shadow(0 2px 1px rgba(0, 0, 0, .35)); transform: rotate(
 .titlepage h2 { margin: .25em 0 .2em; font-family: var(--fellsc); font-weight: normal; font-size: 8.6cqh; line-height: 1.04; }
 .titlepage .rule { width: 40%; height: 1.2cqh; border-top: 1px solid currentColor; border-bottom: 3px double currentColor; opacity: .5; margin: .6em 0; }
 .titlepage .by { font-family: var(--fell); font-style: italic; font-size: 4.4cqh; }
+.titlepage h2, .titlepage .by, .src, .cover .ctitle { text-wrap: balance; }
 .titlepage .imprint { margin-top: 2.4em; font-family: var(--fellsc); font-size: 2.6cqh; letter-spacing: .14em; opacity: .55; }
 .src { position: absolute; left: 12%; right: 12%; bottom: 4.5%; text-align: center; font-size: 2.15cqh; line-height: 1.35; font-style: italic; opacity: .6; }
 .endpage { position: absolute; inset: 12% 10% 16%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3cqh; }
