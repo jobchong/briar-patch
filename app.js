@@ -328,8 +328,8 @@ ${rowsData().map((r, ri) => `<section class="row">
   }
 
   function sceneFor(p, st) {
-    const useAfter = st && st.done && p.after && p.after.art;
-    return ART.scene({ bg: (useAfter && p.after.bg) || p.bg, art: useAfter ? p.after.art : p.art, seed: R.i + 3 });
+    const scene = st && st.done && p.after && (p.after.art || p.after.image) ? p.after : p;
+    return ART.scene({ ...scene, bg: scene.bg || p.bg, seed: R.i + 3 });
   }
   function leftHtml() {
     const p = page(), b = R.book;
@@ -510,7 +510,7 @@ ${p.after ? `<div class="after${st.done ? ' shown' : ''}">${esc(p.after.text).re
     if (st.blanks.length > 1 && p.text.split('\n').length <= 2) text += '\n' + p.text;
     if (p.after) {
       const a = $('.after', screenEl); if (a) a.classList.add('shown');
-      if (p.after.art) {
+      if (p.after.art || p.after.image) {
         const art = $('.page.left .art', screenEl);
         art.innerHTML = sceneFor(p, st); art.classList.add('animate');
       }

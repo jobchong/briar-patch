@@ -1503,6 +1503,7 @@ ${o.crack ? `<path fill="#6b5e68" d="M70 20L92 10L94 15L72 25Z"/><path fill="non
   }
 
   function scene(spec = {}, cls = '') {
+    if (spec.image) return `<img class="scene ${cls}" src="${spec.image}" alt="">`;
     const id = 'v' + (++uid);
     const seed = spec.seed || 7;
     const bgFn = BG[spec.bg || 'day'] || BG.day;

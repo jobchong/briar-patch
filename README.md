@@ -69,10 +69,10 @@ Notes on the choices:
 Everything is in `stories.js`, and the comment at the top explains the format. A page looks like this:
 
 ```js
-{ bg: 'farm', text: '"Not I," said the [cat].', art: [['cat', 150, 312, 1.7]] }
+{ text: '"Not I," said the [cat].', image: 'illustrations/hen/03.webp' }
 ```
 
-Square brackets mark the blank. `art` places pictures from `art.js` on a 300 by 360 canvas. Open `index.html#gallery` to see every picture by name. To jump straight to a page while editing, open `index.html#book=hen&page=3` (add `&solve` to see it filled in).
+Square brackets mark the blank. Store each book's illustrations under `illustrations/<book-id>/`. Set `after.image` when finishing a word reveals a new picture. An `after` with only text keeps the page illustration. To jump straight to a page while editing, open `index.html#book=hen&page=3` (add `&solve` to see it filled in). The SVG sprites are still available in `index.html#gallery`.
 
 To rename the shelves (to the children's names, say), edit `SHELVES` at the top of `stories.js`.
 
