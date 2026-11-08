@@ -367,9 +367,8 @@ ${rowsData().map((r, ri) => `<section class="row">
     const p = page(), b = R.book, st = cur();
     if (p.type === 'cover') {
       return `<div class="page right"><div class="titlepage">
-<div class="orn">&#10086;</div><h2>${esc(b.title)}</h2><div class="rule"></div>
-<div class="by">${esc(b.byline)}</div><div class="imprint">The Briar Patch Library</div></div>
-<div class="src">${esc(b.source || '')}</div><button class="corner next ready" tabindex="-1" aria-label="Next"></button></div>`;
+<div class="orn">&#10086;</div><h2>${esc(b.title)}</h2><div class="rule"></div></div>
+<button class="corner next ready" tabindex="-1" aria-label="Next"></button></div>`;
     }
     if (p.type === 'end') {
       const n = (store.get('stars', {})[b.id] || 0);
@@ -431,7 +430,7 @@ ${p.after ? `<div class="after${st.done ? ' shown' : ''}">${esc(p.after.text).re
     KB.glow([]);
     if (p.type === 'cover') {
       KB.glow(['ArrowRight']);
-      say(`${R.book.title}. ${R.book.byline}.`, () => armIdle(() => say('Press the arrow to start the story.', armIdle), 6000));
+      say(R.book.title, () => armIdle(() => say('Press the arrow to start the story.', armIdle), 6000));
       return;
     }
     if (p.type === 'end') return theEnd();

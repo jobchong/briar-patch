@@ -238,14 +238,11 @@ svg.star { filter: drop-shadow(0 2px 1px rgba(0, 0, 0, .35)); transform: rotate(
 @keyframes lift { 50% { filter: drop-shadow(-3px -3px 4px rgba(0, 0, 0, .18)); transform: translate(-2px, -2px); } }
 
 /* title page and the end */
-.titlepage { position: absolute; inset: 10% 10% 16%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.titlepage { position: absolute; inset: 10%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 .titlepage .orn { font-family: var(--fell); color: var(--stamp); font-size: 7cqh; line-height: 1; }
 .titlepage h2 { margin: .25em 0 .2em; font-family: var(--fellsc); font-weight: normal; font-size: 8.6cqh; line-height: 1.04; }
 .titlepage .rule { width: 40%; height: 1.2cqh; border-top: 1px solid currentColor; border-bottom: 3px double currentColor; opacity: .5; margin: .6em 0; }
-.titlepage .by { font-family: var(--fell); font-style: italic; font-size: 4.4cqh; }
-.titlepage h2, .titlepage .by, .src, .cover .ctitle { text-wrap: balance; }
-.titlepage .imprint { margin-top: 2.4em; font-family: var(--fellsc); font-size: 2.6cqh; letter-spacing: .14em; opacity: .55; }
-.src { position: absolute; left: 12%; right: 12%; bottom: 4.5%; text-align: center; font-size: 2.15cqh; line-height: 1.35; font-style: italic; opacity: .6; }
+.titlepage h2, .cover .ctitle { text-wrap: balance; }
 .endpage { position: absolute; inset: 12% 10% 16%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3cqh; }
 .theend { font-family: var(--fell); font-style: italic; font-size: 13cqh; line-height: 1; }
 .sticker { width: 28cqh; opacity: 0; transform: scale(2.4) rotate(-40deg); }

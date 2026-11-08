@@ -1,5 +1,7 @@
 # The Briar Patch Library
 
+[Read the stories](https://jobchong.org/stories/). The published library now lives in [jobchong.github.io](https://github.com/jobchong/jobchong.github.io/tree/master/content/stories).
+
 A fill-in-the-blanks storybook for small children learning to spell on a computer. It's plain HTML and JavaScript with no build step: open `index.html` in Safari or Chrome.
 
 Each page has a picture and a blank word, and the child fills it in by typing. Only the right letter goes in. A wrong key gets a soft "boop" and the letter floats away. Nothing ever has to be deleted or corrected. (There is no reading voice for now; see *Voice* below.)
