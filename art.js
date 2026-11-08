@@ -661,6 +661,22 @@ ${o.smoke && k === 'brick' ? `<path fill="none" class="fine" d="M71 14q-4-4 0-8t
   };
   META.house = { w: 1.4 };
 
+  // a campfire: two crossed logs and the flames
+  S.fire = () => `
+<path fill="${C.bark}" d="${stick(12, 93, 82, 79, 9)}${stick(18, 79, 88, 93, 9)}"/>
+<ellipse fill="${C.tan}" cx="12" cy="93" rx="3" ry="4.5"/><ellipse fill="${C.tan}" cx="88" cy="93" rx="3" ry="4.5"/>
+<path fill="${C.orange}" d="M28 86C22 70 32 62 34 48C38 58 42 60 42 70C44 60 48 50 50 28C54 50 58 58 58 68C60 60 64 56 66 46C70 60 78 70 72 86Z"/>
+<path class="nol" fill="${C.butter}" d="M40 86C38 78 42 74 44 66C46 72 50 74 50 64C52 72 56 76 58 70C60 78 62 82 60 86Z"/>
+<path fill="none" class="fine" d="M44 24q-4-6 0-12M57 20q4-6 0-12"/>`;
+  META.fire = { w: 1.1 };
+
+  // a little pond (lies flat on the ground, like the mud)
+  S.pond = () => `
+<path fill="#86aec4" d="M6 88C8 78 30 75 44 79C58 72 84 74 94 84C98 92 80 97 60 96C40 99 10 97 6 88Z"/>
+<path fill="none" class="fine" d="M22 86q6-3 12 0M50 81q6-3 12 0M66 90q6-3 12 0M38 92q5-2.5 10 0"/>
+<path fill="${C.leaf}" d="M88 82q-3-14 1-22q2 10 3 21zM93 84q1-12 6-18q-2 10-3 18z"/>`;
+  META.pond = { sky: true };
+
   // a billy goat (side on, facing right)
   S.goat = (o = {}) => {
     const c = o.color || '#efe6d2', horn = '#b59a72';

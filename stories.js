@@ -209,12 +209,12 @@ window.BOOKS = [
       { bg: 'wood', text: 'One day, Brer Rabbit sat down in the [sun]\nand fell fast asleep.', art: [['sun', 225, 100, 0.9], ['rabbit', 130, 314, 1.6, { jacket: true, sleep: true }]] },
       { bg: 'wood', text: 'Brer Fox crept up, and snap!\nHe [got] him!', art: [['rabbit', 95, 316, 1.3, { jacket: true }], ['fox', 210, 316, 1.5, { flip: true, happy: true }]] },
       {
-        bg: 'wood', text: '"I will cook you in my [pot]!" said Brer Fox.', art: [['pot', 105, 318, 1.3], ['fox', 220, 316, 1.4, { flip: true }]],
-        after: { text: '"Cook me in your pot," said Brer Rabbit,\n"but please don\'t throw me in the briar patch!"' }
+        bg: 'wood', text: '"I will roast you on my [fire]!" said Brer Fox.', art: [['fire', 100, 320, 1.25], ['fox', 220, 316, 1.4, { flip: true }]],
+        after: { text: '"Roast me, Brer Fox," said Brer Rabbit,\n"but please don\'t throw me in the briar patch!"' }
       },
       {
-        bg: 'wood', text: '"Then I will dunk you in the [mud]!" said Brer Fox.', art: [['mud', 110, 322, 1.4], ['fox', 220, 316, 1.4, { flip: true }]],
-        after: { text: '"Dunk me in the mud," said Brer Rabbit,\n"but please, PLEASE don\'t throw me in the briar patch!"' }
+        bg: 'wood', text: '"Then I will drown you in the [pond]!" said Brer Fox.', art: [['pond', 105, 326, 1.6], ['fox', 225, 316, 1.4, { flip: true }]],
+        after: { text: '"Drown me as deep as you please, Brer Fox," said Brer Rabbit,\n"but please, PLEASE don\'t throw me in the briar patch!"' }
       },
       {
         bg: 'wood', text: '"The briar patch is the worst place of all!" thought Brer Fox.\nSo in went Brer Rabbit.\nBump, bump, [bump]!',
