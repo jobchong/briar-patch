@@ -317,7 +317,7 @@ ${rowsData().map((r, ri) => `<section class="row">
     }
     spread.classList.add('nofx');
     spread.innerHTML = leftHtml() + rightHtml();
-    screenEl.scrollTop = 0;
+    screenEl.scrollTop = 0; spread.scrollTop = 0;
     spread.classList.remove('fresh'); void spread.offsetWidth; spread.classList.add('fresh');
     setTimeout(() => spread.classList.remove('nofx'), 60);
     fitText();
