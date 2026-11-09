@@ -53,10 +53,16 @@ img.scene { object-fit: contain; }
 @keyframes popin { from { transform: scale(.2) translateY(20%); opacity: 0; } to { transform: none; opacity: 1; } }
 
 /* ---------- the shelf ---------- */
+/* The chosen book rises by --lift and wears a ring and glow that reach --room past its edges.
+   The scrolling row clips whatever it holds, so it is padded by that much above and at the
+   sides, and the gaps around the rows leave that space free. Below, the board hides the clip
+   (and keeps the row's scrollbar sitting on it). */
 .shelf {
   --ch: min(27vh, 310px);
+  --lift: 1vh;
+  --room: calc(var(--ch) * .12);
   height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 3.2vh; padding: 1vh 3vw 0;
+  gap: calc(var(--room) + var(--lift)); padding: 1vh 3vw 0;
 }
 .shelf header { text-align: center; }
 .shelf h1 {
@@ -64,9 +70,9 @@ img.scene { object-fit: contain; }
   font-size: clamp(26px, 5.4vh, 60px); letter-spacing: .03em; text-shadow: 0 2px 0 rgba(0, 0, 0, .4);
 }
 .shelf .sub { margin: .1em 0 0; font-family: var(--fell); font-style: italic; color: #d8caa4; font-size: clamp(14px, 2.4vh, 24px); }
-.row { width: 100%; position: relative; display: flex; align-items: flex-end; gap: 2.4vw; padding: 0 2vw; }
+.row { width: 100%; position: relative; display: flex; align-items: flex-end; gap: max(2.4vw, var(--room)); padding: 0 2vw; }
 .row::after {
-  content: ""; position: absolute; left: -2vw; right: -2vw; bottom: -1.6vh; height: 1.8vh;
+  content: ""; position: absolute; z-index: 3; left: -2vw; right: -2vw; bottom: -1.6vh; height: 1.8vh;
   background: linear-gradient(#8f5f3a, #5d3a21); border-radius: 3px;
   box-shadow: 0 10px 16px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 220, 170, .25);
 }
@@ -77,9 +83,10 @@ img.scene { object-fit: contain; }
 .plaque svg.scene { width: 100%; height: auto; aspect-ratio: 300 / 360; mix-blend-mode: normal; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .4)); }
 .books {
   flex: 1; min-width: 0; display: flex; gap: clamp(14px, 1.6vw, 28px); align-items: flex-end; overflow-x: auto;
-  padding: 3.2vh 12px 8px; margin: -3.2vh -12px -8px;
+  padding: calc(var(--room) + var(--lift)) var(--room) 8px;
+  margin: calc(-1 * (var(--room) + var(--lift))) calc(-1 * var(--room)) -8px;
   scrollbar-width: thin; scrollbar-color: #927248 transparent;
-  scroll-padding-inline: 12px;
+  scroll-padding-inline: var(--room);
 }
 .cover {
   flex: none; position: relative; width: calc(var(--ch) * .76); height: var(--ch);
@@ -105,10 +112,19 @@ img.scene { object-fit: contain; }
   font-size: calc(var(--ch) * .079); line-height: 1.05; text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
 }
 .cover.sel {
-  transform: translateY(-2.2vh) rotate(-1.5deg) scale(1.06);
-  box-shadow: inset 7px 0 0 rgba(0, 0, 0, .28), 0 0 0 4px var(--glow), 0 0 34px 8px rgba(242, 201, 90, .5), 0 18px 22px rgba(0, 0, 0, .5);
+  transform: translateY(calc(-1 * var(--lift))) rotate(-1.5deg) scale(1.04);
+  box-shadow: inset 7px 0 0 rgba(0, 0, 0, .28), inset 9px 0 0 rgba(255, 255, 255, .07), inset 0 0 0 1px rgba(255, 255, 255, .08),
+    0 12px 14px rgba(0, 0, 0, .5);
   z-index: 2;
 }
+/* the ring stands a little away from the book, with its own rounder corners */
+.cover::before {
+  content: ""; position: absolute; inset: calc(var(--ch) * -.026); pointer-events: none;
+  border: 3px solid var(--glow); border-radius: calc(var(--ch) * .055);
+  box-shadow: 0 0 calc(var(--ch) * .05) rgba(242, 201, 90, .6);
+  opacity: 0; transition: opacity .2s;
+}
+.cover.sel::before { opacity: 1; }
 .stars { position: absolute; top: -6%; right: -8%; display: flex; flex-wrap: wrap; justify-content: flex-end; max-width: 80%; }
 .stars .star { width: calc(var(--ch, 200px) * .13); margin-left: -3%; }
 .stars .more { font-family: var(--fell); color: var(--gold); font-size: calc(var(--ch, 200px) * .08); align-self: center; }
@@ -337,10 +353,15 @@ svg.star { filter: drop-shadow(0 2px 1px rgba(0, 0, 0, .35)); transform: rotate(
     gap: 28px; padding: 24px 16px 32px;
   }
   .row { display: block; padding: 0; }
-  .row::after { left: -8px; right: -8px; }
+  .row::after { left: -16px; right: -16px; border-radius: 0; }
   .plaque { width: auto; flex-direction: row; margin-bottom: 12px; font-size: 18px; }
   .plaque svg.scene { width: 30px; }
-  .books { padding-top: 12px; margin-top: 0; }
+  /* the books don't rise here, and the row's sides line up with the screen's edges */
+  .shelf { --lift: 0px; }
+  .books {
+    padding: var(--room) 16px 8px; margin: calc(12px - var(--room)) -16px -8px;
+    scroll-padding-inline: 16px;
+  }
   .cover.sel { transform: rotate(-1deg); }
   .cover .ctitle { align-items: flex-start; top: 74%; }
   .reader { height: 100%; }
